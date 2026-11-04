@@ -1,18 +1,45 @@
-import { BriefcaseBusiness, GraduationCap, MapPin, Circle } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  GraduationCap,
+  MapPin,
+  Circle,
+  LoaderCircle,
+} from "lucide-react";
 
-import { profile } from "../data/profile";
+import type { CharacterProfile } from "../types/character";
+
+interface CharacterInformationProps {
+  profile?: CharacterProfile;
+}
 
 const INFO_ITEM_CLASS =
-  "flex min-w-0 flex-col md:border-l md:border-white/20 md:px-5";
+  "flex min-w-0 flex-row items-center justify-between gap-2 border-b border-white/10 py-2.5 md:flex-col md:items-start md:justify-start md:border-b-0 md:border-l md:border-white/20 md:px-5 md:py-0";
 
 const INFO_HEADER_CLASS = "flex h-6 items-center gap-2";
 
 const INFO_TITLE_CLASS =
   "text-[11px] font-bold uppercase tracking-wide text-gray-100";
 
-const INFO_VALUE_CLASS = "mt-3 text-sm leading-relaxed text-gray-200";
+const INFO_VALUE_CLASS =
+  "text-xs leading-relaxed text-gray-200 md:mt-3 md:text-sm";
 
-export function CharacterInformation() {
+function LoadingIndicator() {
+  return (
+    <div
+      className="flex h-6 items-center"
+      role="status"
+      aria-label="Waiting for character selection"
+    >
+      <LoaderCircle
+        size={17}
+        aria-hidden="true"
+        className="animate-spin text-violet-300"
+      />
+    </div>
+  );
+}
+
+export function CharacterInformation({ profile }: CharacterInformationProps) {
   return (
     <section
       aria-label="Character information"
@@ -20,18 +47,22 @@ export function CharacterInformation() {
     >
       <div className="relative overflow-hidden rounded-2xl">
         {/* Glass panel */}
-        <div className="grid grid-cols-2 gap-x-6 gap-y-7 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-6 shadow-[inset_0_0_35px_rgba(255,255,255,0.05)] backdrop-blur-xl md:grid-cols-[112px_repeat(4,minmax(0,1fr))] md:items-stretch md:gap-x-0 md:px-7">
+        <div className="grid grid-cols-[76px_minmax(0,1fr)] gap-x-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-5 shadow-[inset_0_0_35px_rgba(255,255,255,0.05)] backdrop-blur-xl md:grid-cols-[112px_repeat(4,minmax(0,1fr))] md:items-stretch md:gap-x-0 md:px-7 md:py-6">
           {/* Seniority */}
-          <div className="col-span-2 flex items-center justify-center md:col-span-1">
-            <div className="flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-xl border-2 border-[#80FF00] bg-[#171A2A] shadow-[0_0_10px_rgba(128,255,0,0.35),0_0_22px_rgba(128,255,0,0.2)]">
-              <div className="flex flex-col items-center justify-center gap-1">
-                <span className="text-[11px] font-bold leading-none tracking-[0.12em] text-white">
-                  LV
-                </span>
+          <div className="row-span-4 flex items-center justify-start md:row-span-1 md:justify-center">
+            <div className="rounded-xl bg-gradient-to-br from-violet-500 via-purple-400 to-[#80FF00] p-[2px]">
+              <div className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-[10px] bg-[#171A2A]">
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <span className="text-[11px] font-bold leading-none tracking-[0.12em] text-white">
+                    LV
+                  </span>
 
-                <span className="text-xl font-black leading-none tracking-wide text-white">
-                  {profile.seniority}
-                </span>
+                  {profile?.seniority && (
+                    <span className="text-xl font-black leading-none tracking-wide text-white">
+                      {profile.seniority}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -46,7 +77,13 @@ export function CharacterInformation() {
               <h2 className={INFO_TITLE_CLASS}>Experience</h2>
             </div>
 
-            <p className={INFO_VALUE_CLASS}>{profile.experience}</p>
+            <div className="min-w-0 text-right md:text-left">
+              {profile?.experience ? (
+                <p className={INFO_VALUE_CLASS}>{profile.experience}</p>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </div>
           </div>
 
           {/* Education */}
@@ -56,7 +93,13 @@ export function CharacterInformation() {
               <h2 className={INFO_TITLE_CLASS}>Education</h2>
             </div>
 
-            <p className={INFO_VALUE_CLASS}>{profile.education}</p>
+            <div className="min-w-0 text-right md:text-left">
+              {profile?.education ? (
+                <p className={INFO_VALUE_CLASS}>{profile.education}</p>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </div>
           </div>
 
           {/* Location */}
@@ -66,24 +109,55 @@ export function CharacterInformation() {
               <h2 className={INFO_TITLE_CLASS}>Location</h2>
             </div>
 
-            <p className={INFO_VALUE_CLASS}>{profile.location}</p>
+            <div className="min-w-0 text-right md:text-left">
+              {profile?.location ? (
+                <p className={INFO_VALUE_CLASS}>{profile.location}</p>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </div>
           </div>
 
           {/* Status */}
-          <div className={INFO_ITEM_CLASS}>
+          <div className={`${INFO_ITEM_CLASS} border-b-0`}>
             <div className={INFO_HEADER_CLASS}>
               <Circle
                 size={9}
                 fill="currentColor"
-                className="shrink-0 text-[#80FF00]"
+                className="shrink-0"
+                style={{
+                  color: profile
+                    ? profile.isAvailable
+                      ? "#80FF00"
+                      : "#FF3B5C"
+                    : "#80FF00",
+                }}
               />
               <h2 className={INFO_TITLE_CLASS}>Status</h2>
             </div>
 
-            <div className="mt-3">
-              <span className="inline-flex rounded-md border border-[#80FF00]/70 bg-[#80FF00]/10 px-2.5 py-2 text-[9px] font-bold uppercase leading-tight text-gray-100">
-                {profile.availability}
-              </span>
+            <div className="min-w-0 text-right md:text-left">
+              {profile ? (
+                <div className="md:mt-3">
+                  <span
+                    className="inline-flex max-w-full rounded-md border px-2 py-1.5 text-[8px] font-bold uppercase leading-tight text-gray-100 md:px-2.5 md:py-2 md:text-[9px]"
+                    style={{
+                      borderColor: profile.isAvailable
+                        ? "rgba(128, 255, 0, 0.7)"
+                        : "rgba(255, 59, 92, 0.7)",
+                      backgroundColor: profile.isAvailable
+                        ? "rgba(128, 255, 0, 0.1)"
+                        : "rgba(255, 59, 92, 0.1)",
+                    }}
+                  >
+                    {profile.isAvailable
+                      ? "Available for opportunities"
+                      : "Not available for opportunities"}
+                  </span>
+                </div>
+              ) : (
+                <LoadingIndicator />
+              )}
             </div>
           </div>
         </div>

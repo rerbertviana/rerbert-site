@@ -1,11 +1,10 @@
 import Image from "next/image";
 
-import { CharacterCarousel } from "./components/CharacterCarousel";
-import { CharacterInformation } from "./components/CharacterInformation";
+import { CharacterSelectionContent } from "./components/CharacterSelectionContent";
 import { SelectionFooter } from "./components/SelectionFooter";
 import { SelectionHeader } from "./components/SelectionHeader";
 import { SelectionTitle } from "./components/SelectionTitle";
-import { profile } from "./data/profile";
+import { site } from "./data/site";
 
 export function CharacterSelectionPage() {
   return (
@@ -40,10 +39,9 @@ export function CharacterSelectionPage() {
         aria-label="RERBERT.EXE character selection homepage"
         className="relative z-10 min-h-screen"
       >
-        <SelectionHeader resumeUrl={profile.resumeUrl} />
+        <SelectionHeader resumeUrl={site.resumeUrl} />
         <SelectionTitle />
-        <CharacterCarousel />
-        <CharacterInformation />
+        <CharacterSelectionContent />
         <SelectionFooter />
       </main>
     </>

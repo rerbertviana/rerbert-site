@@ -29,6 +29,13 @@ export const characters: Character[] = [
     role: "Fullstack Developer",
     image: CHARACTER_IMAGES.main,
     status: "available",
+    profile: {
+      seniority: "MID",
+      experience: "6+ years",
+      education: "Information Systems - IFBA",
+      location: "Vitória da Conquista, Bahia, Brazil",
+      isAvailable: true,
+    },
   },
   {
     id: "locked-03",

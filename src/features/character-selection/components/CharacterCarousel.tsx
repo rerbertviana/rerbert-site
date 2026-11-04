@@ -11,16 +11,21 @@ const SWIPE_THRESHOLD = 45;
 
 type NavigationDirection = "next" | "previous";
 
-export function CharacterCarousel() {
+interface CharacterCarouselProps {
+  selectedCharacterId: string | null;
+  onSelectedCharacterChange: (characterId: string | null) => void;
+}
+
+export function CharacterCarousel({
+  selectedCharacterId,
+  onSelectedCharacterChange,
+}: CharacterCarouselProps) {
   const initialCharacterIndex = Math.max(
     characters.findIndex((character) => character.id === "rerbert"),
     0,
   );
 
   const [activeIndex, setActiveIndex] = useState(initialCharacterIndex);
-  const [selectedCharacterId, setSelectedCharacterId] = useState<string | null>(
-    null,
-  );
   const [navigationDirection, setNavigationDirection] =
     useState<NavigationDirection>("next");
 
@@ -39,12 +44,12 @@ export function CharacterCarousel() {
 
   function handleCharacterSelect(characterId: string, index: number) {
     if (selectedCharacterId === characterId) {
-      setSelectedCharacterId(null);
+      onSelectedCharacterChange(null);
       return;
     }
 
     setActiveIndex(index);
-    setSelectedCharacterId(characterId);
+    onSelectedCharacterChange(characterId);
   }
 
   function handleNavigation(direction: NavigationDirection) {
@@ -70,7 +75,6 @@ export function CharacterCarousel() {
   function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
     if (!event.isPrimary || characters.length <= 1) return;
 
-    // Prevent stale swipe suppression from blocking a new interaction.
     suppressClick.current = false;
     pointerStartX.current = event.clientX;
   }
