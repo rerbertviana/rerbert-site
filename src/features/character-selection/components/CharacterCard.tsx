@@ -104,7 +104,7 @@ export function CharacterCard({
               absolute inset-0
               ${
                 isSelected
-                  ? "bg-gradient-to-t from-[#080516] via-[#080516]/90 via-[22%] to-transparent"
+                  ? "bg-gradient-to-t from-[#080516] via-[#080516]/95 via-[22%] to-transparent"
                   : "bg-gradient-to-t from-[#080516] via-[#080516]/100 via-[25%] to-[#080516]/40"
               }
             `}
@@ -124,17 +124,16 @@ export function CharacterCard({
 
           {/* Locked icon */}
           {isLocked && (
-            <div className="absolute inset-x-0 top-[64%] z-10 flex justify-center">
+            <div className="absolute inset-x-0 top-[42%] z-10 flex justify-center sm:top-[46%]">
               <LockKeyhole
                 aria-hidden="true"
-                size={30}
-                className="text-[#AAA6BB] drop-shadow-[0_0_5px_rgba(0,0,0,0.7)]"
+                className="h-8 w-8 text-[#AAA6BB] drop-shadow-[0_0_5px_rgba(0,0,0,0.7)] sm:h-9 sm:w-9"
               />
             </div>
           )}
 
           {/* Bottom information */}
-          <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-center justify-center px-2 pb-4 pt-3 text-center">
+          <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-center justify-center px-2 pb-4 pt-3 text-center sm:px-3 md:px-4">
             {/* Decorative gradient divider */}
             {!isLocked && (
               <svg
@@ -175,17 +174,17 @@ export function CharacterCard({
             )}
 
             {isLocked ? (
-              <p className="font-[family-name:var(--font-oxanium)] text-sm font-bold tracking-wider text-[#AAA6BB]">
+              <p className="hidden font-[family-name:var(--font-oxanium)] text-sm font-bold tracking-wider text-[#AAA6BB] sm:block">
                 LOCKED
               </p>
             ) : (
               <>
-                <h3 className="font-[family-name:var(--font-oxanium)] text-base font-bold uppercase tracking-wide text-white not-italic sm:text-xl">
+                <h3 className="w-full break-words font-[family-name:var(--font-oxanium)] text-[clamp(0.65rem,1.1vw,1.25rem)] font-bold uppercase leading-tight tracking-wide text-white not-italic">
                   {character.name}
                 </h3>
 
                 <p
-                  className={`mt-1 text-xs font-medium sm:text-sm ${
+                  className={`mt-1 w-full break-words text-[clamp(0.55rem,0.85vw,0.875rem)] font-medium leading-tight ${
                     isSelected ? "text-[#80FF00]" : "text-gray-400"
                   }`}
                 >
