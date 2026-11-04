@@ -36,8 +36,8 @@ export function CharacterCard({
         transition-all duration-300 ease-out
         ${
           isSelected
-            ? "z-10 w-[clamp(220px,25vw,340px)] scale-[1.04]"
-            : "w-[clamp(140px,15vw,210px)]"
+            ? "z-10 w-[clamp(180px,20vw,260px)] scale-[1.03]"
+            : "w-[clamp(110px,12vw,170px)]"
         }
         ${
           isLocked
@@ -82,8 +82,8 @@ export function CharacterCard({
             fill
             sizes={
               isSelected
-                ? "(max-width: 768px) 220px, 340px"
-                : "(max-width: 768px) 140px, 210px"
+                ? "(max-width: 768px) 180px, 260px"
+                : "(max-width: 768px) 110px, 170px"
             }
             priority={character.id === "rerbert"}
             className={`
@@ -105,7 +105,7 @@ export function CharacterCard({
               ${
                 isSelected
                   ? "bg-gradient-to-t from-[#080516] via-[#080516]/90 via-[22%] to-transparent"
-                  : "bg-gradient-to-t from-[#080516] via-[#080516]/95 via-[25%] to-[#080516]/30"
+                  : "bg-gradient-to-t from-[#080516] via-[#080516]/100 via-[25%] to-[#080516]/40"
               }
             `}
           />

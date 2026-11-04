@@ -19,7 +19,7 @@ export function CharacterCarousel() {
   return (
     <section
       aria-label="Character carousel"
-      className="mx-auto flex w-full max-w-[1440px] items-center justify-center gap-3 px-4 sm:gap-5"
+      className="mx-auto flex w-full max-w-[1440px] items-center justify-center gap-2 px-4 sm:gap-4"
     >
       <button
         type="button"
@@ -31,7 +31,7 @@ export function CharacterCarousel() {
       </button>
 
       <div className="min-w-0 flex-1 overflow-x-auto overflow-y-hidden scrollbar-hide">
-        <div className="mx-auto flex w-max min-w-full items-end justify-center gap-3 px-2 py-12 sm:gap-4 md:gap-5">
+        <div className="mx-auto flex w-max min-w-full items-end justify-center gap-2 px-2 pt-5 pb-10 sm:gap-3 md:gap-4">
           {characters.map((character) => (
             <CharacterCard
               key={character.id}
