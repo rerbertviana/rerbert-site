@@ -6,7 +6,7 @@ import Link from "next/link";
 import {
   ChevronDown,
   Download,
-  Gamepad2,
+  ChevronsLeftRightEllipsis,
   Volume2,
   VolumeX,
 } from "lucide-react";
@@ -91,7 +91,7 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
         aria-label="RERBERT home"
         className="group flex shrink-0 items-center gap-3"
       >
-        <Gamepad2
+        <ChevronsLeftRightEllipsis
           aria-hidden="true"
           className="h-9 w-9 text-[#80FF00] transition-transform group-hover:scale-110 sm:h-10 sm:w-10"
           strokeWidth={2.2}
