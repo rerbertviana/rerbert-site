@@ -139,13 +139,15 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
             onClick={() => setIsLanguageMenuOpen((previous) => !previous)}
             className="flex h-10 items-center justify-center gap-2 rounded-lg border border-violet-500/40 bg-[#100C24]/80 px-3 text-sm font-semibold text-white transition-colors hover:border-violet-400 sm:h-11 sm:px-4"
           >
-            <Image
-              src={currentLanguage.flag}
-              alt=""
-              width={20}
-              height={14}
-              className="rounded-[2px] object-cover"
-            />
+            <div className="relative h-[14px] w-[21px] shrink-0 overflow-hidden rounded-[2px]">
+              <Image
+                src={currentLanguage.flag}
+                alt=""
+                fill
+                sizes="21px"
+                className="object-cover"
+              />
+            </div>
 
             <span>{currentLanguage.shortLabel}</span>
 
@@ -180,13 +182,15 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
                         : "text-gray-300 hover:bg-violet-500/10 hover:text-white"
                     }`}
                   >
-                    <Image
-                      src={language.flag}
-                      alt=""
-                      width={22}
-                      height={15}
-                      className="rounded-[2px] object-cover"
-                    />
+                    <div className="relative h-[15px] w-[22px] shrink-0 overflow-hidden rounded-[2px]">
+                      <Image
+                        src={language.flag}
+                        alt=""
+                        fill
+                        sizes="22px"
+                        className="object-cover"
+                      />
+                    </div>
 
                     <span className="flex-1">{language.label}</span>
 

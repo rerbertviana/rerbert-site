@@ -70,6 +70,8 @@ export function CharacterCarousel() {
   function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
     if (!event.isPrimary || characters.length <= 1) return;
 
+    // Prevent stale swipe suppression from blocking a new interaction.
+    suppressClick.current = false;
     pointerStartX.current = event.clientX;
   }
 
@@ -93,6 +95,7 @@ export function CharacterCarousel() {
 
   function handlePointerCancel() {
     pointerStartX.current = null;
+    suppressClick.current = false;
   }
 
   function handleClickCapture(event: MouseEvent<HTMLDivElement>) {
