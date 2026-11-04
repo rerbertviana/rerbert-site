@@ -31,19 +31,12 @@ export function CharacterCard({
         isLocked ? "Locked character" : `${character.name}, ${character.role}`
       }
       aria-pressed={isSelected}
+      data-selected={isSelected}
       className={`
-        group relative z-0 block shrink-0 aspect-[3/4] text-center
-        transition-all duration-300 ease-out
-        ${
-          isSelected
-            ? "z-10 w-[clamp(180px,20vw,260px)] scale-[1.03]"
-            : "w-[clamp(110px,12vw,170px)]"
-        }
-        ${
-          isLocked
-            ? "cursor-not-allowed"
-            : "cursor-pointer hover:z-20 hover:scale-[1.02]"
-        }
+        group relative z-0 block w-[clamp(88px,22vw,220px)] shrink-0 aspect-[3/4] text-center
+        transition-[filter] duration-300 ease-out
+        ${isSelected ? "z-10" : ""}
+        ${isLocked ? "cursor-not-allowed" : "cursor-pointer"}
         focus-visible:outline-none focus-visible:ring-2
         focus-visible:ring-[#80FF00] focus-visible:ring-offset-4
         focus-visible:ring-offset-[#080516]
@@ -80,11 +73,7 @@ export function CharacterCard({
                 : `${character.name} character illustration`
             }
             fill
-            sizes={
-              isSelected
-                ? "(max-width: 768px) 180px, 260px"
-                : "(max-width: 768px) 110px, 170px"
-            }
+            sizes="(max-width: 768px) 22vw, 220px"
             priority={character.id === "rerbert"}
             className={`
               object-cover object-top
@@ -195,15 +184,6 @@ export function CharacterCard({
           </div>
         </div>
       </div>
-
-      {/* Hover glow */}
-      {!isLocked && !isSelected && (
-        <style jsx>{`
-          button:hover > div {
-            filter: ${greenGlow};
-          }
-        `}</style>
-      )}
     </button>
   );
 }
