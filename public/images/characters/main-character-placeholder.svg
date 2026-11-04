@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="420" viewBox="0 0 320 420">
-  <rect width="320" height="420" rx="18" fill="#171522"/>
-  <circle cx="160" cy="135" r="74" fill="#51406d"/>
-  <path d="M76 350c8-86 54-132 84-132s76 46 84 132v40H76z" fill="#292338"/>
-  <path d="M91 117c7-57 43-86 76-86 43 0 69 35 68 91-22-23-45-33-77-29-28 4-47 17-67 24z" fill="#171522"/>
-  <text x="160" y="395" fill="#A3FF6F" font-family="Arial, sans-serif" font-size="13" text-anchor="middle">MAIN CHARACTER PLACEHOLDER</text>
-</svg>

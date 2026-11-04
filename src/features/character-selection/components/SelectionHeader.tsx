@@ -98,7 +98,7 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
         />
 
         <div className="flex flex-col">
-          <span className="font-[family-name:var(--font-oxanium)] text-lg font-extrabold italic leading-tight tracking-wide text-white sm:text-2xl">
+          <span className="font-[family-name:var(--font-oxanium)] text-lg font-extrabold leading-tight tracking-wide text-white sm:text-2xl">
             RERBERT
           </span>
 
