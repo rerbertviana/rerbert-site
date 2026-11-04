@@ -84,7 +84,7 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
   }
 
   return (
-    <header className="relative z-20 flex min-h-[76px] flex-wrap items-center justify-between gap-4 bg-[linear-gradient(to_bottom,rgba(8,5,22,0.95)_0%,rgba(8,5,22,0.65)_45%,rgba(8,5,22,0)_100%)] px-4 py-3 backdrop-blur-[2px] sm:px-8 lg:px-11">
+    <header className="sticky top-0 z-50 flex min-h-[76px] flex-wrap items-center justify-between gap-4 bg-[linear-gradient(to_bottom,rgba(8,5,22,0.95)_0%,rgba(8,5,22,0.65)_45%,rgba(8,5,22,0)_100%)] px-4 py-3 backdrop-blur-[2px] sm:px-8 lg:px-11">
       {/* Brand */}
       <Link
         href="/"
