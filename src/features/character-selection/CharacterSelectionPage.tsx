@@ -37,7 +37,7 @@ export function CharacterSelectionPage() {
       {/* Page content */}
       <main
         aria-label="RERBERT.EXE character selection homepage"
-        className="relative z-10 min-h-screen"
+        className="relative z-10 flex min-h-screen flex-col"
       >
         <SelectionHeader resumeUrl={site.resumeUrl} />
         <SelectionTitle />
