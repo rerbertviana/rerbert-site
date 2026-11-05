@@ -9,6 +9,9 @@ interface CharacterCardProps {
   onSelect: () => void;
 }
 
+const ACTIVE_BORDER_GRADIENT =
+  "bg-[linear-gradient(90deg,#80FF00_0%,#BFFF80_35%,#FFFFFF_50%,#BFFF80_65%,#80FF00_100%)]";
+
 export function CharacterCard({
   character,
   isSelected,
@@ -46,13 +49,13 @@ export function CharacterCard({
       <div
         className={`
           relative z-10 h-full w-full
-          transition-[background-color,filter] duration-300 ease-out
+          transition-[filter] duration-300 ease-out
           ${
             isSelected
-              ? "bg-[#80FF00] p-[3px]"
+              ? `${ACTIVE_BORDER_GRADIENT} p-[3px]`
               : isLocked
                 ? "bg-[#777387]/50 p-[4px]"
-                : "bg-[#777387]/50 p-[4px] group-hover:bg-[#80FF00]"
+                : "bg-[#777387]/50 p-[4px] group-hover:bg-[linear-gradient(90deg,#80FF00_0%,#BFFF80_35%,#FFFFFF_50%,#BFFF80_65%,#80FF00_100%)]"
           }
         `}
         style={{
@@ -81,7 +84,9 @@ export function CharacterCard({
               ${
                 isSelected
                   ? "grayscale-0 brightness-100"
-                  : "grayscale brightness-[0.45] contrast-90"
+                  : isLocked
+                    ? "grayscale brightness-[0.45] contrast-90"
+                    : "grayscale brightness-[0.45] contrast-90 group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100"
               }
             `}
           />
@@ -130,7 +135,11 @@ export function CharacterCard({
                 className={`
                   pointer-events-none absolute inset-x-0 top-0 h-2 w-full
                   transition-[filter] duration-500
-                  ${isSelected ? "grayscale-0" : "grayscale"}
+                  ${
+                    isSelected
+                      ? "grayscale-0"
+                      : "grayscale group-hover:grayscale-0"
+                  }
                 `}
                 viewBox="0 0 340 8"
                 preserveAspectRatio="none"
@@ -173,9 +182,19 @@ export function CharacterCard({
                 </h3>
 
                 <p
-                  className={`mt-1 w-full break-words text-[clamp(0.55rem,0.85vw,0.875rem)] font-medium leading-tight ${
-                    isSelected ? "text-[#80FF00]" : "text-gray-400"
-                  }`}
+                  className={`
+                    mt-1 w-full break-words
+                    text-[clamp(0.55rem,0.85vw,0.875rem)]
+                    font-medium leading-tight
+                    transition-colors duration-300
+                    ${
+                      isSelected
+                        ? "text-[#80FF00]"
+                        : isLocked
+                          ? "text-gray-400"
+                          : "text-gray-400 group-hover:text-[#80FF00]"
+                    }
+                  `}
                 >
                   {character.role}
                 </p>

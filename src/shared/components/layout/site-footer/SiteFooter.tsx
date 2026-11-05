@@ -4,13 +4,14 @@ const KEY_CLASS =
 const SHORTCUT_CLASS =
   "flex items-center gap-2 text-xs text-white/65 sm:text-sm";
 
-export function SelectionFooter() {
+export function SiteFooter() {
   return (
     <footer className="relative z-10 mt-auto w-full bg-[linear-gradient(to_top,rgba(8,5,22,0.75)_0%,rgba(8,5,22,0.25)_65%,rgba(8,5,22,0)_100%)] px-4 pt-8 pb-6 sm:px-8 lg:px-11">
       {/* Footer content */}
       <div className="flex w-full items-center justify-between gap-4">
         {/* Keyboard shortcuts */}
         <div
+          role="group"
           aria-label="Keyboard shortcuts"
           className="flex flex-wrap items-center justify-start gap-x-5 gap-y-3 sm:gap-x-6"
         >

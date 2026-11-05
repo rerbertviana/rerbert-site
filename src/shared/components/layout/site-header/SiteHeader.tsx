@@ -21,7 +21,7 @@ interface LanguageOption {
   flag: string;
 }
 
-interface SelectionHeaderProps {
+interface SiteHeaderProps {
   resumeUrl: string;
 }
 
@@ -42,7 +42,7 @@ const LANGUAGE_OPTIONS: Record<Language, LanguageOption> = {
 
 const languages = Object.values(LANGUAGE_OPTIONS);
 
-export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
+export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
   const [selectedLanguage, setSelectedLanguage] = useState<Language>("en");
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);

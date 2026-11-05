@@ -1,8 +1,9 @@
 import Image from "next/image";
 
+import { SiteFooter } from "@/shared/components/layout/site-footer/SiteFooter";
+import { SiteHeader } from "@/shared/components/layout/site-header/SiteHeader";
+
 import { CharacterSelectionContent } from "./components/CharacterSelectionContent";
-import { SelectionFooter } from "./components/SelectionFooter";
-import { SelectionHeader } from "./components/SelectionHeader";
 import { SelectionTitle } from "./components/SelectionTitle";
 import { site } from "./data/site";
 
@@ -39,10 +40,10 @@ export function CharacterSelectionPage() {
         aria-label="RERBERT.EXE character selection homepage"
         className="relative z-10 flex min-h-screen flex-col"
       >
-        <SelectionHeader resumeUrl={site.resumeUrl} />
+        <SiteHeader resumeUrl={site.resumeUrl} />
         <SelectionTitle />
         <CharacterSelectionContent />
-        <SelectionFooter />
+        <SiteFooter />
       </main>
     </>
   );
