@@ -19,10 +19,9 @@ interface CharacterCarouselProps {
 function isEditableTarget(target: EventTarget | null) {
   if (!(target instanceof HTMLElement)) return false;
 
-  return Boolean(
-    target.closest(
-      'input, textarea, select, [contenteditable="true"], [role="textbox"]',
-    ),
+  return (
+    target.isContentEditable ||
+    Boolean(target.closest('input, textarea, select, [role="textbox"]'))
   );
 }
 
@@ -96,15 +95,24 @@ export function CharacterCarousel({
         return;
       }
 
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        handlePrevious();
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
+        return;
       }
 
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        handleNext();
-      }
+      event.preventDefault();
+
+      const direction: NavigationDirection =
+        event.key === "ArrowLeft" ? "previous" : "next";
+
+      setNavigationDirection(direction);
+
+      setActiveIndex((currentIndex) => {
+        if (direction === "previous") {
+          return (currentIndex - 1 + characters.length) % characters.length;
+        }
+
+        return (currentIndex + 1) % characters.length;
+      });
     }
 
     window.addEventListener("keydown", handleKeyDown);
@@ -112,7 +120,7 @@ export function CharacterCarousel({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  });
+  }, []);
 
   function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
     if (!event.isPrimary || characters.length <= 1) return;

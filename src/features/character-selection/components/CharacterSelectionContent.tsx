@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { characters } from "../data/characters";
@@ -8,13 +8,14 @@ import { CharacterCarousel } from "./CharacterCarousel";
 import { CharacterInformation } from "./CharacterInformation";
 import { SelectCharacterButton } from "./SelectCharacterButton";
 
+const DEFAULT_SELECTED_CHARACTER_ID = "rerbert";
+
 function isEditableTarget(target: EventTarget | null) {
   if (!(target instanceof HTMLElement)) return false;
 
-  return Boolean(
-    target.closest(
-      'input, textarea, select, [contenteditable="true"], [role="textbox"]',
-    ),
+  return (
+    target.isContentEditable ||
+    Boolean(target.closest('input, textarea, select, [role="textbox"]'))
   );
 }
 
@@ -22,7 +23,7 @@ export function CharacterSelectionContent() {
   const router = useRouter();
 
   const [selectedCharacterId, setSelectedCharacterId] = useState<string | null>(
-    "rerbert",
+    DEFAULT_SELECTED_CHARACTER_ID,
   );
 
   const selectedCharacter = characters.find(
@@ -31,11 +32,11 @@ export function CharacterSelectionContent() {
 
   const canSelectCharacter = selectedCharacter?.status === "available";
 
-  function handleConfirmSelection() {
+  const handleConfirmSelection = useCallback(() => {
     if (!canSelectCharacter) return;
 
     router.push("/profile");
-  }
+  }, [canSelectCharacter, router]);
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -59,10 +60,8 @@ export function CharacterSelectionContent() {
         }
 
         event.preventDefault();
-
-        if (canSelectCharacter) {
-          router.push("/profile");
-        }
+        handleConfirmSelection();
+        return;
       }
 
       if (event.key === "Escape" && selectedCharacterId !== null) {
@@ -76,7 +75,7 @@ export function CharacterSelectionContent() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [canSelectCharacter, selectedCharacterId, router]);
+  }, [handleConfirmSelection, selectedCharacterId]);
 
   return (
     <div className="flex flex-1 flex-col">

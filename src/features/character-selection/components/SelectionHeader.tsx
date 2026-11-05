@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -24,20 +25,22 @@ interface SelectionHeaderProps {
   resumeUrl: string;
 }
 
-const languages: LanguageOption[] = [
-  {
+const LANGUAGE_OPTIONS: Record<Language, LanguageOption> = {
+  en: {
     code: "en",
     label: "English",
     shortLabel: "EN",
     flag: "/images/flags/us.svg",
   },
-  {
+  "pt-BR": {
     code: "pt-BR",
     label: "Português (Brasil)",
     shortLabel: "PT",
     flag: "/images/flags/br.svg",
   },
-];
+};
+
+const languages = Object.values(LANGUAGE_OPTIONS);
 
 export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
   const [selectedLanguage, setSelectedLanguage] = useState<Language>("en");
@@ -45,11 +48,10 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
 
   const languageMenuRef = useRef<HTMLDivElement>(null);
+  const languageListRef = useRef<HTMLDivElement>(null);
   const languageButtonRef = useRef<HTMLButtonElement>(null);
 
-  const currentLanguage = languages.find(
-    (language) => language.code === selectedLanguage,
-  )!;
+  const currentLanguage = LANGUAGE_OPTIONS[selectedLanguage];
 
   useEffect(() => {
     function handleClickOutside(event: PointerEvent) {
@@ -61,26 +63,87 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
       }
     }
 
-    function handleEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setIsLanguageMenuOpen(false);
-        languageButtonRef.current?.focus();
-      }
-    }
-
     document.addEventListener("pointerdown", handleClickOutside);
-    document.addEventListener("keydown", handleEscape);
 
     return () => {
       document.removeEventListener("pointerdown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscape);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isLanguageMenuOpen) return;
+
+    const selectedOption = languageListRef.current?.querySelector<HTMLElement>(
+      '[role="menuitemradio"][aria-checked="true"]',
+    );
+
+    selectedOption?.focus();
+  }, [isLanguageMenuOpen]);
 
   function handleLanguageChange(language: Language) {
     setSelectedLanguage(language);
     setIsLanguageMenuOpen(false);
     languageButtonRef.current?.focus();
+  }
+
+  function handleLanguageMenuKeyDown(
+    event: ReactKeyboardEvent<HTMLDivElement>,
+  ) {
+    const menuItems =
+      languageListRef.current?.querySelectorAll<HTMLButtonElement>(
+        '[role="menuitemradio"]',
+      );
+
+    if (!menuItems?.length) return;
+
+    const currentIndex = Array.from(menuItems).findIndex(
+      (item) => item === document.activeElement,
+    );
+
+    let nextIndex = currentIndex;
+
+    switch (event.key) {
+      case "ArrowDown":
+        nextIndex = (currentIndex + 1) % menuItems.length;
+        break;
+
+      case "ArrowUp":
+        nextIndex = (currentIndex - 1 + menuItems.length) % menuItems.length;
+        break;
+
+      case "Home":
+        nextIndex = 0;
+        break;
+
+      case "End":
+        nextIndex = menuItems.length - 1;
+        break;
+
+      case "Escape":
+        event.preventDefault();
+        event.stopPropagation();
+        setIsLanguageMenuOpen(false);
+        languageButtonRef.current?.focus();
+        return;
+
+      default:
+        return;
+    }
+
+    event.preventDefault();
+    menuItems[nextIndex]?.focus();
+  }
+
+  function handleLanguageButtonKeyDown(
+    event: ReactKeyboardEvent<HTMLButtonElement>,
+  ) {
+    if (
+      !isLanguageMenuOpen &&
+      (event.key === "ArrowDown" || event.key === "ArrowUp")
+    ) {
+      event.preventDefault();
+      setIsLanguageMenuOpen(true);
+    }
   }
 
   return (
@@ -109,10 +172,7 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
       </Link>
 
       {/* Global controls */}
-      <nav
-        aria-label="Global controls"
-        className="flex items-center gap-2 sm:gap-3"
-      >
+      <div className="flex items-center gap-2 sm:gap-3">
         {/* Audio */}
         <button
           type="button"
@@ -136,7 +196,9 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
             aria-label="Select language"
             aria-haspopup="menu"
             aria-expanded={isLanguageMenuOpen}
+            aria-controls="language-menu"
             onClick={() => setIsLanguageMenuOpen((previous) => !previous)}
+            onKeyDown={handleLanguageButtonKeyDown}
             className="flex h-10 items-center justify-center gap-2 rounded-lg border border-violet-500/40 bg-[#100C24]/80 px-3 text-sm font-semibold text-white transition-colors hover:border-violet-400 sm:h-11 sm:px-4"
           >
             <div className="relative h-[14px] w-[21px] shrink-0 overflow-hidden rounded-[2px]">
@@ -162,8 +224,11 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
 
           {isLanguageMenuOpen && (
             <div
+              id="language-menu"
+              ref={languageListRef}
               role="menu"
               aria-label="Language options"
+              onKeyDown={handleLanguageMenuKeyDown}
               className="absolute right-0 top-full z-50 mt-2 min-w-[200px] overflow-hidden rounded-lg border border-violet-500/40 bg-[#100C24] p-1 shadow-[0_8px_30px_rgba(0,0,0,0.45)]"
             >
               {languages.map((language) => {
@@ -175,6 +240,7 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
                     type="button"
                     role="menuitemradio"
                     aria-checked={isSelected}
+                    tabIndex={-1}
                     onClick={() => handleLanguageChange(language.code)}
                     className={`flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left text-sm transition-colors ${
                       isSelected
@@ -212,13 +278,13 @@ export function SelectionHeader({ resumeUrl }: SelectionHeaderProps) {
           href={resumeUrl}
           download
           aria-label="Download CV"
-          className="flex h-10 items-center justify-center gap-2 rounded-lg border border-[#80FF00] bg-[#80FF00]/5 px-3 text-xs font-bold text-white shadow-[0_0_12px_rgba(128,255,0,0.12)] transition-all hover:bg-[#80FF00]/15 hover:shadow-[0_0_18px_rgba(128,255,0,0.3)] sm:h-11 sm:px-5 sm:text-sm"
+          className="flex h-10 items-center justify-center gap-2 rounded-lg border border-[#80FF00] bg-[#80FF00]/5 px-3 text-xs font-bold text-white shadow-[0_0_12px_rgba(128,255,0,0.12)] transition-[background-color,box-shadow] hover:bg-[#80FF00]/15 hover:shadow-[0_0_18px_rgba(128,255,0,0.3)] sm:h-11 sm:px-5 sm:text-sm"
         >
           <Download aria-hidden="true" size={19} className="text-[#80FF00]" />
           <span className="hidden sm:inline">Download CV</span>
           <span className="sm:hidden">CV</span>
         </a>
-      </nav>
+      </div>
 
       {/* Decorative bottom line with diagonal finish */}
       <svg

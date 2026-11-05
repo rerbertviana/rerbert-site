@@ -23,26 +23,36 @@ const INFO_TITLE_CLASS =
 const INFO_VALUE_CLASS =
   "text-xs leading-relaxed text-gray-200 md:mt-3 md:text-sm";
 
+const STATUS_COLORS = {
+  available: {
+    foreground: "#80FF00",
+    border: "rgba(128, 255, 0, 0.7)",
+    background: "rgba(128, 255, 0, 0.1)",
+  },
+  unavailable: {
+    foreground: "#FF3B5C",
+    border: "rgba(255, 59, 92, 0.7)",
+    background: "rgba(255, 59, 92, 0.1)",
+  },
+} as const;
+
 function LoadingIndicator() {
   return (
-    <div
-      className="flex h-6 items-center"
-      role="status"
-      aria-label="Waiting for character selection"
-    >
-      <LoaderCircle
-        size={17}
-        aria-hidden="true"
-        className="animate-spin text-violet-300"
-      />
+    <div className="flex h-6 items-center" aria-hidden="true">
+      <LoaderCircle size={17} className="animate-spin text-violet-300" />
     </div>
   );
 }
 
 export function CharacterInformation({ profile }: CharacterInformationProps) {
+  const statusColors = profile?.isAvailable
+    ? STATUS_COLORS.available
+    : STATUS_COLORS.unavailable;
+
   return (
     <section
       aria-label="Character information"
+      aria-busy={!profile}
       className="mx-auto w-full max-w-5xl px-3"
     >
       <div className="relative overflow-hidden rounded-2xl">
@@ -57,10 +67,12 @@ export function CharacterInformation({ profile }: CharacterInformationProps) {
                     LV
                   </span>
 
-                  {profile?.seniority && (
+                  {profile ? (
                     <span className="text-xl font-black leading-none tracking-wide text-white">
                       {profile.seniority}
                     </span>
+                  ) : (
+                    <LoadingIndicator />
                   )}
                 </div>
               </div>
@@ -126,11 +138,7 @@ export function CharacterInformation({ profile }: CharacterInformationProps) {
                 fill="currentColor"
                 className="shrink-0"
                 style={{
-                  color: profile
-                    ? profile.isAvailable
-                      ? "#80FF00"
-                      : "#FF3B5C"
-                    : "#80FF00",
+                  color: statusColors.foreground,
                 }}
               />
               <h2 className={INFO_TITLE_CLASS}>Status</h2>
@@ -142,12 +150,8 @@ export function CharacterInformation({ profile }: CharacterInformationProps) {
                   <span
                     className="inline-flex max-w-full rounded-md border px-2 py-1.5 text-[8px] font-bold uppercase leading-tight text-gray-100 md:px-2.5 md:py-2 md:text-[9px]"
                     style={{
-                      borderColor: profile.isAvailable
-                        ? "rgba(128, 255, 0, 0.7)"
-                        : "rgba(255, 59, 92, 0.7)",
-                      backgroundColor: profile.isAvailable
-                        ? "rgba(128, 255, 0, 0.1)"
-                        : "rgba(255, 59, 92, 0.1)",
+                      borderColor: statusColors.border,
+                      backgroundColor: statusColors.background,
                     }}
                   >
                     {profile.isAvailable

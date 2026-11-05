@@ -10,7 +10,7 @@ export function SelectionFooter() {
       {/* Footer content */}
       <div className="flex w-full items-center justify-between gap-4">
         {/* Keyboard shortcuts */}
-        <nav
+        <div
           aria-label="Keyboard shortcuts"
           className="flex flex-wrap items-center justify-start gap-x-5 gap-y-3 sm:gap-x-6"
         >
@@ -31,7 +31,7 @@ export function SelectionFooter() {
             <kbd className={KEY_CLASS}>Esc</kbd>
             <span>Back</span>
           </div>
-        </nav>
+        </div>
 
         {/* Version */}
         <span className="shrink-0 font-[family-name:var(--font-oxanium)] text-xs tracking-wider text-white/40">

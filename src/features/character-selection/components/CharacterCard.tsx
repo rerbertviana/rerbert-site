@@ -30,7 +30,7 @@ export function CharacterCard({
       aria-label={
         isLocked ? "Locked character" : `${character.name}, ${character.role}`
       }
-      aria-pressed={isSelected}
+      aria-pressed={isLocked ? undefined : isSelected}
       data-selected={isSelected}
       className={`
         group relative z-0 block w-[clamp(88px,22vw,220px)] shrink-0 aspect-[3/4] text-center
@@ -77,7 +77,7 @@ export function CharacterCard({
             priority={character.id === "rerbert"}
             className={`
               object-cover object-top
-              transition-all duration-500
+              transition-[filter] duration-500
               ${
                 isSelected
                   ? "grayscale-0 brightness-100"

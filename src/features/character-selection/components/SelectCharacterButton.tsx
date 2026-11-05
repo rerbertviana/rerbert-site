@@ -10,10 +10,7 @@ export function SelectCharacterButton({
   const buttonLabel = disabled ? "SELECT CHARACTER" : "CONFIRM CHARACTER";
 
   return (
-    <section
-      aria-label="Confirm character selection"
-      className="relative isolate mx-auto flex w-full items-center justify-center px-4 py-6"
-    >
+    <div className="relative isolate mx-auto flex w-full items-center justify-center px-4 py-6">
       {/* Horizontal energy line behind the button */}
       <svg
         aria-hidden="true"
@@ -74,7 +71,7 @@ export function SelectCharacterButton({
       <div
         className={`
           relative z-10 w-full max-w-[360px] rounded-xl p-[1.5px]
-          transition-all duration-300
+          transition-[background-color,box-shadow] duration-300
           ${
             disabled
               ? "bg-[#354137]"
@@ -91,7 +88,7 @@ export function SelectCharacterButton({
             rounded-[11px] px-6
             font-[family-name:var(--font-oxanium)]
             text-base font-bold uppercase tracking-[0.14em]
-            transition-all duration-300
+            transition-[filter,transform] duration-300
             focus-visible:outline-none focus-visible:ring-2
             focus-visible:ring-[#80FF00] focus-visible:ring-offset-2
             focus-visible:ring-offset-[#080516]
@@ -106,6 +103,6 @@ export function SelectCharacterButton({
           {buttonLabel}
         </button>
       </div>
-    </section>
+    </div>
   );
 }
