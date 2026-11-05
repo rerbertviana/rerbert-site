@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { playSound } from "../../../shared/lib/audio/audioManager";
 import { characters } from "../data/characters";
 import { CharacterCarousel } from "./CharacterCarousel";
 import { CharacterInformation } from "./CharacterInformation";
@@ -35,6 +36,7 @@ export function CharacterSelectionContent() {
   const handleConfirmSelection = useCallback(() => {
     if (!canSelectCharacter) return;
 
+    playSound("buttonConfirm");
     router.push("/profile");
   }, [canSelectCharacter, router]);
 
@@ -66,6 +68,7 @@ export function CharacterSelectionContent() {
 
       if (event.key === "Escape" && selectedCharacterId !== null) {
         event.preventDefault();
+        playSound("interfaceBack");
         setSelectedCharacterId(null);
       }
     }

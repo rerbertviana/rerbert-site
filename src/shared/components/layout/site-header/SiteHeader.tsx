@@ -12,6 +12,8 @@ import {
   VolumeX,
 } from "lucide-react";
 
+import { playSound, toggleAmbientMusic } from "../../../lib/audio/audioManager";
+
 type Language = "en" | "pt-BR";
 
 interface LanguageOption {
@@ -45,7 +47,7 @@ const languages = Object.values(LANGUAGE_OPTIONS);
 export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
   const [selectedLanguage, setSelectedLanguage] = useState<Language>("en");
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
-  const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+  const [isSoundEnabled, setIsSoundEnabled] = useState(false);
 
   const languageMenuRef = useRef<HTMLDivElement>(null);
   const languageListRef = useRef<HTMLDivElement>(null);
@@ -80,9 +82,24 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
     selectedOption?.focus();
   }, [isLanguageMenuOpen]);
 
+  async function handleSoundToggle() {
+    const isPlaying = await toggleAmbientMusic();
+
+    setIsSoundEnabled(isPlaying);
+  }
+
+  function handleLanguageMenuToggle() {
+    setIsLanguageMenuOpen((previous) => {
+      playSound(previous ? "interfaceClose" : "interfaceOpen");
+
+      return !previous;
+    });
+  }
+
   function handleLanguageChange(language: Language) {
     setSelectedLanguage(language);
     setIsLanguageMenuOpen(false);
+    playSound("interfaceClose");
     languageButtonRef.current?.focus();
   }
 
@@ -123,6 +140,7 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
         event.preventDefault();
         event.stopPropagation();
         setIsLanguageMenuOpen(false);
+        playSound("interfaceClose");
         languageButtonRef.current?.focus();
         return;
 
@@ -143,6 +161,7 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
     ) {
       event.preventDefault();
       setIsLanguageMenuOpen(true);
+      playSound("interfaceOpen");
     }
   }
 
@@ -178,7 +197,7 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
           type="button"
           aria-label={isSoundEnabled ? "Disable sound" : "Enable sound"}
           aria-pressed={isSoundEnabled}
-          onClick={() => setIsSoundEnabled((previous) => !previous)}
+          onClick={handleSoundToggle}
           className="flex h-10 w-10 items-center justify-center rounded-lg border border-violet-500/40 bg-[#100C24]/80 text-violet-300 transition-colors hover:border-violet-400 hover:bg-violet-500/10 sm:h-11 sm:w-14"
         >
           {isSoundEnabled ? (
@@ -197,7 +216,7 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
             aria-haspopup="menu"
             aria-expanded={isLanguageMenuOpen}
             aria-controls="language-menu"
-            onClick={() => setIsLanguageMenuOpen((previous) => !previous)}
+            onClick={handleLanguageMenuToggle}
             onKeyDown={handleLanguageButtonKeyDown}
             className="flex h-10 items-center justify-center gap-2 rounded-lg border border-violet-500/40 bg-[#100C24]/80 px-3 text-sm font-semibold text-white transition-colors hover:border-violet-400 sm:h-11 sm:px-4"
           >

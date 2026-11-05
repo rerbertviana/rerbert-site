@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { PointerEvent, MouseEvent } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { playSound } from "../../../shared/lib/audio/audioManager";
 import { characters } from "../data/characters";
 import { CharacterCard } from "./CharacterCard";
 
@@ -51,18 +52,9 @@ export function CharacterCarousel({
     };
   });
 
-  function handleCharacterSelect(characterId: string, index: number) {
-    if (selectedCharacterId === characterId) {
-      onSelectedCharacterChange(null);
-      return;
-    }
-
-    setActiveIndex(index);
-    onSelectedCharacterChange(characterId);
-  }
-
-  function handleNavigation(direction: NavigationDirection) {
+  const handleNavigation = useCallback((direction: NavigationDirection) => {
     setNavigationDirection(direction);
+    playSound("characterNavigation");
 
     setActiveIndex((currentIndex) => {
       if (direction === "previous") {
@@ -71,6 +63,18 @@ export function CharacterCarousel({
 
       return (currentIndex + 1) % characters.length;
     });
+  }, []);
+
+  function handleCharacterSelect(characterId: string, index: number) {
+    if (selectedCharacterId === characterId) {
+      playSound("interfaceBack");
+      onSelectedCharacterChange(null);
+      return;
+    }
+
+    playSound("characterSelect");
+    setActiveIndex(index);
+    onSelectedCharacterChange(characterId);
   }
 
   function handlePrevious() {
@@ -104,15 +108,7 @@ export function CharacterCarousel({
       const direction: NavigationDirection =
         event.key === "ArrowLeft" ? "previous" : "next";
 
-      setNavigationDirection(direction);
-
-      setActiveIndex((currentIndex) => {
-        if (direction === "previous") {
-          return (currentIndex - 1 + characters.length) % characters.length;
-        }
-
-        return (currentIndex + 1) % characters.length;
-      });
+      handleNavigation(direction);
     }
 
     window.addEventListener("keydown", handleKeyDown);
@@ -120,7 +116,7 @@ export function CharacterCarousel({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [handleNavigation]);
 
   function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
     if (!event.isPrimary || characters.length <= 1) return;
