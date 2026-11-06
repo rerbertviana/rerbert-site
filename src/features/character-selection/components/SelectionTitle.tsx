@@ -35,7 +35,7 @@ export function SelectionTitle() {
       {/* Main heading */}
       <h1
         id="selection-title"
-        className="mt-3 flex flex-wrap justify-center gap-x-3 font-[family-name:var(--font-oxanium)] text-3xl font-extrabold uppercase italic leading-none tracking-tight text-white sm:text-4xl md:text-5xl"
+        className="mt-3 flex flex-wrap justify-center gap-x-3 font-[family-name:var(--font-oxanium)] text-3xl font-extrabold uppercase leading-none tracking-tight text-white sm:text-4xl md:text-5xl"
       >
         <span>{translations.title.first}</span>
 
