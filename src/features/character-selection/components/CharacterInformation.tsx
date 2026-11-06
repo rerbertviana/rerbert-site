@@ -1,3 +1,5 @@
+"use client";
+
 import {
   BriefcaseBusiness,
   GraduationCap,
@@ -6,10 +8,14 @@ import {
   LoaderCircle,
 } from "lucide-react";
 
+import { useLanguage } from "@/shared/i18n/LanguageProvider";
 import type { CharacterProfile } from "../types/character";
 
 interface CharacterInformationProps {
   profile?: CharacterProfile;
+  localizedSeniority?: string;
+  localizedExperience?: string;
+  localizedEducation?: string;
 }
 
 const INFO_ITEM_CLASS =
@@ -44,14 +50,22 @@ function LoadingIndicator() {
   );
 }
 
-export function CharacterInformation({ profile }: CharacterInformationProps) {
+export function CharacterInformation({
+  profile,
+  localizedSeniority,
+  localizedExperience,
+  localizedEducation,
+}: CharacterInformationProps) {
+  const { dictionary } = useLanguage();
+  const translations = dictionary.characterSelection.information;
+
   const statusColors = profile?.isAvailable
     ? STATUS_COLORS.available
     : STATUS_COLORS.unavailable;
 
   return (
     <section
-      aria-label="Character information"
+      aria-label={translations.label}
       aria-busy={!profile}
       className="mx-auto w-full max-w-5xl px-3"
     >
@@ -64,12 +78,12 @@ export function CharacterInformation({ profile }: CharacterInformationProps) {
               <div className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-[10px] bg-[#171A2A]">
                 <div className="flex flex-col items-center justify-center gap-1">
                   <span className="text-[11px] font-bold leading-none tracking-[0.12em] text-white">
-                    LV
+                    {translations.level}
                   </span>
 
                   {profile ? (
-                    <span className="text-xl font-black leading-none tracking-wide text-white">
-                      {profile.seniority}
+                    <span className="max-w-full px-3 text-base font-black leading-none tracking-wide text-center text-white sm:text-lg">
+                      {localizedSeniority ?? profile.seniority}
                     </span>
                   ) : (
                     <LoadingIndicator />
@@ -86,12 +100,14 @@ export function CharacterInformation({ profile }: CharacterInformationProps) {
                 size={17}
                 className="shrink-0 text-violet-300"
               />
-              <h2 className={INFO_TITLE_CLASS}>Experience</h2>
+              <h2 className={INFO_TITLE_CLASS}>{translations.experience}</h2>
             </div>
 
             <div className="min-w-0 text-right md:text-left">
               {profile?.experience ? (
-                <p className={INFO_VALUE_CLASS}>{profile.experience}</p>
+                <p className={INFO_VALUE_CLASS}>
+                  {localizedExperience ?? profile.experience}
+                </p>
               ) : (
                 <LoadingIndicator />
               )}
@@ -102,12 +118,14 @@ export function CharacterInformation({ profile }: CharacterInformationProps) {
           <div className={INFO_ITEM_CLASS}>
             <div className={INFO_HEADER_CLASS}>
               <GraduationCap size={19} className="shrink-0 text-violet-300" />
-              <h2 className={INFO_TITLE_CLASS}>Education</h2>
+              <h2 className={INFO_TITLE_CLASS}>{translations.education}</h2>
             </div>
 
             <div className="min-w-0 text-right md:text-left">
               {profile?.education ? (
-                <p className={INFO_VALUE_CLASS}>{profile.education}</p>
+                <p className={INFO_VALUE_CLASS}>
+                  {localizedEducation ?? profile.education}
+                </p>
               ) : (
                 <LoadingIndicator />
               )}
@@ -118,7 +136,7 @@ export function CharacterInformation({ profile }: CharacterInformationProps) {
           <div className={INFO_ITEM_CLASS}>
             <div className={INFO_HEADER_CLASS}>
               <MapPin size={17} className="shrink-0 text-violet-300" />
-              <h2 className={INFO_TITLE_CLASS}>Location</h2>
+              <h2 className={INFO_TITLE_CLASS}>{translations.location}</h2>
             </div>
 
             <div className="min-w-0 text-right md:text-left">
@@ -141,7 +159,7 @@ export function CharacterInformation({ profile }: CharacterInformationProps) {
                   color: statusColors.foreground,
                 }}
               />
-              <h2 className={INFO_TITLE_CLASS}>Status</h2>
+              <h2 className={INFO_TITLE_CLASS}>{translations.status}</h2>
             </div>
 
             <div className="min-w-0 text-right md:text-left">
@@ -155,8 +173,8 @@ export function CharacterInformation({ profile }: CharacterInformationProps) {
                     }}
                   >
                     {profile.isAvailable
-                      ? "Available for opportunities"
-                      : "Not available for opportunities"}
+                      ? translations.available
+                      : translations.unavailable}
                   </span>
                 </div>
               ) : (

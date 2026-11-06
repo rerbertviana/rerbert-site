@@ -1,4 +1,11 @@
+"use client";
+
+import { useLanguage } from "@/shared/i18n/LanguageProvider";
+
 export function SelectionTitle() {
+  const { dictionary } = useLanguage();
+  const translations = dictionary.characterSelection;
+
   return (
     <section
       aria-labelledby="selection-title"
@@ -14,7 +21,7 @@ export function SelectionTitle() {
         </span>
 
         <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#B77AFF] sm:text-sm">
-          Character Selection
+          {translations.sectionLabel}
         </p>
 
         <span
@@ -30,14 +37,14 @@ export function SelectionTitle() {
         id="selection-title"
         className="mt-3 flex flex-wrap justify-center gap-x-3 font-[family-name:var(--font-oxanium)] text-3xl font-extrabold uppercase italic leading-none tracking-tight text-white sm:text-4xl md:text-5xl"
       >
-        <span>Choose Your</span>
+        <span>{translations.title.first}</span>
 
-        <span className="text-[#8AFF00]">Developer</span>
+        <span className="text-[#8AFF00]">{translations.title.highlight}</span>
       </h1>
 
       {/* Description */}
       <p className="mt-3 max-w-xl text-sm font-medium text-white/90 sm:text-base">
-        Select a character to explore my profile, skills, projects and career.
+        {translations.subtitle}
       </p>
 
       {/* Decorative divider */}
@@ -49,7 +56,6 @@ export function SelectionTitle() {
         preserveAspectRatio="none"
       >
         <defs>
-          {/* Left gradient: green to purple */}
           <linearGradient
             id="selection-divider-left"
             x1="0"
@@ -65,7 +71,6 @@ export function SelectionTitle() {
             <stop offset="100%" stopColor="#A855F7" stopOpacity="0.35" />
           </linearGradient>
 
-          {/* Right gradient: mirrored */}
           <linearGradient
             id="selection-divider-right"
             x1="700"
@@ -82,14 +87,12 @@ export function SelectionTitle() {
           </linearGradient>
         </defs>
 
-        {/* Left side */}
         <path
           d="M0 22 H45 L60 7 H180"
           stroke="url(#selection-divider-left)"
           strokeWidth="1.2"
         />
 
-        {/* Right side */}
         <path
           d="M700 22 H655 L640 7 H520"
           stroke="url(#selection-divider-right)"

@@ -1,3 +1,7 @@
+"use client";
+
+import { useLanguage } from "@/shared/i18n/LanguageProvider";
+
 interface SelectCharacterButtonProps {
   disabled?: boolean;
   onClick: () => void;
@@ -7,7 +11,10 @@ export function SelectCharacterButton({
   disabled = false,
   onClick,
 }: SelectCharacterButtonProps) {
-  const buttonLabel = disabled ? "SELECT CHARACTER" : "CONFIRM CHARACTER";
+  const { dictionary } = useLanguage();
+  const translations = dictionary.characterSelection.button;
+
+  const buttonLabel = disabled ? translations.select : translations.confirm;
 
   return (
     <div className="relative isolate mx-auto flex w-full items-center justify-center px-4 py-6">

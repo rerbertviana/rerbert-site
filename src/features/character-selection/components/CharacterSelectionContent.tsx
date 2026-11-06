@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { playSound } from "../../../shared/lib/audio/audioManager";
+import { useLanguage } from "@/shared/i18n/LanguageProvider";
+import { getCharacterTranslation } from "../utils/getCharacterTranslation";
 import { characters } from "../data/characters";
 import { CharacterCarousel } from "./CharacterCarousel";
 import { CharacterInformation } from "./CharacterInformation";
@@ -22,6 +24,7 @@ function isEditableTarget(target: EventTarget | null) {
 
 export function CharacterSelectionContent() {
   const router = useRouter();
+  const { locale, dictionary } = useLanguage();
 
   const [selectedCharacterId, setSelectedCharacterId] = useState<string | null>(
     DEFAULT_SELECTED_CHARACTER_ID,
@@ -33,12 +36,20 @@ export function CharacterSelectionContent() {
 
   const canSelectCharacter = selectedCharacter?.status === "available";
 
+  const selectedCharacterTranslation = selectedCharacter
+    ? getCharacterTranslation(
+        selectedCharacter.id,
+        selectedCharacter.name,
+        dictionary.characterSelection.characters,
+      )
+    : undefined;
+
   const handleConfirmSelection = useCallback(() => {
     if (!canSelectCharacter) return;
 
     playSound("buttonConfirm");
-    router.push("/profile");
-  }, [canSelectCharacter, router]);
+    router.push(`/${locale}/profile`);
+  }, [canSelectCharacter, locale, router]);
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -87,7 +98,12 @@ export function CharacterSelectionContent() {
         onSelectedCharacterChange={setSelectedCharacterId}
       />
 
-      <CharacterInformation profile={selectedCharacter?.profile} />
+      <CharacterInformation
+        profile={selectedCharacter?.profile}
+        localizedSeniority={selectedCharacterTranslation?.seniority}
+        localizedExperience={selectedCharacterTranslation?.experience}
+        localizedEducation={selectedCharacterTranslation?.education}
+      />
 
       <SelectCharacterButton
         disabled={!canSelectCharacter}

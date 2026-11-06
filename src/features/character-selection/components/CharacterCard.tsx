@@ -5,6 +5,11 @@ import type { Character } from "../types/character";
 
 interface CharacterCardProps {
   character: Character;
+  name: string;
+  role: string;
+  lockedLabel: string;
+  lockedCharacterLabel: string;
+  illustrationLabel: string;
   isSelected: boolean;
   onSelect: () => void;
 }
@@ -14,6 +19,11 @@ const ACTIVE_BORDER_GRADIENT =
 
 export function CharacterCard({
   character,
+  name,
+  role,
+  lockedLabel,
+  lockedCharacterLabel,
+  illustrationLabel,
   isSelected,
   onSelect,
 }: CharacterCardProps) {
@@ -30,9 +40,7 @@ export function CharacterCard({
       type="button"
       disabled={isLocked}
       onClick={onSelect}
-      aria-label={
-        isLocked ? "Locked character" : `${character.name}, ${character.role}`
-      }
+      aria-label={isLocked ? lockedCharacterLabel : `${name}, ${role}`}
       aria-pressed={isLocked ? undefined : isSelected}
       data-selected={isSelected}
       className={`
@@ -71,9 +79,7 @@ export function CharacterCard({
           <Image
             src={character.image}
             alt={
-              isLocked
-                ? "Locked character silhouette"
-                : `${character.name} character illustration`
+              isLocked ? lockedCharacterLabel : `${name} ${illustrationLabel}`
             }
             fill
             sizes="(max-width: 768px) 22vw, 220px"
@@ -173,12 +179,12 @@ export function CharacterCard({
 
             {isLocked ? (
               <p className="hidden font-[family-name:var(--font-oxanium)] text-sm font-bold tracking-wider text-[#AAA6BB] sm:block">
-                LOCKED
+                {lockedLabel}
               </p>
             ) : (
               <>
                 <h3 className="w-full break-words font-[family-name:var(--font-oxanium)] text-[clamp(0.65rem,1.1vw,1.25rem)] font-bold uppercase leading-tight tracking-wide text-white not-italic">
-                  {character.name}
+                  {name}
                 </h3>
 
                 <p
@@ -196,7 +202,7 @@ export function CharacterCard({
                     }
                   `}
                 >
-                  {character.role}
+                  {role}
                 </p>
               </>
             )}

@@ -5,6 +5,8 @@ import type { PointerEvent, MouseEvent } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { playSound } from "../../../shared/lib/audio/audioManager";
+import { useLanguage } from "@/shared/i18n/LanguageProvider";
+import { getCharacterTranslation } from "../utils/getCharacterTranslation";
 import { characters } from "../data/characters";
 import { CharacterCard } from "./CharacterCard";
 
@@ -30,6 +32,9 @@ export function CharacterCarousel({
   selectedCharacterId,
   onSelectedCharacterChange,
 }: CharacterCarouselProps) {
+  const { dictionary } = useLanguage();
+  const translations = dictionary.characterSelection;
+
   const initialCharacterIndex = Math.max(
     characters.findIndex((character) => character.id === "rerbert"),
     0,
@@ -85,7 +90,6 @@ export function CharacterCarousel({
     handleNavigation("next");
   }
 
-  // Keyboard navigation
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (
@@ -161,12 +165,12 @@ export function CharacterCarousel({
 
   return (
     <section
-      aria-label="Character carousel"
+      aria-label={translations.carousel.label}
       className="mx-auto mt-0 flex w-full max-w-[1100px] items-center justify-center gap-2 px-2 sm:gap-4 sm:px-4"
     >
       <button
         type="button"
-        aria-label="Previous character"
+        aria-label={translations.carousel.previousCharacter}
         onClick={handlePrevious}
         className="flex size-8 shrink-0 items-center justify-center text-white/60 transition-colors duration-300 hover:text-[#80FF00] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#80FF00] sm:size-10"
       >
@@ -188,6 +192,12 @@ export function CharacterCarousel({
           {visibleCharacters.map(({ character, characterIndex }) => {
             const isSelected = selectedCharacterId === character.id;
 
+            const characterTranslation = getCharacterTranslation(
+              character.id,
+              character.name,
+              translations.characters,
+            );
+
             return (
               <div
                 key={character.id}
@@ -200,6 +210,11 @@ export function CharacterCarousel({
               >
                 <CharacterCard
                   character={character}
+                  name={characterTranslation.name}
+                  role={characterTranslation.role}
+                  lockedLabel={translations.card.locked}
+                  lockedCharacterLabel={translations.card.lockedCharacter}
+                  illustrationLabel={translations.card.characterIllustration}
                   isSelected={isSelected}
                   onSelect={() =>
                     handleCharacterSelect(character.id, characterIndex)
@@ -213,7 +228,7 @@ export function CharacterCarousel({
 
       <button
         type="button"
-        aria-label="Next character"
+        aria-label={translations.carousel.nextCharacter}
         onClick={handleNext}
         className="flex size-8 shrink-0 items-center justify-center text-white/60 transition-colors duration-300 hover:text-[#80FF00] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#80FF00] sm:size-10"
       >

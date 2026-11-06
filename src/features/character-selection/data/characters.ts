@@ -33,7 +33,7 @@ export const characters: Character[] = [
       seniority: "MID",
       experience: "6+ years",
       education: "Information Systems - IFBA",
-      location: "Vitória da Conquista, Bahia, Brazil",
+      location: "Vitória da Conquista, Bahia, Brasil",
       isAvailable: true,
     },
   },

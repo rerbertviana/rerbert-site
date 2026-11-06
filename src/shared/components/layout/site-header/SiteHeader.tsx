@@ -12,22 +12,18 @@ import {
   VolumeX,
 } from "lucide-react";
 
-import { playSound, toggleAmbientMusic } from "../../../lib/audio/audioManager";
-
-type Language = "en" | "pt-BR";
+import { useLanguage } from "@/shared/i18n/LanguageProvider";
+import type { Locale } from "@/shared/i18n/config";
+import { playSound, toggleAmbientMusic } from "@/shared/lib/audio/audioManager";
 
 interface LanguageOption {
-  code: Language;
+  code: Locale;
   label: string;
   shortLabel: string;
   flag: string;
 }
 
-interface SiteHeaderProps {
-  resumeUrl: string;
-}
-
-const LANGUAGE_OPTIONS: Record<Language, LanguageOption> = {
+const LANGUAGE_OPTIONS: Record<Locale, LanguageOption> = {
   en: {
     code: "en",
     label: "English",
@@ -44,8 +40,9 @@ const LANGUAGE_OPTIONS: Record<Language, LanguageOption> = {
 
 const languages = Object.values(LANGUAGE_OPTIONS);
 
-export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
-  const [selectedLanguage, setSelectedLanguage] = useState<Language>("en");
+export function SiteHeader() {
+  const { locale, dictionary, resumeUrl, changeLanguage } = useLanguage();
+
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const [isSoundEnabled, setIsSoundEnabled] = useState(false);
 
@@ -53,7 +50,7 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
   const languageListRef = useRef<HTMLDivElement>(null);
   const languageButtonRef = useRef<HTMLButtonElement>(null);
 
-  const currentLanguage = LANGUAGE_OPTIONS[selectedLanguage];
+  const currentLanguage = LANGUAGE_OPTIONS[locale];
 
   useEffect(() => {
     function handleClickOutside(event: PointerEvent) {
@@ -96,11 +93,17 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
     });
   }
 
-  function handleLanguageChange(language: Language) {
-    setSelectedLanguage(language);
+  function handleLanguageChange(language: Locale) {
+    if (language === locale) {
+      setIsLanguageMenuOpen(false);
+      playSound("interfaceClose");
+      languageButtonRef.current?.focus();
+      return;
+    }
+
     setIsLanguageMenuOpen(false);
     playSound("interfaceClose");
-    languageButtonRef.current?.focus();
+    changeLanguage(language);
   }
 
   function handleLanguageMenuKeyDown(
@@ -169,8 +172,8 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
     <header className="sticky top-0 z-50 flex min-h-[76px] flex-wrap items-center justify-between gap-4 bg-[linear-gradient(to_bottom,rgba(8,5,22,0.95)_0%,rgba(8,5,22,0.65)_45%,rgba(8,5,22,0)_100%)] px-4 py-3 backdrop-blur-[2px] sm:px-8 lg:px-11">
       {/* Brand */}
       <Link
-        href="/"
-        aria-label="RERBERT home"
+        href={`/${locale}`}
+        aria-label={`RERBERT — ${dictionary.navigation.home}`}
         className="group flex shrink-0 items-center gap-3"
       >
         <ChevronsLeftRightEllipsis
@@ -185,7 +188,7 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
           </span>
 
           <span className="text-[9px] uppercase tracking-[0.16em] text-gray-400 sm:text-[11px]">
-            Developer Portfolio
+            {dictionary.header.developerPortfolio}
           </span>
         </div>
       </Link>
@@ -195,7 +198,11 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
         {/* Audio */}
         <button
           type="button"
-          aria-label={isSoundEnabled ? "Disable sound" : "Enable sound"}
+          aria-label={
+            isSoundEnabled
+              ? dictionary.header.disableSound
+              : dictionary.header.enableSound
+          }
           aria-pressed={isSoundEnabled}
           onClick={handleSoundToggle}
           className="flex h-10 w-10 items-center justify-center rounded-lg border border-violet-500/40 bg-[#100C24]/80 text-violet-300 transition-colors hover:border-violet-400 hover:bg-violet-500/10 sm:h-11 sm:w-14"
@@ -212,7 +219,7 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
           <button
             ref={languageButtonRef}
             type="button"
-            aria-label="Select language"
+            aria-label={dictionary.header.selectLanguage}
             aria-haspopup="menu"
             aria-expanded={isLanguageMenuOpen}
             aria-controls="language-menu"
@@ -246,12 +253,12 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
               id="language-menu"
               ref={languageListRef}
               role="menu"
-              aria-label="Language options"
+              aria-label={dictionary.header.languageOptions}
               onKeyDown={handleLanguageMenuKeyDown}
               className="absolute right-0 top-full z-50 mt-2 min-w-[200px] overflow-hidden rounded-lg border border-violet-500/40 bg-[#100C24] p-1 shadow-[0_8px_30px_rgba(0,0,0,0.45)]"
             >
               {languages.map((language) => {
-                const isSelected = selectedLanguage === language.code;
+                const isSelected = locale === language.code;
 
                 return (
                   <button
@@ -296,12 +303,14 @@ export function SiteHeader({ resumeUrl }: SiteHeaderProps) {
         <a
           href={resumeUrl}
           download
-          aria-label="Download CV"
+          aria-label={dictionary.header.downloadCv}
           className="flex h-10 items-center justify-center gap-2 rounded-lg border border-[#80FF00] bg-[#80FF00]/5 px-3 text-xs font-bold text-white shadow-[0_0_12px_rgba(128,255,0,0.12)] transition-[background-color,box-shadow] hover:bg-[#80FF00]/15 hover:shadow-[0_0_18px_rgba(128,255,0,0.3)] sm:h-11 sm:px-5 sm:text-sm"
         >
           <Download aria-hidden="true" size={19} className="text-[#80FF00]" />
-          <span className="hidden sm:inline">Download CV</span>
-          <span className="sm:hidden">CV</span>
+          <span className="hidden sm:inline">
+            {dictionary.header.downloadCv}
+          </span>
+          <span className="sm:hidden">{dictionary.header.cv}</span>
         </a>
       </div>
 

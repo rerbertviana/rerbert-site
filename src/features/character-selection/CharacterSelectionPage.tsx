@@ -5,7 +5,6 @@ import { SiteHeader } from "@/shared/components/layout/site-header/SiteHeader";
 
 import { CharacterSelectionContent } from "./components/CharacterSelectionContent";
 import { SelectionTitle } from "./components/SelectionTitle";
-import { site } from "./data/site";
 
 export function CharacterSelectionPage() {
   return (
@@ -37,10 +36,10 @@ export function CharacterSelectionPage() {
 
       {/* Page content */}
       <main
-        aria-label="RERBERT.EXE character selection homepage"
+        aria-label="RERBERT.EXE"
         className="relative z-10 flex min-h-screen flex-col"
       >
-        <SiteHeader resumeUrl={site.resumeUrl} />
+        <SiteHeader />
         <SelectionTitle />
         <CharacterSelectionContent />
         <SiteFooter />
