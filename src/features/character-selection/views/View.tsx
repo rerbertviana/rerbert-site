@@ -3,7 +3,7 @@
 import { useController } from "../controller/useController";
 
 import { CharacterCarousel } from "../components/character-carousel/View";
-import { CharacterInformation } from "../components/CharacterInformation";
+import { CharacterInformation } from "../components/character-information/View";
 import { SelectCharacterButton } from "../components/SelectCharacterButton";
 import { SelectionTitle } from "../components/SelectionTitle";
 

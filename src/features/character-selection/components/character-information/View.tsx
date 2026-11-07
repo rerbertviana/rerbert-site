@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
-import type { CharacterProfile } from "../types/character";
+import type { CharacterProfile } from "../../types/character";
 
 interface CharacterInformationProps {
   profile?: CharacterProfile;
@@ -70,7 +70,6 @@ export function CharacterInformation({
       className="mx-auto w-full max-w-5xl px-3"
     >
       <div className="relative overflow-hidden rounded-2xl">
-        {/* Glass panel */}
         <div className="grid grid-cols-[76px_minmax(0,1fr)] gap-x-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-5 shadow-[inset_0_0_35px_rgba(255,255,255,0.05)] backdrop-blur-xl md:grid-cols-[112px_repeat(4,minmax(0,1fr))] md:items-stretch md:gap-x-0 md:px-7 md:py-6">
           {/* Seniority */}
           <div className="row-span-4 flex items-center justify-start md:row-span-1 md:justify-center">
