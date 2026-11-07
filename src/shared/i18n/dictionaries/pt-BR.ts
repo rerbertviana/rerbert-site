@@ -92,6 +92,13 @@ const ptBR: Dictionary = {
       viewMore: "VER MAIS",
       technologiesLabel: "Principais tecnologias",
     },
+
+    missions: {
+      title: "MISSÕES",
+      description:
+        "Explore minha trajetória profissional e os projetos que desenvolvi.",
+      viewMore: "VER MAIS",
+    },
   },
 };
 

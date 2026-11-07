@@ -88,5 +88,11 @@ export interface Dictionary {
       viewMore: string;
       technologiesLabel: string;
     };
+
+    missions: {
+      title: string;
+      description: string;
+      viewMore: string;
+    };
   };
 }

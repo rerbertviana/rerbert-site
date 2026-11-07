@@ -93,6 +93,13 @@ const en: Dictionary = {
       viewMore: "VIEW MORE",
       technologiesLabel: "Main technologies",
     },
+    
+    missions: {
+      title: "MISSIONS",
+      description:
+        "Explore my professional journey and the projects I have developed.",
+      viewMore: "VIEW MORE",
+    },
   },
 };
 
