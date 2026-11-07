@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Award,
   BriefcaseBusiness,
   GraduationCap,
   MapPin,
@@ -70,9 +71,27 @@ export function CharacterInformation({
       className="mx-auto w-full max-w-5xl px-3"
     >
       <div className="relative overflow-hidden rounded-2xl">
-        <div className="grid grid-cols-[76px_minmax(0,1fr)] gap-x-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-5 shadow-[inset_0_0_35px_rgba(255,255,255,0.05)] backdrop-blur-xl md:grid-cols-[112px_repeat(4,minmax(0,1fr))] md:items-stretch md:gap-x-0 md:px-7 md:py-6">
-          {/* Seniority */}
-          <div className="row-span-4 flex items-center justify-start md:row-span-1 md:justify-center">
+        <div className="grid grid-cols-1 gap-x-0 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-5 shadow-[inset_0_0_35px_rgba(255,255,255,0.05)] backdrop-blur-xl md:grid-cols-5 md:items-stretch md:gap-x-0 md:px-5 md:py-6">
+          {/* Seniority - Mobile */}
+          <div className={`${INFO_ITEM_CLASS} md:hidden`}>
+            <div className={INFO_HEADER_CLASS}>
+              <Award size={17} className="shrink-0 text-violet-300" />
+              <h2 className={INFO_TITLE_CLASS}>{translations.level}</h2>
+            </div>
+
+            <div className="min-w-0 text-right">
+              {profile ? (
+                <p className={INFO_VALUE_CLASS}>
+                  {localizedSeniority ?? profile.seniority}
+                </p>
+              ) : (
+                <LoadingIndicator />
+              )}
+            </div>
+          </div>
+
+          {/* Seniority - Desktop */}
+          <div className="hidden min-w-0 items-center justify-center md:flex">
             <div className="rounded-xl bg-gradient-to-br from-violet-500 via-purple-400 to-[#80FF00] p-[2px]">
               <div className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-[10px] bg-[#171A2A]">
                 <div className="flex flex-col items-center justify-center gap-1">
@@ -81,7 +100,7 @@ export function CharacterInformation({
                   </span>
 
                   {profile ? (
-                    <span className="max-w-full px-3 text-base font-black leading-none tracking-wide text-center text-white sm:text-lg">
+                    <span className="max-w-full px-3 text-center text-base font-black leading-none tracking-wide text-white sm:text-lg">
                       {localizedSeniority ?? profile.seniority}
                     </span>
                   ) : (
