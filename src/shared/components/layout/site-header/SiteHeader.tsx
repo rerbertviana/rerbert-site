@@ -14,7 +14,11 @@ import {
 
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
 import type { Locale } from "@/shared/i18n/config";
-import { playSound, toggleAmbientMusic } from "@/shared/lib/audio/audioManager";
+import {
+  isAmbientMusicPlaying,
+  playSound,
+  toggleAmbientMusic,
+} from "@/shared/lib/audio/audioManager";
 
 interface LanguageOption {
   code: Locale;
@@ -44,7 +48,9 @@ export function SiteHeader() {
   const { locale, dictionary, resumeUrl, changeLanguage } = useLanguage();
 
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
-  const [isSoundEnabled, setIsSoundEnabled] = useState(false);
+  const [isSoundEnabled, setIsSoundEnabled] = useState(() =>
+    isAmbientMusicPlaying(),
+  );
 
   const languageMenuRef = useRef<HTMLDivElement>(null);
   const languageListRef = useRef<HTMLDivElement>(null);
