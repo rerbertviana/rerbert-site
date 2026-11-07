@@ -94,5 +94,10 @@ export interface Dictionary {
       description: string;
       viewMore: string;
     };
+
+    links: {
+      title: string;
+      description: string;
+    };
   };
 }

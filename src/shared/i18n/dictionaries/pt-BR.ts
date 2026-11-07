@@ -99,6 +99,11 @@ const ptBR: Dictionary = {
         "Explore minha trajetória profissional e os projetos que desenvolvi.",
       viewMore: "VER MAIS",
     },
+
+    links: {
+      title: "LINKS",
+      description: "Meus principais canais profissionais e presença online.",
+    },
   },
 };
 
