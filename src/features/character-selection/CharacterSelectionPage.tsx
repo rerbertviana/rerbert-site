@@ -3,13 +3,11 @@ import Image from "next/image";
 import { SiteFooter } from "@/shared/components/layout/site-footer/SiteFooter";
 import { SiteHeader } from "@/shared/components/layout/site-header/SiteHeader";
 
-import { CharacterSelectionContent } from "./components/CharacterSelectionContent";
-import { SelectionTitle } from "./components/SelectionTitle";
+import { View } from "./views/View";
 
 export function CharacterSelectionPage() {
   return (
     <>
-      {/* Responsive background */}
       <div
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#080516]"
@@ -30,18 +28,15 @@ export function CharacterSelectionPage() {
           />
         </picture>
 
-        {/* Contrast overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#080516]/20 via-[#080516]/10 to-[#080516]/50" />
       </div>
 
-      {/* Page content */}
       <main
         aria-label="RERBERT.EXE"
         className="relative z-10 flex min-h-screen flex-col"
       >
         <SiteHeader />
-        <SelectionTitle />
-        <CharacterSelectionContent />
+        <View />
         <SiteFooter />
       </main>
     </>
