@@ -164,7 +164,7 @@ export function CharacterInformation({
               <div className="min-w-0 text-right md:text-left">
                 <div className="md:mt-3">
                   <span
-                    className="inline-flex max-w-full rounded-md border px-2 py-1.5 text-[8px] font-bold uppercase leading-tight text-gray-100 md:px-2.5 md:py-2 md:text-[9px]"
+                    className="inline-flex max-w-full items-center justify-center rounded-md border px-2 py-1.5 text-center text-[8px] font-bold uppercase leading-tight text-gray-100 md:px-2.5 md:py-2 md:text-[9px]"
                     style={{
                       borderColor: statusColors.border,
                       backgroundColor: statusColors.background,

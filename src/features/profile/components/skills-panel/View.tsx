@@ -76,7 +76,6 @@ export function View() {
                 transition-all duration-200 ease-out
                 hover:-translate-y-1 hover:scale-105
                 hover:border-white/80
-                hover:shadow-[0_0_12px_rgba(255,255,255,0.25)]
                 ${index >= MOBILE_SKILLS_LIMIT ? "hidden lg:flex" : ""}
                 lg:h-12 lg:w-12 lg:p-2
               `}
