@@ -17,7 +17,7 @@ export function SelectCharacterButton({
   const buttonLabel = disabled ? translations.select : translations.confirm;
 
   return (
-    <div className="relative isolate mx-auto flex w-full items-center justify-center px-4 py-6">
+    <div className="relative isolate mx-auto flex w-full items-center justify-center px-4 py-4 sm:py-6">
       {/* Horizontal energy line behind the button */}
       <svg
         aria-hidden="true"
@@ -77,8 +77,9 @@ export function SelectCharacterButton({
       {/* Button border */}
       <div
         className={`
-          relative z-10 w-full max-w-[360px] rounded-xl p-[1.5px]
+          relative z-10 w-full max-w-[280px] rounded-xl p-[1.5px]
           transition-[background-color,box-shadow] duration-300
+          sm:max-w-[360px]
           ${
             disabled
               ? "bg-[#354137]"
@@ -91,15 +92,15 @@ export function SelectCharacterButton({
           onClick={onClick}
           disabled={disabled}
           className={`
-            flex h-[64px] w-full items-center justify-center
-            rounded-[11px] px-6
+            flex h-[52px] w-full items-center justify-center
+            rounded-[11px] px-4 sm:h-[64px] sm:px-6
             font-[family-name:var(--font-oxanium)]
-            text-base font-bold uppercase tracking-[0.14em]
+            text-sm font-bold uppercase tracking-[0.12em]
             transition-[filter,transform] duration-300
             focus-visible:outline-none focus-visible:ring-2
             focus-visible:ring-[#80FF00] focus-visible:ring-offset-2
             focus-visible:ring-offset-[#080516]
-            sm:text-lg
+            sm:text-lg sm:tracking-[0.14em]
             ${
               disabled
                 ? "cursor-not-allowed bg-[#182019] text-[#657064]"
