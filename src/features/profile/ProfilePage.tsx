@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { SiteFooter } from "@/shared/components/layout/site-footer/SiteFooter";
-import { SiteHeader } from "@/shared/components/layout/site-header/SiteHeader";
+import { SiteFooter } from "@/shared/components/layout/site-footer/View";
+import { SiteHeader } from "@/shared/components/layout/site-header/View";
 
 import { View } from "./views/View";
 
