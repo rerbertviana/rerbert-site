@@ -1,8 +1,8 @@
-import { View as ProfileTitle } from "../components/profile-title/View";
 import { View as BackButton } from "../components/back-button/View";
-import { View as SkillsPanel } from "../components/skills-panel/View";
-import { View as MissionsPanel } from "../components/missions-panel/View";
 import { View as LinksPanel } from "../components/links-panel/View";
+import { View as MissionsPanel } from "../components/missions-panel/View";
+import { View as ProfileTitle } from "../components/profile-title/View";
+import { View as SkillsPanel } from "../components/skills-panel/View";
 
 export function View() {
   return (

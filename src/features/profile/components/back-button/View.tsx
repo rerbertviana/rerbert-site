@@ -18,7 +18,14 @@ export function View() {
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape" && !event.repeat) {
+      const target = event.target;
+
+      const isTyping =
+        target instanceof HTMLElement &&
+        (target.isContentEditable ||
+          ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+
+      if (event.key === "Escape" && !event.repeat && !isTyping) {
         event.preventDefault();
         handleBack();
       }
@@ -35,6 +42,7 @@ export function View() {
     <div className="mb-3 flex w-full justify-start sm:mb-4">
       <button
         type="button"
+        onMouseEnter={() => playSound("interfaceOpen")}
         onClick={handleBack}
         className="
           group inline-flex items-center gap-2

@@ -74,10 +74,7 @@ export function View() {
           />
 
           {/* Professional experience timeline */}
-          <ol
-            aria-label={content.title}
-            className="relative flex w-full flex-col gap-4 pl-5 lg:min-w-0 lg:flex-1 lg:flex-row lg:items-start lg:justify-between lg:gap-2 lg:pl-0"
-          >
+          <div className="relative w-full lg:min-w-0 lg:flex-1">
             {/* Mobile timeline line */}
             <div
               aria-hidden="true"
@@ -93,50 +90,58 @@ export function View() {
               "
             />
 
-            {featuredMissions.map((mission, index) => {
-              const isCurrentHighlight = index === 0;
-              const localizedContent = mission.content[locale];
+            <ol
+              aria-label={content.title}
+              className="
+                relative z-10 flex w-full flex-col gap-4 pl-5
+                lg:flex-row lg:items-start lg:justify-between lg:gap-2 lg:pl-0
+              "
+            >
+              {featuredMissions.map((mission, index) => {
+                const isFeatured = index === 0;
+                const localizedContent = mission.content[locale];
 
-              const accentColor = isCurrentHighlight
-                ? "bg-[#80FF00] shadow-[0_0_10px_rgba(128,255,0,0.65)]"
-                : "bg-[#A855F7] shadow-[0_0_10px_rgba(168,85,247,0.5)]";
+                const accentColor = isFeatured
+                  ? "bg-[#80FF00] shadow-[0_0_10px_rgba(128,255,0,0.65)]"
+                  : "bg-[#A855F7] shadow-[0_0_10px_rgba(168,85,247,0.5)]";
 
-              const textColor = isCurrentHighlight
-                ? "text-[#80FF00]"
-                : "text-[#C4B5FD]";
+                const textColor = isFeatured
+                  ? "text-[#80FF00]"
+                  : "text-[#C4B5FD]";
 
-              return (
-                <li
-                  key={mission.id}
-                  className="relative flex min-w-0 flex-1 flex-col gap-1"
-                >
-                  {/* Timeline marker */}
-                  <span
-                    aria-hidden="true"
-                    className={`absolute -left-5 top-1 h-[11px] w-[11px] rounded-full lg:static lg:mx-auto lg:mb-2 lg:block ${accentColor}`}
-                  />
+                return (
+                  <li
+                    key={mission.id}
+                    className="relative flex min-w-0 flex-1 flex-col gap-1"
+                  >
+                    {/* Timeline marker */}
+                    <span
+                      aria-hidden="true"
+                      className={`absolute -left-5 top-1 h-[11px] w-[11px] rounded-full lg:static lg:mx-auto lg:mb-2 lg:block ${accentColor}`}
+                    />
 
-                  <div className="min-w-0 lg:text-center">
-                    <h3
-                      className={`truncate text-xs font-semibold ${textColor}`}
-                      title={mission.company}
-                    >
-                      {mission.company}
-                    </h3>
+                    <div className="min-w-0 lg:text-center">
+                      <h3
+                        className={`truncate text-xs font-semibold ${textColor}`}
+                        title={mission.company}
+                      >
+                        {mission.company}
+                      </h3>
 
-                    <p className="mt-0.5 truncate text-[10px] font-medium text-white/90">
-                      {localizedContent.role}
-                    </p>
+                      <p className="mt-0.5 truncate text-[10px] font-medium text-white/90">
+                        {localizedContent.role}
+                      </p>
 
-                    <p className="mt-1 text-[9px] text-gray-400">
-                      {formatDate(mission.startDate, locale)} –{" "}
-                      {formatDate(mission.endDate, locale)}
-                    </p>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
+                      <p className="mt-1 text-[9px] text-gray-400">
+                        {formatDate(mission.startDate, locale)} –{" "}
+                        {formatDate(mission.endDate, locale)}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
 
           {/* View more - visual indicator */}
           <div className="w-full shrink-0 self-end lg:w-auto lg:self-auto">

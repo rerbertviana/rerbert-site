@@ -7,18 +7,7 @@ import { ArrowRight, Code2 } from "lucide-react";
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
 import { playSound } from "@/shared/lib/audio/audioManager";
 
-const SKILLS = [
-  { name: "React", image: "/images/skills/react.png" },
-  { name: "TypeScript", image: "/images/skills/typescript.png" },
-  { name: "Next.js", image: "/images/skills/nextjs.png" },
-  { name: "Tailwind CSS", image: "/images/skills/tailwindcss.png" },
-  { name: "Node.js", image: "/images/skills/nodejs.png" },
-  { name: "Express", image: "/images/skills/express.png" },
-  { name: "PostgreSQL", image: "/images/skills/postgresql.png" },
-  { name: "Docker", image: "/images/skills/docker.png" },
-];
-
-const MOBILE_SKILLS_LIMIT = 6;
+import { MOBILE_SKILLS_LIMIT, SKILLS } from "../../data/skills";
 
 export function View() {
   const { locale, dictionary } = useLanguage();
@@ -73,6 +62,7 @@ export function View() {
 
           {/* Technology logos */}
           <div
+            role="group"
             aria-label={content.technologiesLabel}
             className="
               flex w-full items-center justify-center gap-2
@@ -83,7 +73,6 @@ export function View() {
               <div
                 key={skill.name}
                 title={skill.name}
-                onMouseEnter={() => playSound("skillHover")}
                 className={`
                   flex h-11 w-11 shrink-0 items-center justify-center
                   rounded-lg border border-white/30 bg-[#090817]/90 p-1.5

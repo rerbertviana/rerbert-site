@@ -6,8 +6,9 @@ export function View() {
   const { dictionary } = useLanguage();
   const { pageLabel, title, subtitle } = dictionary.profile;
 
-  const titleWords = title.split(" ");
-  const highlightedWord = titleWords.pop();
+  const lastSpaceIndex = title.lastIndexOf(" ");
+  const titlePrefix = title.slice(0, lastSpaceIndex);
+  const highlightedWord = title.slice(lastSpaceIndex + 1);
 
   return (
     <section
@@ -89,15 +90,9 @@ export function View() {
           id="profile-title"
           className="relative z-10 flex flex-wrap justify-center gap-x-3 font-[family-name:var(--font-oxanium)] text-3xl font-extrabold uppercase leading-none tracking-tight sm:text-4xl md:text-5xl"
         >
-          {titleWords.map((word, index) => (
-            <span key={`${word}-${index}`} className="text-white">
-              {word}
-            </span>
-          ))}
+          {titlePrefix && <span className="text-white">{titlePrefix}</span>}
 
-          {highlightedWord && (
-            <span className="text-[#8AFF00]">{highlightedWord}</span>
-          )}
+          <span className="text-[#8AFF00]">{highlightedWord}</span>
         </h1>
       </div>
 
