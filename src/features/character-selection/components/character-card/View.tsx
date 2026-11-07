@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { LockKeyhole } from "lucide-react";
 
-import type { Character } from "../types/character";
+import type { Character } from "../../types/character";
 
 interface CharacterCardProps {
   character: Character;
@@ -53,7 +53,6 @@ export function CharacterCard({
         focus-visible:ring-offset-[#080516]
       `}
     >
-      {/* Card border */}
       <div
         className={`
           relative z-10 h-full w-full
@@ -71,7 +70,6 @@ export function CharacterCard({
           filter: isSelected ? greenGlow : undefined,
         }}
       >
-        {/* Card content */}
         <div
           className="relative h-full w-full overflow-hidden bg-[#100C24]"
           style={{ clipPath: cardClipPath }}
@@ -97,7 +95,6 @@ export function CharacterCard({
             `}
           />
 
-          {/* Bottom gradient overlay */}
           <div
             aria-hidden="true"
             className={`
@@ -110,7 +107,6 @@ export function CharacterCard({
             `}
           />
 
-          {/* Scanline effect for unselected cards */}
           {!isSelected && (
             <div
               aria-hidden="true"
@@ -122,7 +118,6 @@ export function CharacterCard({
             />
           )}
 
-          {/* Locked icon */}
           {isLocked && (
             <div className="absolute inset-x-0 top-[42%] z-10 flex justify-center sm:top-[46%]">
               <LockKeyhole
@@ -132,9 +127,7 @@ export function CharacterCard({
             </div>
           )}
 
-          {/* Bottom information */}
           <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-center justify-center px-2 pb-4 pt-3 text-center sm:px-3 md:px-4">
-            {/* Decorative gradient divider */}
             {!isLocked && (
               <svg
                 aria-hidden="true"

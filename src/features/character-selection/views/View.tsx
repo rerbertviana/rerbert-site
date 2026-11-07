@@ -2,7 +2,7 @@
 
 import { useController } from "../controller/useController";
 
-import { CharacterCarousel } from "../components/CharacterCarousel";
+import { CharacterCarousel } from "../components/character-carousel/View";
 import { CharacterInformation } from "../components/CharacterInformation";
 import { SelectCharacterButton } from "../components/SelectCharacterButton";
 import { SelectionTitle } from "../components/SelectionTitle";
