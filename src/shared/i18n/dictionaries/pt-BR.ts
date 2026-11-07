@@ -79,6 +79,12 @@ const ptBR: Dictionary = {
       },
     },
   },
+
+  profile: {
+    pageLabel: "PERFIL",
+    title: "PERFIL DO PERSONAGEM",
+    subtitle: "Conheça o desenvolvedor por trás do código.",
+  },
 };
 
 export default ptBR;

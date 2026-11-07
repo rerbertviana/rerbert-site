@@ -76,4 +76,10 @@ export interface Dictionary {
       };
     };
   };
+
+  profile: {
+    pageLabel: string;
+    title: string;
+    subtitle: string;
+  };
 }

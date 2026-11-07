@@ -79,6 +79,13 @@ const en: Dictionary = {
       },
     },
   },
+
+  profile: {
+    pageLabel: "PROFILE",
+    title: "CHARACTER PROFILE",
+    subtitle:
+      "A quick overview of my skills, professional journey and main links.",
+  },
 };
 
 export default en;
