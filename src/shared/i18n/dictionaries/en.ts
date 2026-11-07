@@ -85,6 +85,14 @@ const en: Dictionary = {
     title: "CHARACTER PROFILE",
     subtitle:
       "A quick overview of my skills, professional journey and main links.",
+
+    skills: {
+      title: "SKILLS",
+      description:
+        "Main technologies, tools and expertise that I use to build solutions.",
+      viewMore: "VIEW MORE",
+      technologiesLabel: "Main technologies",
+    },
   },
 };
 

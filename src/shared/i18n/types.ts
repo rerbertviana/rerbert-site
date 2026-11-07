@@ -81,5 +81,12 @@ export interface Dictionary {
     pageLabel: string;
     title: string;
     subtitle: string;
+
+    skills: {
+      title: string;
+      description: string;
+      viewMore: string;
+      technologiesLabel: string;
+    };
   };
 }

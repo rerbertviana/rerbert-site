@@ -84,6 +84,14 @@ const ptBR: Dictionary = {
     pageLabel: "PERFIL",
     title: "PERFIL DO PERSONAGEM",
     subtitle: "Conheça o desenvolvedor por trás do código.",
+
+    skills: {
+      title: "HABILIDADES",
+      description:
+        "Principais tecnologias, ferramentas e conhecimentos que utilizo para desenvolver soluções.",
+      viewMore: "VER MAIS",
+      technologiesLabel: "Principais tecnologias",
+    },
   },
 };
 
