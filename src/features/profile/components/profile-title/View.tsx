@@ -87,7 +87,7 @@ export function View() {
 
         <h1
           id="profile-title"
-          className="relative z-10 flex flex-wrap justify-center gap-x-2 font-[family-name:var(--font-oxanium)] text-2xl font-extrabold uppercase leading-none tracking-tight sm:gap-x-3 sm:text-3xl md:text-4xl"
+          className="relative z-10 flex flex-wrap justify-center gap-x-3 font-[family-name:var(--font-oxanium)] text-3xl font-extrabold uppercase leading-none tracking-tight sm:text-4xl md:text-5xl"
         >
           {titleWords.map((word, index) => (
             <span key={`${word}-${index}`} className="text-white">

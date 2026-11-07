@@ -84,6 +84,7 @@ const ptBR: Dictionary = {
     pageLabel: "PERFIL",
     title: "PERFIL DO PERSONAGEM",
     subtitle: "Conheça o desenvolvedor por trás do código.",
+    backButton: "VOLTAR À SELEÇÃO",
 
     skills: {
       title: "HABILIDADES",

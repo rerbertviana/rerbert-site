@@ -32,8 +32,11 @@ export function View() {
   const content = dictionary.profile.links;
 
   return (
-    <article className="group relative mx-auto w-full max-w-5xl rounded-2xl bg-[#100C24]/55 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] motion-reduce:transform-none">
-      <div className="flex min-h-[100px] flex-col items-center gap-4 rounded-2xl px-5 py-5 lg:flex-row lg:gap-4 lg:px-5 lg:py-4">
+    <article
+      onMouseEnter={() => playSound("interfaceOpen")}
+      className="group relative mx-auto w-full max-w-5xl rounded-2xl bg-[#100C24]/55 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] motion-reduce:transform-none"
+    >
+      <div className="flex min-h-[130px] flex-col items-center gap-4 rounded-2xl px-5 py-5 lg:flex-row lg:gap-4 lg:px-5 lg:py-4">
         {/* Panel heading */}
         <div className="flex w-full items-center justify-center lg:w-auto lg:shrink-0">
           {/* Icon - desktop only */}
@@ -78,7 +81,7 @@ export function View() {
               rel="noopener noreferrer"
               aria-label={`Visit ${social.label}`}
               title={social.label}
-              onClick={() => playSound("interfaceOpen")}
+              onClick={() => playSound("buttonConfirm")}
               className="
                 group/link flex h-11 w-11 shrink-0 items-center justify-center
                 rounded-xl border border-white/30 bg-[#090817]/90

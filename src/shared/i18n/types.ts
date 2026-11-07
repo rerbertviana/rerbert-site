@@ -81,6 +81,7 @@ export interface Dictionary {
     pageLabel: string;
     title: string;
     subtitle: string;
+    backButton: string;
 
     skills: {
       title: string;

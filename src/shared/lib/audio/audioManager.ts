@@ -4,7 +4,8 @@ type SoundEffect =
   | "buttonConfirm"
   | "interfaceBack"
   | "interfaceOpen"
-  | "interfaceClose";
+  | "interfaceClose"
+  | "skillHover";
 
 const AMBIENT_MUSIC_PATH = "/audio/ambient/ambient-theme.wav";
 
@@ -15,6 +16,7 @@ const SOUND_EFFECT_PATHS: Record<SoundEffect, string> = {
   interfaceBack: "/audio/sfx/interface-back.wav",
   interfaceOpen: "/audio/sfx/interface-open.wav",
   interfaceClose: "/audio/sfx/interface-close.wav",
+  skillHover: "/audio/sfx/skill-hover-wind.wav",
 };
 
 const AMBIENT_VOLUME = 0.18;
