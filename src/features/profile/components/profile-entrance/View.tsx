@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
@@ -8,27 +8,35 @@ interface ProfileEntranceProps {
   children: ReactNode;
 }
 
-const GLITCH_DURATION = 0.65;
-const GLITCH_DELAY = 0.15;
-const SCAN_DURATION = 0.6;
+const FRAGMENTS = [
+  { x: -90, y: -45, color: "green" },
+  { x: 65, y: -80, color: "violet" },
+  { x: -45, y: 70, color: "green" },
+  { x: 100, y: 35, color: "violet" },
+  { x: -75, y: 25, color: "violet" },
+  { x: 55, y: -65, color: "green" },
+  { x: 85, y: 75, color: "violet" },
+  { x: -100, y: -30, color: "green" },
+  { x: 70, y: 55, color: "green" },
+  { x: -55, y: -75, color: "violet" },
+  { x: 95, y: -40, color: "green" },
+  { x: -80, y: 65, color: "violet" },
+  { x: 45, y: 80, color: "green" },
+  { x: -65, y: -55, color: "violet" },
+  { x: 90, y: 20, color: "green" },
+  { x: -40, y: 85, color: "violet" },
+] as const;
+
+const FRAGMENT_DURATION = 0.7;
+const FRAGMENT_STAGGER = 0.010;
 
 export function View({ children }: ProfileEntranceProps) {
   const shouldReduceMotion = useReducedMotion();
-  const [hasScanCompleted, setHasScanCompleted] = useState(false);
 
-  const isScanning = !shouldReduceMotion && !hasScanCompleted;
+  const [hasReconstructionCompleted, setHasReconstructionCompleted] =
+    useState(false);
 
-  useEffect(() => {
-    if (!isScanning) return;
-
-    const previousOverflow = document.body.style.overflow;
-
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [isScanning]);
+  const isReconstructing = !shouldReduceMotion && !hasReconstructionCompleted;
 
   if (shouldReduceMotion) {
     return <>{children}</>;
@@ -36,122 +44,123 @@ export function View({ children }: ProfileEntranceProps) {
 
   return (
     <div
-      aria-busy={isScanning}
-      className={`relative isolate ${isScanning ? "overflow-hidden" : ""}`}
-      inert={isScanning}
+      aria-busy={isReconstructing}
+      className="relative isolate w-full min-w-0"
+      inert={isReconstructing}
     >
-      {/* Profile content with digital displacement */}
+      {/* Profile content */}
       <motion.div
-        className={`relative z-10 ${isScanning ? "pointer-events-none" : ""}`}
+        className={`relative z-10 ${
+          isReconstructing ? "pointer-events-none" : ""
+        }`}
         initial={{
-          opacity: 0.7,
-          x: 0,
+          opacity: 0.55,
+          filter: "blur(3px)",
         }}
         animate={{
-          opacity: [0.7, 1, 0.85, 1],
-          x: [0, -4, 3, -2, 0],
-          skewX: [0, -0.5, 0.4, -0.2, 0],
+          opacity: 1,
+          filter: "blur(0px)",
         }}
         transition={{
-          duration: GLITCH_DURATION,
-          delay: GLITCH_DELAY,
-          ease: "linear",
-          times: [0, 0.2, 0.45, 0.7, 1],
+          duration: 1.05,
+          delay: 0.08,
+          ease: [0.22, 1, 0.36, 1],
         }}
-        onAnimationComplete={() => setHasScanCompleted(true)}
       >
         {children}
       </motion.div>
 
-      {/* Green digital glitch bands */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[18%] z-30 h-5"
-        style={{
-          clipPath: "polygon(0 0, 100% 15%, 100% 85%, 0 100%)",
-          background:
-            "linear-gradient(90deg, transparent, rgba(138,255,0,0.75), rgba(138,255,0,0.15), transparent)",
-        }}
-        initial={{ x: "-100%", opacity: 0 }}
-        animate={{
-          x: ["-100%", "0%", "8%", "100%"],
-          opacity: [0, 0.9, 0.65, 0],
-        }}
-        transition={{
-          duration: GLITCH_DURATION,
-          delay: 0.05,
-          ease: "linear",
-          times: [0, 0.3, 0.55, 1],
-        }}
-      />
+      {/* Isolated glitch animation layer */}
+      {isReconstructing && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-20 overflow-hidden"
+        >
+          {/* Digital reconstruction fragments */}
+          {FRAGMENTS.map((fragment, index) => {
+            const isLastFragment = index === FRAGMENTS.length - 1;
 
-      {/* Violet digital glitch bands */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[48%] z-30 h-3"
-        style={{
-          clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0 80%)",
-          background:
-            "linear-gradient(90deg, transparent, rgba(183,122,255,0.7), rgba(183,122,255,0.12), transparent)",
-        }}
-        initial={{ x: "100%", opacity: 0 }}
-        animate={{
-          x: ["100%", "0%", "-5%", "-100%"],
-          opacity: [0, 0.8, 0.55, 0],
-        }}
-        transition={{
-          duration: GLITCH_DURATION,
-          delay: 0.12,
-          ease: "linear",
-          times: [0, 0.3, 0.6, 1],
-        }}
-      />
+            return (
+              <motion.div
+                key={index}
+                className="absolute overflow-hidden"
+                style={{
+                  top: `${Math.floor(index / 4) * 25}%`,
+                  left: `${(index % 4) * 25}%`,
+                  width: "25%",
+                  height: "25%",
+                  background:
+                    fragment.color === "green"
+                      ? "linear-gradient(135deg, rgba(138,255,0,0.16), rgba(8,5,22,0.88))"
+                      : "linear-gradient(135deg, rgba(183,122,255,0.18), rgba(8,5,22,0.88))",
+                  border:
+                    fragment.color === "green"
+                      ? "1px solid rgba(138,255,0,0.45)"
+                      : "1px solid rgba(183,122,255,0.45)",
+                  boxShadow:
+                    fragment.color === "green"
+                      ? "0 0 14px rgba(138,255,0,0.18)"
+                      : "0 0 14px rgba(183,122,255,0.18)",
+                }}
+                initial={{
+                  x: fragment.x,
+                  y: fragment.y,
+                  opacity: 0,
+                  scale: 1.08,
+                }}
+                animate={{
+                  x: [fragment.x, fragment.x * -0.12, 0],
+                  y: [fragment.y, fragment.y * -0.12, 0],
+                  opacity: [0, 0.9, 0],
+                  scale: [1.08, 1.02, 1],
+                }}
+                transition={{
+                  duration: FRAGMENT_DURATION,
+                  delay: index * FRAGMENT_STAGGER,
+                  ease: [0.22, 1, 0.36, 1],
+                  times: [0, 0.65, 1],
+                }}
+                onAnimationComplete={
+                  isLastFragment
+                    ? () => setHasReconstructionCompleted(true)
+                    : undefined
+                }
+              >
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(255,255,255,0.08) 4px)",
+                  }}
+                />
+              </motion.div>
+            );
+          })}
 
-      {/* Short horizontal digital fragments */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-[72%] z-30 h-2 w-1/3"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent, rgba(138,255,0,0.8), transparent)",
-        }}
-        initial={{ x: 30, opacity: 0 }}
-        animate={{
-          x: [30, -12, 8, 0],
-          opacity: [0, 1, 0.7, 0],
-        }}
-        transition={{
-          duration: 0.4,
-          delay: 0.2,
-          ease: "linear",
-          times: [0, 0.35, 0.7, 1],
-        }}
-      />
-
-      {/* Holographic scanner */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 z-20 h-8"
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent, rgba(138,255,0,0.08), rgba(138,255,0,0.65), rgba(138,255,0,0.08), transparent)",
-          boxShadow:
-            "0 0 12px rgba(138,255,0,0.35), 0 0 30px rgba(138,255,0,0.2)",
-        }}
-        initial={{
-          top: "-2rem",
-          opacity: 0,
-        }}
-        animate={{
-          top: "100%",
-          opacity: [0, 1, 1, 0],
-        }}
-        transition={{
-          duration: SCAN_DURATION,
-          ease: "easeInOut",
-          times: [0, 0.12, 0.8, 1],
-        }}
-      />
+          {/* Brief horizontal digital interference */}
+          <motion.div
+            className="absolute left-0 top-[35%] h-[2px] w-full"
+            style={{
+              background:
+                "linear-gradient(90deg, transparent, #8AFF00, #B77AFF, transparent)",
+              boxShadow: "0 0 12px rgba(138,255,0,0.5)",
+            }}
+            initial={{
+              x: "-100%",
+              opacity: 0,
+            }}
+            animate={{
+              x: ["-100%", "0%", "100%"],
+              opacity: [0, 0.9, 0],
+            }}
+            transition={{
+              duration: 0.35,
+              delay: 0.18,
+              ease: "linear",
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }
