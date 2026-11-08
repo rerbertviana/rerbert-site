@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { LockKeyhole } from "lucide-react";
 
+import { playSound } from "@/shared/lib/audio/audioManager";
+
 import type { Character } from "../../types/character";
 
 interface CharacterCardProps {
@@ -40,6 +42,11 @@ export function CharacterCard({
       type="button"
       disabled={isLocked}
       onClick={onSelect}
+      onMouseEnter={() => {
+        if (!isLocked && !isSelected) {
+          playSound("interfaceOpen");
+        }
+      }}
       aria-label={isLocked ? lockedCharacterLabel : `${name}, ${role}`}
       aria-pressed={isLocked ? undefined : isSelected}
       data-selected={isSelected}

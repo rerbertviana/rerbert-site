@@ -28,6 +28,9 @@ export function useController() {
     DEFAULT_SELECTED_CHARACTER_ID,
   );
 
+  const [shouldAnimateInformation, setShouldAnimateInformation] =
+    useState(false);
+
   const selectedCharacter = characters.find(
     (character) => character.id === selectedCharacterId,
   );
@@ -42,8 +45,21 @@ export function useController() {
       )
     : undefined;
 
+  const handleSelectedCharacterChange = useCallback(
+    (characterId: string | null) => {
+      if (selectedCharacterId === null && characterId !== null) {
+        setShouldAnimateInformation(true);
+      }
+
+      setSelectedCharacterId(characterId);
+    },
+    [selectedCharacterId],
+  );
+
   const handleConfirmSelection = useCallback(() => {
     if (!canSelectCharacter) return;
+
+    setShouldAnimateInformation(false);
 
     playSound("buttonConfirm");
     router.push(`/${locale}/profile`);
@@ -91,10 +107,11 @@ export function useController() {
 
   return {
     selectedCharacterId,
-    setSelectedCharacterId,
+    handleSelectedCharacterChange,
     selectedCharacter,
     selectedCharacterTranslation,
     canSelectCharacter,
     handleConfirmSelection,
+    shouldAnimateInformation,
   };
 }

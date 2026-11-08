@@ -7,6 +7,7 @@ import {
   MapPin,
   Circle,
 } from "lucide-react";
+import { motion } from "motion/react";
 
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
 import type { CharacterProfile } from "../../types/character";
@@ -16,6 +17,7 @@ interface CharacterInformationProps {
   localizedSeniority?: string;
   localizedExperience?: string;
   localizedEducation?: string;
+  shouldAnimate?: boolean;
 }
 
 const INFO_ITEM_CLASS =
@@ -47,6 +49,7 @@ export function CharacterInformation({
   localizedSeniority,
   localizedExperience,
   localizedEducation,
+  shouldAnimate = false,
 }: CharacterInformationProps) {
   const { dictionary } = useLanguage();
   const translations = dictionary.characterSelection.information;
@@ -60,13 +63,31 @@ export function CharacterInformation({
     : STATUS_COLORS.unavailable;
 
   return (
-    <section
+    <motion.section
       aria-label={translations.label}
+      initial={
+        shouldAnimate
+          ? {
+              opacity: 0,
+              y: 12,
+              filter: "blur(4px)",
+            }
+          : false
+      }
+      animate={{
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+      }}
+      transition={{
+        duration: 0.4,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className="mx-auto w-full max-w-5xl px-3"
     >
       <div className="relative">
         <div className="relative overflow-hidden rounded-lg md:rounded-2xl">
-          <div className="grid grid-cols-1 gap-x-0 rounded-lg border border-white/10 bg-white/[0.04] px-4 py-5 shadow-[inset_0_0_35px_rgba(255,255,255,0.05)] backdrop-blur-xl md:grid-cols-5 md:items-stretch md:gap-x-0 md:rounded-2xl md:px-5 md:py-6">
+          <div className="grid grid-cols-1 gap-x-0 rounded-lg bg-white/[0.04] px-4 py-5 shadow-[inset_0_0_35px_rgba(255,255,255,0.05)] backdrop-blur-xl md:grid-cols-5 md:items-stretch md:gap-x-0 md:rounded-2xl md:px-5 md:py-6">
             {/* Seniority - Mobile */}
             <div className={`${INFO_ITEM_CLASS} md:hidden`}>
               <div className={INFO_HEADER_CLASS}>
@@ -195,12 +216,21 @@ export function CharacterInformation({
                 y2="0"
                 gradientUnits="userSpaceOnUse"
               >
+                {/* Left edge - violet */}
                 <stop offset="0%" stopColor="#A855F7" stopOpacity="0.7" />
-                <stop offset="20%" stopColor="#A855F7" stopOpacity="0.55" />
-                <stop offset="35%" stopColor="#D8C4F5" stopOpacity="0.75" />
-                <stop offset="50%" stopColor="#FFFFFF" stopOpacity="1" />
-                <stop offset="65%" stopColor="#D8C4F5" stopOpacity="0.75" />
-                <stop offset="80%" stopColor="#A855F7" stopOpacity="0.55" />
+                <stop offset="15%" stopColor="#A855F7" stopOpacity="0.55" />
+
+                {/* Transition to neon green */}
+                <stop offset="20%" stopColor="#80FF00" stopOpacity="0.8" />
+                <stop offset="25%" stopColor="#80FF00" stopOpacity="1" />
+                <stop offset="32%" stopColor="#80FF00" stopOpacity="0.65" />
+                <stop offset="38%" stopColor="#80FF00" stopOpacity="0" />
+
+                {/* Transparent center */}
+                <stop offset="65%" stopColor="#A855F7" stopOpacity="0" />
+
+                {/* Right edge - violet */}
+                <stop offset="75%" stopColor="#A855F7" stopOpacity="0.55" />
                 <stop offset="100%" stopColor="#A855F7" stopOpacity="0.7" />
               </linearGradient>
             </defs>
@@ -221,6 +251,6 @@ export function CharacterInformation({
           </svg>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

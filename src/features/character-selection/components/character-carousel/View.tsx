@@ -51,6 +51,7 @@ export function CharacterCarousel(props: CharacterCarouselProps) {
         >
           {visibleCharacters.map(({ character, characterIndex }) => {
             const isSelected = props.selectedCharacterId === character.id;
+            const isLocked = character.status === "locked";
 
             const characterTranslation = getCharacterTranslation(
               character.id,
@@ -65,7 +66,13 @@ export function CharacterCarousel(props: CharacterCarouselProps) {
                   relative flex shrink-0 items-end justify-center
                   origin-bottom
                   transition-transform duration-300 ease-out
-                  ${isSelected ? "z-20 scale-[1.08]" : "z-0 scale-100"}
+                  ${
+                    isSelected
+                      ? "z-20 scale-[1.08]"
+                      : isLocked
+                        ? "z-0 scale-100"
+                        : "z-0 scale-100 hover:z-20 hover:scale-[1.08]"
+                  }
                 `}
               >
                 <CharacterCard

@@ -10,11 +10,12 @@ import { SelectionTitle } from "../components/selection-title/View";
 export function View() {
   const {
     selectedCharacterId,
-    setSelectedCharacterId,
+    handleSelectedCharacterChange,
     selectedCharacter,
     selectedCharacterTranslation,
     canSelectCharacter,
     handleConfirmSelection,
+    shouldAnimateInformation,
   } = useController();
 
   return (
@@ -23,7 +24,7 @@ export function View() {
 
       <CharacterCarousel
         selectedCharacterId={selectedCharacterId}
-        onSelectedCharacterChange={setSelectedCharacterId}
+        onSelectedCharacterChange={handleSelectedCharacterChange}
       />
 
       <CharacterInformation
@@ -31,6 +32,7 @@ export function View() {
         localizedSeniority={selectedCharacterTranslation?.seniority}
         localizedExperience={selectedCharacterTranslation?.experience}
         localizedEducation={selectedCharacterTranslation?.education}
+        shouldAnimate={shouldAnimateInformation}
       />
 
       <SelectCharacterButton
