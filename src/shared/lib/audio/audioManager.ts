@@ -23,9 +23,11 @@ const AMBIENT_VOLUME = 0.18;
 const SFX_VOLUME = 0.35;
 
 let ambientAudio: HTMLAudioElement | null = null;
-let isAmbientPlaying = false;
+let isAudioEnabled = true;
+let wasAmbientPlayingBeforeMute = false;
 
 const soundCache = new Map<SoundEffect, HTMLAudioElement>();
+const activeSoundEffects = new Set<HTMLAudioElement>();
 
 function getAmbientAudio() {
   if (typeof window === "undefined") return null;
@@ -56,37 +58,69 @@ function getSoundAudio(sound: SoundEffect) {
   return audio;
 }
 
-export async function toggleAmbientMusic(): Promise<boolean> {
+export function isSoundEnabled() {
+  return isAudioEnabled;
+}
+
+export function isAmbientMusicPlaying() {
+  return Boolean(ambientAudio && !ambientAudio.paused);
+}
+
+function stopActiveSoundEffects() {
+  activeSoundEffects.forEach((audio) => {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+
+  activeSoundEffects.clear();
+}
+
+async function resumeAmbientMusic() {
   const audio = getAmbientAudio();
 
   if (!audio) return false;
 
-  if (isAmbientPlaying) {
-    audio.pause();
-    audio.currentTime = 0;
-    isAmbientPlaying = false;
-
-    return false;
-  }
-
   try {
     await audio.play();
-    isAmbientPlaying = true;
-
     return true;
   } catch (error) {
     console.warn("Unable to play ambient music:", error);
-    isAmbientPlaying = false;
-
     return false;
   }
 }
 
-export function isAmbientMusicPlaying() {
-  return isAmbientPlaying;
+export async function toggleAudio(): Promise<boolean> {
+  if (isAudioEnabled) {
+    isAudioEnabled = false;
+
+    const audio = getAmbientAudio();
+
+    wasAmbientPlayingBeforeMute = Boolean(audio && !audio.paused);
+
+    audio?.pause();
+
+    stopActiveSoundEffects();
+
+    return false;
+  }
+
+  isAudioEnabled = true;
+
+  if (wasAmbientPlayingBeforeMute) {
+    await resumeAmbientMusic();
+  } else {
+    // Preserve the previous behavior: enabling audio can start ambient music.
+    await resumeAmbientMusic();
+  }
+
+  wasAmbientPlayingBeforeMute = false;
+
+  return true;
 }
 
 export function playSound(sound: SoundEffect) {
+  if (!isAudioEnabled) return;
+
   const audio = getSoundAudio(sound);
 
   if (!audio) return;
@@ -97,8 +131,22 @@ export function playSound(sound: SoundEffect) {
   playback.volume = SFX_VOLUME;
   playback.currentTime = 0;
 
+  activeSoundEffects.add(playback);
+
+  playback.addEventListener(
+    "ended",
+    () => {
+      activeSoundEffects.delete(playback);
+    },
+    { once: true },
+  );
+
   void playback.play().catch((error: unknown) => {
-    console.warn(`Unable to play sound effect "${sound}":`, error);
+    activeSoundEffects.delete(playback);
+
+    if (isAudioEnabled) {
+      console.warn(`Unable to play sound effect "${sound}":`, error);
+    }
   });
 }
 
