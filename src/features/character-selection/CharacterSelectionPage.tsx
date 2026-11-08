@@ -1,44 +1,13 @@
-import Image from "next/image";
-
-import { SiteFooter } from "@/shared/components/layout/site-footer/View";
-import { SiteHeader } from "@/shared/components/layout/site-header/View";
+import { SiteLayout } from "@/shared/components/layout/site-layout/View";
 
 import { View } from "./views/View";
 
 export function CharacterSelectionPage() {
   return (
-    <>
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#080516]"
-      >
-        <picture className="absolute inset-0 block">
-          <source
-            media="(max-width: 767px)"
-            srcSet="/images/developer-room-mobile.png"
-          />
-
-          <Image
-            src="/images/developer-room.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-        </picture>
-
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080516]/20 via-[#080516]/10 to-[#080516]/50" />
-      </div>
-
-      <main
-        aria-label="RERBERT.EXE"
-        className="relative z-10 flex min-h-screen flex-col"
-      >
-        <SiteHeader />
+    <SiteLayout>
+      <main aria-label="RERBERT.EXE" className="flex flex-1 flex-col">
         <View />
-        <SiteFooter />
       </main>
-    </>
+    </SiteLayout>
   );
 }
