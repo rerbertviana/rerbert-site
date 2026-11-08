@@ -46,44 +46,94 @@ export function View() {
           preserveAspectRatio="none"
         >
           <defs>
+            {/* Desktop gradients */}
             <linearGradient
-              id="profile-divider-left"
+              id="profile-divider-left-desktop"
               x1="0"
               y1="0"
-              x2="230"
+              x2="160"
               y2="0"
               gradientUnits="userSpaceOnUse"
             >
               <stop offset="0%" stopColor="#80FF00" stopOpacity="0" />
-              <stop offset="50%" stopColor="#80FF00" stopOpacity="1" />
+              <stop offset="35%" stopColor="#80FF00" stopOpacity="0.7" />
+              <stop offset="75%" stopColor="#80FF00" stopOpacity="0.25" />
               <stop offset="100%" stopColor="#80FF00" stopOpacity="0" />
             </linearGradient>
 
             <linearGradient
-              id="profile-divider-right"
+              id="profile-divider-right-desktop"
               x1="900"
               y1="0"
-              x2="670"
+              x2="740"
               y2="0"
               gradientUnits="userSpaceOnUse"
             >
               <stop offset="0%" stopColor="#80FF00" stopOpacity="0" />
-              <stop offset="50%" stopColor="#80FF00" stopOpacity="1" />
+              <stop offset="35%" stopColor="#80FF00" stopOpacity="0.7" />
+              <stop offset="75%" stopColor="#80FF00" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#80FF00" stopOpacity="0" />
+            </linearGradient>
+
+            {/* Mobile gradients */}
+            <linearGradient
+              id="profile-divider-left-mobile"
+              x1="0"
+              y1="0"
+              x2="90"
+              y2="0"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stopColor="#80FF00" stopOpacity="0" />
+              <stop offset="35%" stopColor="#80FF00" stopOpacity="0.7" />
+              <stop offset="75%" stopColor="#80FF00" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#80FF00" stopOpacity="0" />
+            </linearGradient>
+
+            <linearGradient
+              id="profile-divider-right-mobile"
+              x1="900"
+              y1="0"
+              x2="810"
+              y2="0"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stopColor="#80FF00" stopOpacity="0" />
+              <stop offset="35%" stopColor="#80FF00" stopOpacity="0.7" />
+              <stop offset="75%" stopColor="#80FF00" stopOpacity="0.25" />
               <stop offset="100%" stopColor="#80FF00" stopOpacity="0" />
             </linearGradient>
           </defs>
 
-          <path
-            d="M0 14 H230"
-            stroke="url(#profile-divider-left)"
-            strokeWidth="1.2"
-          />
+          {/* Desktop */}
+          <g className="hidden sm:block">
+            <path
+              d="M0 14 H160"
+              stroke="url(#profile-divider-left-desktop)"
+              strokeWidth="1.2"
+            />
 
-          <path
-            d="M900 14 H670"
-            stroke="url(#profile-divider-right)"
-            strokeWidth="1.2"
-          />
+            <path
+              d="M900 14 H740"
+              stroke="url(#profile-divider-right-desktop)"
+              strokeWidth="1.2"
+            />
+          </g>
+
+          {/* Mobile */}
+          <g className="sm:hidden">
+            <path
+              d="M0 14 H90"
+              stroke="url(#profile-divider-left-mobile)"
+              strokeWidth="1.2"
+            />
+
+            <path
+              d="M900 14 H810"
+              stroke="url(#profile-divider-right-mobile)"
+              strokeWidth="1.2"
+            />
+          </g>
         </svg>
 
         <h1
