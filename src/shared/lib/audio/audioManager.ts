@@ -23,8 +23,9 @@ const AMBIENT_VOLUME = 0.18;
 const SFX_VOLUME = 0.35;
 
 let ambientAudio: HTMLAudioElement | null = null;
-let isAudioEnabled = true;
-let wasAmbientPlayingBeforeMute = false;
+
+// Audio starts disabled. The user must explicitly enable it.
+let isAudioEnabled = false;
 
 const soundCache = new Map<SoundEffect, HTMLAudioElement>();
 const activeSoundEffects = new Set<HTMLAudioElement>();
@@ -76,12 +77,21 @@ function stopActiveSoundEffects() {
 }
 
 async function resumeAmbientMusic() {
+  if (!isAudioEnabled) return false;
+
   const audio = getAmbientAudio();
 
   if (!audio) return false;
 
   try {
     await audio.play();
+
+    // Prevent playback if audio was disabled while play() was pending.
+    if (!isAudioEnabled) {
+      audio.pause();
+      return false;
+    }
+
     return true;
   } catch (error) {
     console.warn("Unable to play ambient music:", error);
@@ -95,8 +105,6 @@ export async function toggleAudio(): Promise<boolean> {
 
     const audio = getAmbientAudio();
 
-    wasAmbientPlayingBeforeMute = Boolean(audio && !audio.paused);
-
     audio?.pause();
 
     stopActiveSoundEffects();
@@ -106,14 +114,7 @@ export async function toggleAudio(): Promise<boolean> {
 
   isAudioEnabled = true;
 
-  if (wasAmbientPlayingBeforeMute) {
-    await resumeAmbientMusic();
-  } else {
-    // Preserve the previous behavior: enabling audio can start ambient music.
-    await resumeAmbientMusic();
-  }
-
-  wasAmbientPlayingBeforeMute = false;
+  await resumeAmbientMusic();
 
   return true;
 }
