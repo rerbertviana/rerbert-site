@@ -237,6 +237,7 @@ export function View({
           size={21}
           strokeWidth={1.7}
           aria-hidden="true"
+          stroke={isSelected ? "url(#category-icon-gradient)" : "currentColor"}
           className={isSelected ? "text-[#80FF00]" : "text-white"}
         />
 
@@ -256,6 +257,24 @@ export function View({
         gap-1 px-2 sm:gap-3 sm:px-4
       "
     >
+      {/* Selected category icon gradient */}
+      <svg aria-hidden="true" className="absolute h-0 w-0">
+        <defs>
+          <linearGradient
+            id="category-icon-gradient"
+            x1="0%"
+            y1="100%"
+            x2="100%"
+            y2="0%"
+          >
+            <stop offset="0%" stopColor="#A855F7" />
+            <stop offset="45%" stopColor="#A855F7" />
+            <stop offset="65%" stopColor="#80FF00" />
+            <stop offset="100%" stopColor="#80FF00" />
+          </linearGradient>
+        </defs>
+      </svg>
+
       {/* Previous */}
       <button
         type="button"

@@ -10,6 +10,8 @@ import {
 import { motion } from "motion/react";
 
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
+import { View as DecorativeGradientBorder } from "@/shared/components/decorative-gradient-border/View";
+
 import type { CharacterProfile } from "../../types/character";
 
 interface CharacterInformationProps {
@@ -200,55 +202,10 @@ export function CharacterInformation({
             </div>
           </div>
 
-          {/* Decorative border gradient */}
-          <svg
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 h-full w-full"
-            viewBox="0 0 1000 180"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient
-                id="character-information-border"
-                x1="0"
-                y1="0"
-                x2="1000"
-                y2="0"
-                gradientUnits="userSpaceOnUse"
-              >
-                {/* Left edge - violet */}
-                <stop offset="0%" stopColor="#A855F7" stopOpacity="0.7" />
-                <stop offset="15%" stopColor="#A855F7" stopOpacity="0.55" />
-
-                {/* Transition to neon green */}
-                <stop offset="20%" stopColor="#80FF00" stopOpacity="0.8" />
-                <stop offset="25%" stopColor="#80FF00" stopOpacity="1" />
-                <stop offset="32%" stopColor="#80FF00" stopOpacity="0.65" />
-                <stop offset="38%" stopColor="#80FF00" stopOpacity="0" />
-
-                {/* Transparent center */}
-                <stop offset="65%" stopColor="#A855F7" stopOpacity="0" />
-
-                {/* Right edge - violet */}
-                <stop offset="75%" stopColor="#A855F7" stopOpacity="0.55" />
-                <stop offset="100%" stopColor="#A855F7" stopOpacity="0.7" />
-              </linearGradient>
-            </defs>
-
-            <rect
-              x="0.5"
-              y="0.5"
-              width="999"
-              height="179"
-              rx="8"
-              ry="8"
-              className="[rx:8px] md:[rx:18px] [ry:8px] md:[ry:18px]"
-              fill="none"
-              stroke="url(#character-information-border)"
-              strokeWidth="1"
-              vectorEffect="non-scaling-stroke"
-            />
-          </svg>
+          <DecorativeGradientBorder
+            radius={8}
+            rectClassName="[rx:8px] md:[rx:18px]"
+          />
         </div>
       </div>
     </motion.section>
