@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { View as BackButton } from "@/shared/components/navigation/back-button/View";
 import { View as DigitalReconstructionEntrance } from "@/shared/components/animations/digital-reconstruction-entrance/View";
-import { SKILL_CATEGORIES } from "@/shared/data/skills";
+import { SKILL_CATEGORIES, SKILL_CATEGORY_IDS } from "@/shared/data/skills";
 import type { SkillCategoryId } from "@/shared/types/skills";
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
 
@@ -13,16 +13,37 @@ import { View as CategoryNavigation } from "../components/category-navigation/Vi
 import { View as SkillsGrid } from "../components/skills-grid/View";
 import { View as SkillsTitle } from "../components/skills-title/View";
 
+const DEFAULT_CATEGORY: SkillCategoryId = "frameworks-libraries";
+const CATEGORY_QUERY_PARAM = "category";
+
 export function View() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const { locale } = useLanguage();
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState<SkillCategoryId>(
-    "frameworks-libraries",
-  );
+  const categoryParam = searchParams.get(CATEGORY_QUERY_PARAM);
+
+  const selectedCategoryId: SkillCategoryId =
+    categoryParam &&
+    SKILL_CATEGORY_IDS.includes(categoryParam as SkillCategoryId)
+      ? (categoryParam as SkillCategoryId)
+      : DEFAULT_CATEGORY;
 
   const selectedCategory = SKILL_CATEGORIES.find(
     (category) => category.id === selectedCategoryId,
   );
+
+  function handleCategoryChange(categoryId: SkillCategoryId) {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set(CATEGORY_QUERY_PARAM, categoryId);
+
+    router.push(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
+  }
 
   if (!selectedCategory) return null;
 
@@ -43,7 +64,7 @@ export function View() {
         <section className="mt-0 w-full min-w-0 overflow-x-clip">
           <CategoryNavigation
             selectedCategoryId={selectedCategoryId}
-            onCategoryChange={setSelectedCategoryId}
+            onCategoryChange={handleCategoryChange}
           />
         </section>
 
