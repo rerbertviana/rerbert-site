@@ -133,49 +133,38 @@ const ptBR: Dictionary = {
       "frameworks-libraries": {
         title: "FRAMEWORKS E DESENVOLVIMENTO",
         description:
-          "Frameworks, runtimes e ambientes que utilizo para construir aplicações modernas e escaláveis.",
+          "Ferramentas e ambientes para construir aplicações modernas.",
       },
-
       "languages-core": {
         title: "LINGUAGENS E FUNDAMENTOS",
-        description:
-          "Linguagens de programação e tecnologias fundamentais que utilizo para desenvolver software confiável.",
+        description: "Linguagens e fundamentos do desenvolvimento de software.",
       },
-
       "state-management": {
         title: "GERENCIAMENTO DE ESTADO",
-        description:
-          "Ferramentas e soluções que utilizo para gerenciar estados e fluxos de dados das aplicações.",
+        description: "Gerenciamento de dados e estados das interfaces.",
       },
-
       "apis-data-fetching": {
         title: "APIs E BUSCA DE DADOS",
-        description:
-          "Ferramentas e abordagens que utilizo para integrar serviços e gerenciar dados das aplicações.",
+        description: "Conexão entre aplicações e troca de informações.",
       },
-
       "testing-quality": {
         title: "TESTES E QUALIDADE",
         description:
-          "Ferramentas e práticas que utilizo para garantir a confiabilidade do software e a qualidade do código.",
+          "Garantia da confiabilidade do software e qualidade do código.",
       },
-
       "databases-infrastructure": {
         title: "BANCOS DE DADOS E INFRAESTRUTURA",
-        description:
-          "Tecnologias que utilizo para armazenar, gerenciar e dar suporte à infraestrutura das aplicações.",
+        description: "Armazenamento de dados e suporte aos sistemas.",
       },
-
       "methodologies-workflow": {
         title: "METODOLOGIAS E FLUXO DE TRABALHO",
         description:
-          "Princípios e fluxos de trabalho que sigo para desenvolver software sustentável e colaborar com equipes.",
+          "Organização dos processos de desenvolvimento e trabalho em equipe.",
       },
-
       "devops-collaboration-ai": {
         title: "DEVOPS, COLABORAÇÃO E IA",
         description:
-          "Ferramentas que utilizo para controle de versão, automação, colaboração e desenvolvimento assistido por IA.",
+          "Automação de entregas, colaboração e desenvolvimento com IA.",
       },
     },
 

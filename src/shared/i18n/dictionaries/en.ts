@@ -132,50 +132,36 @@ const en: Dictionary = {
     categoryDetails: {
       "frameworks-libraries": {
         title: "FRAMEWORKS & DEVELOPMENT",
-        description:
-          "Frameworks, runtimes and environments I use to build modern and scalable applications.",
+        description: "Tools and environments for building modern applications.",
       },
-
       "languages-core": {
         title: "LANGUAGES & CORE",
-        description:
-          "Programming languages and core technologies I use to develop reliable software.",
+        description: "Languages and fundamentals behind software development.",
       },
-
       "state-management": {
         title: "STATE MANAGEMENT",
-        description:
-          "Tools and solutions I use to manage application state and data flow.",
+        description: "Managing application data and interface states.",
       },
-
       "apis-data-fetching": {
         title: "APIs & DATA FETCHING",
-        description:
-          "Tools and approaches I use to integrate services and handle application data.",
+        description: "Connecting applications and exchanging data.",
       },
-
       "testing-quality": {
         title: "TESTING & QUALITY",
-        description:
-          "Tools and practices I use to ensure software reliability and maintain code quality.",
+        description: "Ensuring software reliability and code quality.",
       },
-
       "databases-infrastructure": {
         title: "DATABASES & INFRASTRUCTURE",
-        description:
-          "Technologies I use to store, manage and support application infrastructure.",
+        description: "Storing data and supporting application systems.",
       },
-
       "methodologies-workflow": {
         title: "METHODOLOGIES & WORKFLOW",
-        description:
-          "Principles and workflows I follow to build maintainable software and collaborate effectively.",
+        description: "Organizing development processes and teamwork.",
       },
-
       "devops-collaboration-ai": {
         title: "DEVOPS, COLLABORATION & AI",
         description:
-          "Tools I use for version control, automation, collaboration and AI-assisted development.",
+          "Automating delivery, collaboration and AI-assisted development.",
       },
     },
 
