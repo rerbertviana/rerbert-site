@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
 
-interface ProfileEntranceProps {
+interface DigitalReconstructionEntranceProps {
   children: ReactNode;
 }
 
@@ -28,9 +28,9 @@ const FRAGMENTS = [
 ] as const;
 
 const FRAGMENT_DURATION = 0.7;
-const FRAGMENT_STAGGER = 0.010;
+const FRAGMENT_STAGGER = 0.01;
 
-export function View({ children }: ProfileEntranceProps) {
+export function View({ children }: DigitalReconstructionEntranceProps) {
   const shouldReduceMotion = useReducedMotion();
 
   const [hasReconstructionCompleted, setHasReconstructionCompleted] =
@@ -48,7 +48,7 @@ export function View({ children }: ProfileEntranceProps) {
       className="relative isolate w-full min-w-0"
       inert={isReconstructing}
     >
-      {/* Profile content */}
+      {/* Page content */}
       <motion.div
         className={`relative z-10 ${
           isReconstructing ? "pointer-events-none" : ""

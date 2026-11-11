@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { View as BackButton } from "@/shared/components/navigation/back-button/View";
+import { View as DigitalReconstructionEntrance } from "@/shared/components/animations/digital-reconstruction-entrance/View";
 import { SKILL_CATEGORIES } from "@/shared/data/skills";
 import type { SkillCategoryId } from "@/shared/types/skills";
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
@@ -29,34 +30,36 @@ export function View() {
     locale === "pt-BR" ? "VOLTAR AO PERFIL" : "BACK TO PROFILE";
 
   return (
-    <main aria-label="Skills" className="flex w-full flex-1 flex-col">
-      <SkillsTitle />
+    <DigitalReconstructionEntrance>
+      <main aria-label="Skills" className="flex w-full flex-1 flex-col">
+        <SkillsTitle />
 
-      {/* Back button */}
-      <section className="mx-auto w-full max-w-[1080px] px-4 pt-6">
-        <BackButton href="/profile" label={backButtonLabel} />
-      </section>
+        {/* Back button */}
+        <section className="mx-auto w-full max-w-[1080px] px-4 pt-6">
+          <BackButton href="/profile" label={backButtonLabel} />
+        </section>
 
-      {/* Category navigation */}
-      <section className="mt-0 w-full min-w-0 overflow-x-clip">
-        <CategoryNavigation
-          selectedCategoryId={selectedCategoryId}
-          onCategoryChange={setSelectedCategoryId}
-        />
-      </section>
+        {/* Category navigation */}
+        <section className="mt-0 w-full min-w-0 overflow-x-clip">
+          <CategoryNavigation
+            selectedCategoryId={selectedCategoryId}
+            onCategoryChange={setSelectedCategoryId}
+          />
+        </section>
 
-      {/* Selected category header */}
-      <section className="mx-auto mt-6 w-full max-w-[1080px] px-4">
-        <CategoryHeader
-          categoryId={selectedCategoryId}
-          technologiesCount={selectedCategory.skills.length}
-        />
-      </section>
+        {/* Selected category header */}
+        <section className="mx-auto mt-6 w-full max-w-[1080px] px-4">
+          <CategoryHeader
+            categoryId={selectedCategoryId}
+            technologiesCount={selectedCategory.skills.length}
+          />
+        </section>
 
-      {/* Technologies grid */}
-      <section className="mx-auto mt-6 w-full max-w-[1080px] px-4 pb-8">
-        <SkillsGrid selectedCategoryId={selectedCategoryId} />
-      </section>
-    </main>
+        {/* Technologies grid */}
+        <section className="mx-auto mt-6 w-full max-w-[1080px] px-4 pb-8">
+          <SkillsGrid selectedCategoryId={selectedCategoryId} />
+        </section>
+      </main>
+    </DigitalReconstructionEntrance>
   );
 }

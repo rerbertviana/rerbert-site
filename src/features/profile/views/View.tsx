@@ -2,13 +2,13 @@ import { View as BackButton } from "@/shared/components/navigation/back-button/V
 
 import { View as LinksPanel } from "../components/links-panel/View";
 import { View as MissionsPanel } from "../components/missions-panel/View";
-import { View as ProfileEntrance } from "../components/profile-entrance/View";
+import { View as DigitalReconstructionEntrance } from "@/shared/components/animations/digital-reconstruction-entrance/View";
 import { View as ProfileTitle } from "../components/profile-title/View";
 import { View as SkillsPanel } from "../components/skills-panel/View";
 
 export function View() {
   return (
-    <ProfileEntrance>
+    <DigitalReconstructionEntrance>
       <main aria-label="Character Profile" className="flex flex-1 flex-col">
         <ProfileTitle />
 
@@ -24,6 +24,6 @@ export function View() {
           </div>
         </section>
       </main>
-    </ProfileEntrance>
+    </DigitalReconstructionEntrance>
   );
 }
