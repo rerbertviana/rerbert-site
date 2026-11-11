@@ -1,4 +1,5 @@
-import { View as BackButton } from "../components/back-button/View";
+import { View as BackButton } from "@/shared/components/navigation/back-button/View";
+
 import { View as LinksPanel } from "../components/links-panel/View";
 import { View as MissionsPanel } from "../components/missions-panel/View";
 import { View as ProfileEntrance } from "../components/profile-entrance/View";
@@ -13,7 +14,7 @@ export function View() {
 
         <section className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 pb-8 pt-6 sm:px-8">
           <div className="mx-auto w-full max-w-5xl">
-            <BackButton />
+            <BackButton href="" />
           </div>
 
           <div className="flex flex-col gap-4">

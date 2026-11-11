@@ -13,11 +13,18 @@ const PROFICIENCY_PROGRESS: Record<ProficiencyLevel, number> = {
   advanced: 100,
 };
 
+const PROFICIENCY_COLORS: Record<ProficiencyLevel, string> = {
+  basic: "#38BDF8",
+  intermediate: "#A78BFA",
+  advanced: "#80FF00",
+};
+
 export function View({ skill }: SkillCardProps) {
   const { dictionary } = useLanguage();
 
   const proficiency = dictionary.skills.proficiency[skill.proficiency];
   const progress = PROFICIENCY_PROGRESS[skill.proficiency];
+  const accentColor = PROFICIENCY_COLORS[skill.proficiency];
 
   return (
     <article
@@ -35,6 +42,7 @@ export function View({ skill }: SkillCardProps) {
         motion-reduce:transform-none
       "
     >
+      {/* Technology logo */}
       <div
         className="
           flex size-10 shrink-0 items-center justify-center
@@ -53,6 +61,7 @@ export function View({ skill }: SkillCardProps) {
         />
       </div>
 
+      {/* Technology information */}
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
         <div className="flex min-w-0 flex-wrap items-center justify-between gap-x-2 gap-y-0.5">
           <h3
@@ -68,13 +77,14 @@ export function View({ skill }: SkillCardProps) {
             className="
               shrink-0 font-[family-name:var(--font-oxanium)]
               text-[9px] font-bold uppercase tracking-wider
-              text-[#80FF00]
             "
+            style={{ color: accentColor }}
           >
             {proficiency}
           </span>
         </div>
 
+        {/* Proficiency bar */}
         <div
           role="progressbar"
           aria-label={`${skill.name} proficiency`}
@@ -85,11 +95,14 @@ export function View({ skill }: SkillCardProps) {
         >
           <div
             className="
-              h-full rounded-full bg-[#80FF00]
+              h-full rounded-full
               transition-[width] duration-500 ease-out
               motion-reduce:transition-none
             "
-            style={{ width: `${progress}%` }}
+            style={{
+              width: `${progress}%`,
+              backgroundColor: accentColor,
+            }}
           />
         </div>
       </div>

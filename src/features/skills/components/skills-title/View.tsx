@@ -17,7 +17,7 @@ export function View() {
           aria-hidden="true"
           className="text-xl font-bold leading-none text-[#8AFF00]"
         >
-          ‹
+          {"<"}
         </span>
 
         <p className="font-[family-name:var(--font-oxanium)] text-xs font-bold uppercase tracking-[0.3em] text-[#B77AFF] sm:text-sm">
@@ -28,75 +28,128 @@ export function View() {
           aria-hidden="true"
           className="text-xl font-bold leading-none text-[#8AFF00]"
         >
-          ›
+          {">"}
         </span>
       </div>
 
-      {/* Main heading */}
-      <h1
-        id="skills-title"
-        className="mt-3 font-[family-name:var(--font-oxanium)] text-3xl font-extrabold uppercase leading-none tracking-tight text-[#8AFF00] sm:text-4xl md:text-5xl"
-      >
-        {title}
-      </h1>
+      {/* Main heading and decorative lines */}
+      <div className="relative mt-3 flex w-full max-w-[900px] items-center justify-center">
+        <svg
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-1/2 h-7 w-full -translate-y-1/2"
+          viewBox="0 0 900 28"
+          fill="none"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            {/* Desktop gradients */}
+            <linearGradient
+              id="skills-divider-left-desktop"
+              x1="0"
+              y1="0"
+              x2="160"
+              y2="0"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stopColor="#80FF00" stopOpacity="0" />
+              <stop offset="35%" stopColor="#80FF00" stopOpacity="0.7" />
+              <stop offset="75%" stopColor="#80FF00" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#80FF00" stopOpacity="0" />
+            </linearGradient>
+
+            <linearGradient
+              id="skills-divider-right-desktop"
+              x1="900"
+              y1="0"
+              x2="740"
+              y2="0"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stopColor="#80FF00" stopOpacity="0" />
+              <stop offset="35%" stopColor="#80FF00" stopOpacity="0.7" />
+              <stop offset="75%" stopColor="#80FF00" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#80FF00" stopOpacity="0" />
+            </linearGradient>
+
+            {/* Mobile gradients */}
+            <linearGradient
+              id="skills-divider-left-mobile"
+              x1="0"
+              y1="0"
+              x2="90"
+              y2="0"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stopColor="#80FF00" stopOpacity="0" />
+              <stop offset="35%" stopColor="#80FF00" stopOpacity="0.7" />
+              <stop offset="75%" stopColor="#80FF00" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#80FF00" stopOpacity="0" />
+            </linearGradient>
+
+            <linearGradient
+              id="skills-divider-right-mobile"
+              x1="900"
+              y1="0"
+              x2="810"
+              y2="0"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stopColor="#80FF00" stopOpacity="0" />
+              <stop offset="35%" stopColor="#80FF00" stopOpacity="0.7" />
+              <stop offset="75%" stopColor="#80FF00" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#80FF00" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Desktop */}
+          <g className="hidden sm:block">
+            <path
+              d="M0 14 H160"
+              stroke="url(#skills-divider-left-desktop)"
+              strokeWidth="1.2"
+            />
+
+            <path
+              d="M900 14 H740"
+              stroke="url(#skills-divider-right-desktop)"
+              strokeWidth="1.2"
+            />
+          </g>
+
+          {/* Mobile */}
+          <g className="sm:hidden">
+            <path
+              d="M0 14 H90"
+              stroke="url(#skills-divider-left-mobile)"
+              strokeWidth="1.2"
+            />
+
+            <path
+              d="M900 14 H810"
+              stroke="url(#skills-divider-right-mobile)"
+              strokeWidth="1.2"
+            />
+          </g>
+        </svg>
+
+        <h1
+          id="skills-title"
+          className="
+            relative z-10
+            font-[family-name:var(--font-oxanium)]
+            text-3xl font-extrabold uppercase leading-none tracking-tight
+            text-[#8AFF00]
+            sm:text-4xl md:text-5xl
+          "
+        >
+          {title}
+        </h1>
+      </div>
 
       {/* Description */}
       <p className="mt-3 max-w-xl text-sm font-medium text-white/90 sm:text-base">
         {subtitle}
       </p>
-
-      {/* Decorative divider */}
-      <svg
-        aria-hidden="true"
-        className="pointer-events-none mt-4 h-7 w-full max-w-[700px]"
-        viewBox="0 0 700 28"
-        fill="none"
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <linearGradient
-            id="skills-divider-left"
-            x1="0"
-            y1="0"
-            x2="180"
-            y2="0"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0%" stopColor="#80FF00" stopOpacity="0" />
-            <stop offset="25%" stopColor="#80FF00" stopOpacity="1" />
-            <stop offset="45%" stopColor="#80FF00" stopOpacity="0.8" />
-            <stop offset="70%" stopColor="#A855F7" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#A855F7" stopOpacity="0.35" />
-          </linearGradient>
-
-          <linearGradient
-            id="skills-divider-right"
-            x1="700"
-            y1="0"
-            x2="520"
-            y2="0"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0%" stopColor="#80FF00" stopOpacity="0" />
-            <stop offset="25%" stopColor="#80FF00" stopOpacity="1" />
-            <stop offset="45%" stopColor="#80FF00" stopOpacity="0.8" />
-            <stop offset="70%" stopColor="#A855F7" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#A855F7" stopOpacity="0.35" />
-          </linearGradient>
-        </defs>
-
-        <path
-          d="M0 22 H45 L60 7 H180"
-          stroke="url(#skills-divider-left)"
-          strokeWidth="1.2"
-        />
-
-        <path
-          d="M700 22 H655 L640 7 H520"
-          stroke="url(#skills-divider-right)"
-          strokeWidth="1.2"
-        />
-      </svg>
     </section>
   );
 }

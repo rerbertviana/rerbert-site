@@ -7,14 +7,19 @@ import { ArrowLeft } from "lucide-react";
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
 import { playSound } from "@/shared/lib/audio/audioManager";
 
-export function View() {
+interface BackButtonProps {
+  href: string;
+  label?: string;
+}
+
+export function View({ href, label }: BackButtonProps) {
   const router = useRouter();
   const { locale, dictionary } = useLanguage();
 
   const handleBack = useCallback(() => {
     playSound("interfaceClose");
-    router.push(`/${locale}`);
-  }, [locale, router]);
+    router.push(`/${locale}${href}`);
+  }, [href, locale, router]);
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -65,7 +70,7 @@ export function View() {
           className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1"
         />
 
-        {dictionary.profile.backButton}
+        {label ?? dictionary.profile.backButton}
       </button>
     </div>
   );

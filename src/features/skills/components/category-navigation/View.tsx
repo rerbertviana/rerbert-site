@@ -3,23 +3,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { PointerEvent, MouseEvent } from "react";
 
-import {
-  Braces,
-  Code2,
-  Database,
-  FlaskConical,
-  GitBranch,
-  Layers3,
-  Palette,
-  Sparkles,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import type { LucideIcon } from "lucide-react";
 
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
 import type { SkillCategoryId } from "@/shared/types/skills";
+
+import { SKILL_CATEGORY_ICONS } from "../../data/category-config";
 
 const SWIPE_THRESHOLD = 45;
 const MOBILE_BREAKPOINT = 1024;
@@ -36,16 +27,12 @@ interface CategoryNavigationProps {
   onCategoryChange: (categoryId: SkillCategoryId) => void;
 }
 
-const CATEGORIES: CategoryItem[] = [
-  { id: "frameworks-libraries", icon: Code2 },
-  { id: "languages-core", icon: Braces },
-  { id: "state-management", icon: Layers3 },
-  { id: "apis-data-fetching", icon: Database },
-  { id: "testing-quality", icon: FlaskConical },
-  { id: "databases-infrastructure", icon: GitBranch },
-  { id: "methodologies-workflow", icon: Palette },
-  { id: "devops-collaboration-ai", icon: Sparkles },
-];
+const CATEGORIES: CategoryItem[] = Object.entries(SKILL_CATEGORY_ICONS).map(
+  ([id, icon]) => ({
+    id: id as SkillCategoryId,
+    icon,
+  }),
+);
 
 function isEditableTarget(target: EventTarget | null) {
   if (!(target instanceof HTMLElement)) return false;
