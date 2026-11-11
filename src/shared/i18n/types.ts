@@ -1,3 +1,5 @@
+import type { ProficiencyLevel, SkillCategoryId } from "@/shared/types/skills";
+
 export interface Dictionary {
   common: {
     confirm: string;
@@ -100,5 +102,17 @@ export interface Dictionary {
       title: string;
       description: string;
     };
+  };
+
+  skills: {
+    pageLabel: string;
+    title: string;
+    subtitle: string;
+
+    categoryNavigationLabel: string;
+    skillListLabel: string;
+
+    categories: Record<SkillCategoryId, string>;
+    proficiency: Record<ProficiencyLevel, string>;
   };
 }

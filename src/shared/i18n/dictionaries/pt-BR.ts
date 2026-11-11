@@ -107,6 +107,30 @@ const ptBR: Dictionary = {
       description: "Meus principais canais profissionais e presença online.",
     },
   },
+
+  skills: {
+    pageLabel: "ARSENAL TÉCNICO",
+    title: "HABILIDADES",
+    subtitle:
+      "Tecnologias, ferramentas e práticas que utilizo para desenvolver soluções.",
+    categoryNavigationLabel: "Categorias de habilidades",
+    skillListLabel: "Tecnologias e níveis de proficiência",
+    categories: {
+      "frameworks-libraries": "Frameworks e Bibliotecas",
+      "languages-core": "Linguagens e Fundamentos",
+      "state-management": "Gerenciamento de Estado",
+      "apis-data-fetching": "APIs e Busca de Dados",
+      "testing-quality": "Testes e Qualidade",
+      "databases-infrastructure": "Bancos de Dados e Infraestrutura",
+      "methodologies-workflow": "Metodologias e Fluxo de Trabalho",
+      "devops-collaboration-ai": "DevOps, Colaboração e IA",
+    },
+    proficiency: {
+      basic: "Básico",
+      intermediate: "Intermediário",
+      advanced: "Avançado",
+    },
+  },
 };
 
 export default ptBR;

@@ -86,7 +86,7 @@ const en: Dictionary = {
     subtitle:
       "A quick overview of my skills, professional journey and main links.",
     backButton: "BACK TO SELECTION",
-    
+
     skills: {
       title: "SKILLS",
       description:
@@ -105,6 +105,30 @@ const en: Dictionary = {
     links: {
       title: "LINKS",
       description: "My main professional channels and online presence.",
+    },
+  },
+
+  skills: {
+    pageLabel: "TECHNICAL ARSENAL",
+    title: "SKILLS",
+    subtitle:
+      "Explore the technologies, tools and practices I use to build digital solutions.",
+    categoryNavigationLabel: "Skill categories",
+    skillListLabel: "Technologies and proficiency levels",
+    categories: {
+      "frameworks-libraries": "Frameworks & Libraries",
+      "languages-core": "Languages & Core",
+      "state-management": "State Management",
+      "apis-data-fetching": "APIs & Data Fetching",
+      "testing-quality": "Testing & Quality",
+      "databases-infrastructure": "Databases & Infrastructure",
+      "methodologies-workflow": "Methodologies & Workflow",
+      "devops-collaboration-ai": "DevOps, Collaboration & AI",
+    },
+    proficiency: {
+      basic: "Basic",
+      intermediate: "Intermediate",
+      advanced: "Advanced",
     },
   },
 };
