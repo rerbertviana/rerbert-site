@@ -7,6 +7,7 @@ import { playSound } from "@/shared/lib/audio/audioManager";
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
 
 import { characters } from "../../data/characters";
+import { useCharacterSelectionStore } from "../../store/characterSelectionStore";
 
 const SWIPE_THRESHOLD = 45;
 
@@ -33,12 +34,12 @@ export function useController({
   const { dictionary } = useLanguage();
   const translations = dictionary.characterSelection;
 
-  const initialCharacterIndex = Math.max(
-    characters.findIndex((character) => character.id === "rerbert"),
-    0,
+  const activeIndex = useCharacterSelectionStore((state) => state.activeIndex);
+
+  const setActiveIndex = useCharacterSelectionStore(
+    (state) => state.setActiveIndex,
   );
 
-  const [activeIndex, setActiveIndex] = useState(initialCharacterIndex);
   const [navigationDirection, setNavigationDirection] =
     useState<NavigationDirection>("next");
 
@@ -55,18 +56,21 @@ export function useController({
     };
   });
 
-  const handleNavigation = useCallback((direction: NavigationDirection) => {
-    setNavigationDirection(direction);
-    playSound("characterNavigation");
+  const handleNavigation = useCallback(
+    (direction: NavigationDirection) => {
+      setNavigationDirection(direction);
+      playSound("characterNavigation");
 
-    setActiveIndex((currentIndex) => {
-      if (direction === "previous") {
-        return (currentIndex - 1 + characters.length) % characters.length;
-      }
+      setActiveIndex((currentIndex) => {
+        if (direction === "previous") {
+          return (currentIndex - 1 + characters.length) % characters.length;
+        }
 
-      return (currentIndex + 1) % characters.length;
-    });
-  }, []);
+        return (currentIndex + 1) % characters.length;
+      });
+    },
+    [setActiveIndex],
+  );
 
   const handleCharacterSelect = useCallback(
     (characterId: string, index: number) => {
@@ -80,7 +84,7 @@ export function useController({
       setActiveIndex(index);
       onSelectedCharacterChange(characterId);
     },
-    [selectedCharacterId, onSelectedCharacterChange],
+    [selectedCharacterId, onSelectedCharacterChange, setActiveIndex],
   );
 
   const handlePrevious = useCallback(() => {

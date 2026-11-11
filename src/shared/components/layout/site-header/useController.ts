@@ -5,17 +5,16 @@ import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
 import type { Locale } from "@/shared/i18n/config";
-import {
-  isSoundEnabled,
-  playSound,
-  toggleAudio,
-} from "@/shared/lib/audio/audioManager";
+
+import { playSound, toggleAudio } from "@/shared/lib/audio/audioManager";
+import { useAudioEnabled } from "@/shared/lib/audio/useAudioEnabled";
 
 export function useController() {
   const { locale, dictionary, resumeUrl, changeLanguage } = useLanguage();
 
+  const isSoundEnabled = useAudioEnabled();
+
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(() => isSoundEnabled());
 
   const languageMenuRef = useRef<HTMLDivElement>(null);
   const languageListRef = useRef<HTMLDivElement>(null);
@@ -49,9 +48,7 @@ export function useController() {
   }, [isLanguageMenuOpen]);
 
   async function handleSoundToggle() {
-    const enabled = await toggleAudio();
-
-    setSoundEnabled(enabled);
+    await toggleAudio();
   }
 
   function handleLanguageMenuToggle() {
@@ -142,7 +139,7 @@ export function useController() {
     dictionary,
     resumeUrl,
     isLanguageMenuOpen,
-    isSoundEnabled: soundEnabled,
+    isSoundEnabled,
     languageMenuRef,
     languageListRef,
     languageButtonRef,

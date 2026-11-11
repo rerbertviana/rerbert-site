@@ -7,9 +7,8 @@ import { playSound } from "@/shared/lib/audio/audioManager";
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
 
 import { characters } from "../data/characters";
+import { useCharacterSelectionStore } from "../store/characterSelectionStore";
 import { getCharacterTranslation } from "../utils/getCharacterTranslation";
-
-const DEFAULT_SELECTED_CHARACTER_ID = "rerbert";
 
 function isEditableTarget(target: EventTarget | null) {
   if (!(target instanceof HTMLElement)) return false;
@@ -24,8 +23,12 @@ export function useController() {
   const router = useRouter();
   const { locale, dictionary } = useLanguage();
 
-  const [selectedCharacterId, setSelectedCharacterId] = useState<string | null>(
-    DEFAULT_SELECTED_CHARACTER_ID,
+  const selectedCharacterId = useCharacterSelectionStore(
+    (state) => state.selectedCharacterId,
+  );
+
+  const setSelectedCharacterId = useCharacterSelectionStore(
+    (state) => state.setSelectedCharacterId,
   );
 
   const [shouldAnimateInformation, setShouldAnimateInformation] =
@@ -53,7 +56,7 @@ export function useController() {
 
       setSelectedCharacterId(characterId);
     },
-    [selectedCharacterId],
+    [selectedCharacterId, setSelectedCharacterId],
   );
 
   const handleConfirmSelection = useCallback(() => {
@@ -103,7 +106,7 @@ export function useController() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handleConfirmSelection, selectedCharacterId]);
+  }, [handleConfirmSelection, selectedCharacterId, setSelectedCharacterId]);
 
   return {
     selectedCharacterId,

@@ -30,6 +30,28 @@ let isAudioEnabled = false;
 const soundCache = new Map<SoundEffect, HTMLAudioElement>();
 const activeSoundEffects = new Set<HTMLAudioElement>();
 
+const audioStateListeners = new Set<() => void>();
+
+export function subscribeAudioState(listener: () => void) {
+  audioStateListeners.add(listener);
+
+  return () => {
+    audioStateListeners.delete(listener);
+  };
+}
+
+function notifyAudioStateChange() {
+  audioStateListeners.forEach((listener) => listener());
+}
+
+export function isSoundEnabled() {
+  return isAudioEnabled;
+}
+
+export function isAmbientMusicPlaying() {
+  return Boolean(ambientAudio && !ambientAudio.paused);
+}
+
 function getAmbientAudio() {
   if (typeof window === "undefined") return null;
 
@@ -57,14 +79,6 @@ function getSoundAudio(sound: SoundEffect) {
   }
 
   return audio;
-}
-
-export function isSoundEnabled() {
-  return isAudioEnabled;
-}
-
-export function isAmbientMusicPlaying() {
-  return Boolean(ambientAudio && !ambientAudio.paused);
 }
 
 function stopActiveSoundEffects() {
@@ -102,6 +116,7 @@ async function resumeAmbientMusic() {
 export async function toggleAudio(): Promise<boolean> {
   if (isAudioEnabled) {
     isAudioEnabled = false;
+    notifyAudioStateChange();
 
     const audio = getAmbientAudio();
 
@@ -113,6 +128,7 @@ export async function toggleAudio(): Promise<boolean> {
   }
 
   isAudioEnabled = true;
+  notifyAudioStateChange();
 
   await resumeAmbientMusic();
 
