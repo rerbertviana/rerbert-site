@@ -5,7 +5,8 @@ type SoundEffect =
   | "interfaceBack"
   | "interfaceOpen"
   | "interfaceClose"
-  | "skillHover";
+  | "skillHover"
+  | "skillCategorySelect";
 
 const AMBIENT_MUSIC_PATH = "/audio/ambient/ambient-theme.wav";
 
@@ -17,6 +18,7 @@ const SOUND_EFFECT_PATHS: Record<SoundEffect, string> = {
   interfaceOpen: "/audio/sfx/interface-open.wav",
   interfaceClose: "/audio/sfx/interface-close.wav",
   skillHover: "/audio/sfx/skill-hover-wind.wav",
+  skillCategorySelect: "/audio/sfx/skills-category-select.wav",
 };
 
 const AMBIENT_VOLUME = 0.18;

@@ -8,6 +8,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
+import { playSound } from "@/shared/lib/audio/audioManager";
 import type { SkillCategoryId } from "@/shared/types/skills";
 
 import { SKILL_CATEGORY_ICONS } from "../../data/category-config";
@@ -85,6 +86,16 @@ export function View({
     };
   }, []);
 
+  const handleSelectCategory = useCallback(
+    (categoryId: SkillCategoryId) => {
+      if (categoryId === selectedCategoryId) return;
+
+      playSound("characterNavigation");
+      onCategoryChange(categoryId);
+    },
+    [selectedCategoryId, onCategoryChange],
+  );
+
   const visibleCategories = isMobile
     ? Array.from({ length: visibleCount }, (_, index) => {
         const half = Math.floor(visibleCount / 2);
@@ -112,9 +123,9 @@ export function View({
           ? (activeIndex - 1 + CATEGORIES.length) % CATEGORIES.length
           : (activeIndex + 1) % CATEGORIES.length;
 
-      onCategoryChange(CATEGORIES[nextIndex].id);
+      handleSelectCategory(CATEGORIES[nextIndex].id);
     },
-    [activeIndex, onCategoryChange],
+    [activeIndex, handleSelectCategory],
   );
 
   const handlePrevious = useCallback(() => {
@@ -215,7 +226,7 @@ export function View({
         type="button"
         data-category-id={category.id}
         aria-pressed={isSelected}
-        onClick={() => onCategoryChange(category.id)}
+        onClick={() => handleSelectCategory(category.id)}
         className={`
           relative flex h-[88px] w-[108px] shrink-0
           cursor-pointer flex-col items-center justify-center gap-2

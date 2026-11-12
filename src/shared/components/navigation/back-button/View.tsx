@@ -17,7 +17,7 @@ export function View({ href, label }: BackButtonProps) {
   const { locale, dictionary } = useLanguage();
 
   const handleBack = useCallback(() => {
-    playSound("interfaceClose");
+    playSound("characterSelect");
     router.push(`/${locale}${href}`);
   }, [href, locale, router]);
 
@@ -47,7 +47,7 @@ export function View({ href, label }: BackButtonProps) {
     <div className="mb-3 flex w-full justify-start sm:mb-4">
       <button
         type="button"
-        onMouseEnter={() => playSound("interfaceOpen")}
+        onMouseEnter={() => playSound("interfaceClose")}
         onClick={handleBack}
         className="
           group inline-flex items-center gap-2

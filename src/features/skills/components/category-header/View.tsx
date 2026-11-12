@@ -60,12 +60,12 @@ export function View({ categoryId, technologiesCount }: CategoryHeaderProps) {
       {/* Technology count */}
       <div
         className="
-          flex shrink-0 flex-col items-center justify-center
+          hidden shrink-0 flex-col items-center justify-center
           rounded-lg border border-[#A78BFA]/40
           bg-[#100C24]/70 px-2 py-2
           font-[family-name:var(--font-oxanium)]
           text-[#C4B5FD]
-          sm:min-w-[132px] sm:px-4
+          sm:flex sm:min-w-[132px] sm:px-4
         "
       >
         <span className="text-base font-bold leading-none sm:text-lg">
