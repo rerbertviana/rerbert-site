@@ -46,7 +46,7 @@ export function View({ categoryId, technologiesCount }: CategoryHeaderProps) {
             sm:text-xl
           "
         >
-          <span className="text-[#8AFF00]">{firstWord}</span>
+          <span className="text-[#B77AFF]">{firstWord}</span>
 
           {remainingWords.length > 0 && (
             <span className="text-white"> {remainingWords.join(" ")}</span>

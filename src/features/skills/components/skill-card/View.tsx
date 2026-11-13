@@ -15,7 +15,7 @@ const PROFICIENCY_PROGRESS: Record<ProficiencyLevel, number> = {
 
 const PROFICIENCY_COLORS: Record<ProficiencyLevel, string> = {
   basic: "#38BDF8",
-  intermediate: "#A78BFA",
+  intermediate: "#B77AFF",
   advanced: "#80FF00",
 };
 
