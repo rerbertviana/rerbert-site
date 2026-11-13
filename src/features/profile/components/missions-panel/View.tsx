@@ -7,8 +7,8 @@ import { useLanguage } from "@/shared/i18n/LanguageProvider";
 import { playSound } from "@/shared/lib/audio/audioManager";
 import { View as DecorativeGradientBorder } from "@/shared/components/decorative-gradient-border/View";
 
-import { missions } from "../../data/missions";
-import type { MissionLocale } from "../../types/mission";
+import { missions } from "@/shared/data/missions";
+import type { MissionLocale } from "@/shared/types/mission";
 
 const FEATURED_MISSIONS_LIMIT = 3;
 

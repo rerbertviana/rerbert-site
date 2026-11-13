@@ -123,4 +123,31 @@ export interface Dictionary {
     categoryDetails: Record<SkillCategoryId, SkillCategoryDetails>;
     proficiency: Record<ProficiencyLevel, string>;
   };
+
+  missions: {
+    pageLabel: string;
+    title: string;
+    subtitle: string;
+    backToProfile: string;
+
+    filters: {
+      label: string;
+      all: string;
+      experience: string;
+      project: string;
+    };
+
+    categories: {
+      experience: string;
+      project: string;
+    };
+
+    card: {
+      technologies: string;
+      responsibilities: string;
+      highlights: string;
+      inProgress: string;
+      completed: string;
+    };
+  };
 }

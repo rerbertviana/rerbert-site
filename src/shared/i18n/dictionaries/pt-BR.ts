@@ -98,7 +98,7 @@ const ptBR: Dictionary = {
     missions: {
       title: "MISSÕES",
       description:
-        "Explore minha trajetória profissional e os projetos que desenvolvi.",
+        "Explore minha trajetória profissional e projetos que desenvolvi.",
       viewMore: "VER MAIS",
     },
 
@@ -173,6 +173,34 @@ const ptBR: Dictionary = {
       basic: "Básico",
       intermediate: "Intermediário",
       advanced: "Avançado",
+    },
+  },
+
+  missions: {
+    pageLabel: "CARREIRA E PROJETOS",
+    title: "MISSÕES",
+    subtitle:
+      "Explore minha trajetória profissional e os projetos que desenvolvi.",
+    backToProfile: "VOLTAR AO PERFIL",
+
+    filters: {
+      label: "Filtrar missões",
+      all: "TODAS AS MISSÕES",
+      experience: "EXPERIÊNCIA PROFISSIONAL",
+      project: "PROJETOS PESSOAIS",
+    },
+
+    categories: {
+      experience: "EXPERIÊNCIA PROFISSIONAL",
+      project: "PROJETO PESSOAL",
+    },
+
+    card: {
+      technologies: "TECNOLOGIAS",
+      responsibilities: "PRINCIPAIS RESPONSABILIDADES",
+      highlights: "DESTAQUES DO PROJETO",
+      inProgress: "EM ANDAMENTO",
+      completed: "CONCLUÍDO",
     },
   },
 };

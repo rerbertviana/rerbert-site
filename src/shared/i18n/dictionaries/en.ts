@@ -172,6 +172,34 @@ const en: Dictionary = {
       advanced: "Advanced",
     },
   },
+
+  missions: {
+    pageLabel: "CAREER & PROJECTS",
+    title: "MISSIONS",
+    subtitle:
+      "Explore my professional journey and the projects I've built along the way.",
+    backToProfile: "BACK TO PROFILE",
+
+    filters: {
+      label: "Filter missions",
+      all: "ALL MISSIONS",
+      experience: "PROFESSIONAL EXPERIENCE",
+      project: "PERSONAL PROJECTS",
+    },
+
+    categories: {
+      experience: "PROFESSIONAL EXPERIENCE",
+      project: "PERSONAL PROJECT",
+    },
+
+    card: {
+      technologies: "TECHNOLOGIES",
+      responsibilities: "KEY RESPONSIBILITIES",
+      highlights: "PROJECT HIGHLIGHTS",
+      inProgress: "IN PROGRESS",
+      completed: "COMPLETED",
+    },
+  },
 };
 
 export default en;
