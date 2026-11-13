@@ -1,3 +1,4 @@
+import { useLanguage } from "@/shared/i18n/LanguageProvider";
 import { SKILL_CATEGORIES } from "@/shared/data/skills";
 import type { SkillCategoryId } from "@/shared/types/skills";
 
@@ -8,6 +9,8 @@ interface SkillsGridProps {
 }
 
 export function View({ selectedCategoryId }: SkillsGridProps) {
+  const { dictionary } = useLanguage();
+
   const selectedCategory = SKILL_CATEGORIES.find(
     (category) => category.id === selectedCategoryId,
   );
@@ -16,7 +19,7 @@ export function View({ selectedCategoryId }: SkillsGridProps) {
 
   return (
     <section
-      aria-label="Technologies"
+      aria-label={dictionary.skills.technologiesLabel}
       className="
         grid w-full min-w-0
         grid-cols-1 content-start gap-3

@@ -117,6 +117,7 @@ const en: Dictionary = {
     categoryNavigationLabel: "Skill categories",
     skillListLabel: "Technologies and proficiency levels",
     technologiesLabel: "Technologies",
+    backToProfile: "BACK TO PROFILE",
 
     categories: {
       "frameworks-libraries": "Frameworks & Libraries",

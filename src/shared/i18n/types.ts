@@ -113,6 +113,7 @@ export interface Dictionary {
     pageLabel: string;
     title: string;
     subtitle: string;
+    backToProfile: string;
 
     categoryNavigationLabel: string;
     skillListLabel: string;

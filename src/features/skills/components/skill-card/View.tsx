@@ -34,7 +34,6 @@ export function View({ skill }: SkillCardProps) {
         items-center gap-3 overflow-hidden rounded-lg
         border border-[#A78BFA]/30
         bg-[#100C24]/75 px-3 py-2
-        backdrop-blur-sm
         transition-all duration-300 ease-out
         hover:-translate-y-1
         hover:border-[#A78BFA]/70
@@ -49,7 +48,7 @@ export function View({ skill }: SkillCardProps) {
           rounded-lg border border-[#A78BFA]/50
           bg-[#171326] p-2
           transition-colors duration-300
-          group-hover:border-[#80FF00]/70
+          group-hover:border-white/70
         "
       >
         <Image

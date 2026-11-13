@@ -117,6 +117,7 @@ const ptBR: Dictionary = {
     categoryNavigationLabel: "Categorias de habilidades",
     skillListLabel: "Tecnologias e níveis de proficiência",
     technologiesLabel: "Tecnologias",
+    backToProfile: "VOLTAR AO PERFIL",
 
     categories: {
       "frameworks-libraries": "Frameworks e Bibliotecas",

@@ -1,12 +1,12 @@
 import {
   Braces,
-  Code2,
-  Database,
+  Blocks,
+  Webhook,
   FlaskConical,
-  GitBranch,
+  Database,
   Layers3,
-  Palette,
-  Sparkles,
+  Workflow,
+  GitBranch,
 } from "lucide-react";
 
 import type { LucideIcon } from "lucide-react";
@@ -14,12 +14,12 @@ import type { LucideIcon } from "lucide-react";
 import type { SkillCategoryId } from "@/shared/types/skills";
 
 export const SKILL_CATEGORY_ICONS: Record<SkillCategoryId, LucideIcon> = {
-  "frameworks-libraries": Code2,
+  "frameworks-libraries": Blocks,
   "languages-core": Braces,
   "state-management": Layers3,
-  "apis-data-fetching": Database,
+  "apis-data-fetching": Webhook,
   "testing-quality": FlaskConical,
-  "databases-infrastructure": GitBranch,
-  "methodologies-workflow": Palette,
-  "devops-collaboration-ai": Sparkles,
+  "databases-infrastructure": Database,
+  "methodologies-workflow": Workflow,
+  "devops-collaboration-ai": GitBranch,
 };

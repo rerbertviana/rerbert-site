@@ -16,20 +16,25 @@ import { View as SkillsTitle } from "../components/skills-title/View";
 const DEFAULT_CATEGORY: SkillCategoryId = "frameworks-libraries";
 const CATEGORY_QUERY_PARAM = "category";
 
+function isSkillCategoryId(value: string | null): value is SkillCategoryId {
+  return (
+    value !== null &&
+    SKILL_CATEGORY_IDS.some((categoryId) => categoryId === value)
+  );
+}
+
 export function View() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const { locale } = useLanguage();
+  const { dictionary } = useLanguage();
 
   const categoryParam = searchParams.get(CATEGORY_QUERY_PARAM);
 
-  const selectedCategoryId: SkillCategoryId =
-    categoryParam &&
-    SKILL_CATEGORY_IDS.includes(categoryParam as SkillCategoryId)
-      ? (categoryParam as SkillCategoryId)
-      : DEFAULT_CATEGORY;
+  const selectedCategoryId = isSkillCategoryId(categoryParam)
+    ? categoryParam
+    : DEFAULT_CATEGORY;
 
   const selectedCategory = SKILL_CATEGORIES.find(
     (category) => category.id === selectedCategoryId,
@@ -47,17 +52,17 @@ export function View() {
 
   if (!selectedCategory) return null;
 
-  const backButtonLabel =
-    locale === "pt-BR" ? "VOLTAR AO PERFIL" : "BACK TO PROFILE";
-
   return (
     <DigitalReconstructionEntrance>
-      <main aria-label="Skills" className="flex w-full flex-1 flex-col">
+      <main
+        aria-labelledby="skills-title"
+        className="flex w-full flex-1 flex-col"
+      >
         <SkillsTitle />
 
         {/* Back button */}
         <section className="mx-auto w-full max-w-[1080px] px-4 pt-6">
-          <BackButton href="/profile" label={backButtonLabel} />
+          <BackButton href="/profile" label={dictionary.skills.backToProfile} />
         </section>
 
         {/* Category navigation */}
