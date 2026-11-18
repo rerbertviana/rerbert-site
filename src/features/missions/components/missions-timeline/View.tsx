@@ -51,7 +51,7 @@ export function View({ entries }: Props) {
                           after:left-1/2
                           after:top-full
                           after:h-8
-                          after:w-px
+                          after:w-[2px]
                           after:-translate-x-1/2
                           sm:after:hidden
                         `

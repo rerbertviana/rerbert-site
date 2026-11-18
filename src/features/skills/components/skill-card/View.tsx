@@ -32,7 +32,7 @@ export function View({ skill }: SkillCardProps) {
       className="
         group relative flex min-h-[76px] w-full min-w-0
         items-center gap-3 overflow-hidden rounded-lg
-        border border-[#A78BFA]/30
+        border-2 border-[#A78BFA]/30
         bg-[#100C24]/75 px-3 py-2
         transition-all duration-300 ease-out
         hover:-translate-y-1
@@ -48,7 +48,7 @@ export function View({ skill }: SkillCardProps) {
           rounded-lg border border-[#A78BFA]/50
           bg-[#171326] p-2
           transition-colors duration-300
-          group-hover:border-white/70
+          group-hover:border-[#A78BFA]
         "
       >
         <Image

@@ -193,10 +193,10 @@ export function View({ entry }: Props) {
         onClick={handleOpenModal}
         onKeyDown={handleCardKeyDown}
         className="
-          group relative isolate h-full min-h-[200px]
+          group relative z-10 isolate h-full min-h-[200px]
           cursor-pointer
           transition-transform duration-300 ease-out
-          hover:z-10 hover:scale-[1.05]
+          hover:scale-[1.05]
           focus-visible:outline-none
           focus-visible:ring-2 focus-visible:ring-[#A78BFA]
           focus-visible:ring-offset-2 focus-visible:ring-offset-[#080D18]

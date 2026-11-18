@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
@@ -35,24 +36,6 @@ export function View({
         gap-1 px-2 sm:gap-3 sm:px-4
       "
     >
-      {/* Selected category icon gradient */}
-      <svg aria-hidden="true" className="absolute h-0 w-0">
-        <defs>
-          <linearGradient
-            id="category-icon-gradient"
-            x1="0%"
-            y1="100%"
-            x2="100%"
-            y2="0%"
-          >
-            <stop offset="0%" stopColor="#A855F7" />
-            <stop offset="45%" stopColor="#A855F7" />
-            <stop offset="65%" stopColor="#80FF00" />
-            <stop offset="100%" stopColor="#80FF00" />
-          </linearGradient>
-        </defs>
-      </svg>
-
       {/* Previous */}
       <button
         type="button"
@@ -61,9 +44,9 @@ export function View({
         className="
           flex size-8 shrink-0 cursor-pointer items-center justify-center
           text-white/60 transition-colors duration-300
-          hover:text-[#80FF00]
+          hover:text-[#A78BFA]
           focus-visible:outline-none
-          focus-visible:ring-2 focus-visible:ring-[#80FF00]
+          focus-visible:ring-2 focus-visible:ring-[#A78BFA]
           sm:size-10
         "
       >
@@ -105,10 +88,10 @@ export function View({
                   hover:z-20 hover:scale-[1.06]
                   focus-visible:outline-none
                   focus-visible:ring-1
-                  focus-visible:ring-[#80FF00]
+                  focus-visible:ring-[#A78BFA]
                   ${
                     isSelected
-                      ? "z-10 scale-[1.03] border-[#80FF00] bg-[#80FF00]/[0.06]"
+                      ? "z-10 scale-[1.03] border-[#A78BFA] bg-[#A78BFA]/[0.06]"
                       : "border-[#A78BFA]/25 bg-[#171326]/80 hover:border-[#A78BFA]/70 hover:bg-[#211832]"
                   }
                 `}
@@ -117,10 +100,9 @@ export function View({
                   size={21}
                   strokeWidth={1.7}
                   aria-hidden="true"
-                  stroke={
-                    isSelected ? "url(#category-icon-gradient)" : "currentColor"
+                  className={
+                    isSelected ? "text-[#A78BFA]" : "text-white"
                   }
-                  className={isSelected ? "text-[#80FF00]" : "text-white"}
                 />
 
                 <span className="max-w-full text-center font-[family-name:var(--font-oxanium)] text-[10px] font-semibold leading-tight text-white">
@@ -140,9 +122,9 @@ export function View({
         className="
           flex size-8 shrink-0 cursor-pointer items-center justify-center
           text-white/60 transition-colors duration-300
-          hover:text-[#80FF00]
+          hover:text-[#A78BFA]
           focus-visible:outline-none
-          focus-visible:ring-2 focus-visible:ring-[#80FF00]
+          focus-visible:ring-2 focus-visible:ring-[#A78BFA]
           sm:size-10
         "
       >
