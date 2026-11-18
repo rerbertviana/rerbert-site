@@ -30,7 +30,16 @@ export function View({ href, label }: BackButtonProps) {
         (target.isContentEditable ||
           ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
 
-      if (event.key === "Escape" && !event.repeat && !isTyping) {
+      const isModalOpen = document.querySelector(
+        '[role="dialog"][aria-modal="true"]',
+      );
+
+      if (
+        event.key === "Escape" &&
+        !event.repeat &&
+        !isTyping &&
+        !isModalOpen
+      ) {
         event.preventDefault();
         handleBack();
       }

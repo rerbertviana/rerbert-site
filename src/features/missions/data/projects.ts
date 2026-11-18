@@ -2,7 +2,7 @@ import type { Project } from "../types/project";
 
 export const projects: Project[] = [
   {
-    id: "rerbert-exe",
+    id: "portfolio",
     name: "RERBERT.EXE",
     status: "in-progress",
     completedAt: null,
@@ -32,6 +32,8 @@ export const projects: Project[] = [
     name: "EduPresence",
     status: "completed",
     completedAt: "2026-04",
+    frontendUrl: "https://github.com/rerbertviana/edupresence-front-web-final",
+    backendUrl: "https://github.com/rerbertviana/edupresence-backend-final",
     technologies: [],
     content: {
       en: {
@@ -51,6 +53,8 @@ export const projects: Project[] = [
     name: "Kombigogh",
     status: "completed",
     completedAt: "2021-06",
+    frontendUrl: "https://github.com/rerbertviana/Kombigogh-Frontend",
+    backendUrl: "https://github.com/rerbertviana/Kombigogh-Backend",
     technologies: [],
     content: {
       en: {

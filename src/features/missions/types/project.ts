@@ -14,5 +14,8 @@ export interface Project {
   completedAt: string | null;
   image?: string;
   technologies: string[];
+  repositoryUrl?: string;
+  frontendUrl?: string;
+  backendUrl?: string;
   content: Record<MissionLocale, ProjectLocalizedContent>;
 }
