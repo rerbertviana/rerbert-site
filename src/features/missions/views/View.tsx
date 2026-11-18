@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { View as BackButton } from "@/shared/components/navigation/back-button/View";
 import { View as DigitalReconstructionEntrance } from "@/shared/components/animations/digital-reconstruction-entrance/View";
@@ -14,10 +15,27 @@ import { getTimelineEntries } from "../utils/get-timeline-entries";
 
 import type { MissionFilter } from "../types/timeline";
 
+const DEFAULT_FILTER: MissionFilter = "all";
+const FILTER_QUERY_PARAM = "filter";
+
+const VALID_FILTERS: MissionFilter[] = ["all", "experience", "project"];
+
+function isMissionFilter(value: string | null): value is MissionFilter {
+  return value !== null && VALID_FILTERS.includes(value as MissionFilter);
+}
+
 export function View() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const { dictionary } = useLanguage();
 
-  const [selectedFilter, setSelectedFilter] = useState<MissionFilter>("all");
+  const filterParam = searchParams.get(FILTER_QUERY_PARAM);
+
+  const selectedFilter = isMissionFilter(filterParam)
+    ? filterParam
+    : DEFAULT_FILTER;
 
   const timelineEntries = useMemo(() => getTimelineEntries(), []);
 
@@ -30,6 +48,16 @@ export function View() {
 
     return entry.type === "project";
   });
+
+  function handleFilterChange(filter: MissionFilter) {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set(FILTER_QUERY_PARAM, filter);
+
+    router.push(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
+  }
 
   return (
     <DigitalReconstructionEntrance>
@@ -51,7 +79,7 @@ export function View() {
         <section className="mx-auto mt-3 w-full max-w-[1200px] px-4">
           <MissionsFilter
             selectedFilter={selectedFilter}
-            onFilterChange={setSelectedFilter}
+            onFilterChange={handleFilterChange}
           />
         </section>
 
