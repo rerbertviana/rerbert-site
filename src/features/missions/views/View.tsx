@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { View as BackButton } from "@/shared/components/navigation/back-button/View";
@@ -37,17 +36,11 @@ export function View() {
     ? filterParam
     : DEFAULT_FILTER;
 
-  const timelineEntries = useMemo(() => getTimelineEntries(), []);
+  const timelineEntries = getTimelineEntries();
 
-  const filteredEntries = timelineEntries.filter((entry) => {
-    if (selectedFilter === "all") return true;
-
-    if (selectedFilter === "experience") {
-      return entry.type === "experience";
-    }
-
-    return entry.type === "project";
-  });
+  const filteredEntries = timelineEntries.filter(
+    (entry) => selectedFilter === "all" || entry.type === selectedFilter,
+  );
 
   function handleFilterChange(filter: MissionFilter) {
     const params = new URLSearchParams(searchParams.toString());

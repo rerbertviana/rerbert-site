@@ -200,6 +200,7 @@ const en: Dictionary = {
       completed: "COMPLETED",
       overview: "Overview",
       sourceCode: "Source Code",
+      closeDetails: "Close mission details",
     },
   },
 };

@@ -113,7 +113,6 @@ export function View({ selectedFilter, onFilterChange }: Props) {
 
   return (
     <section
-      aria-label={content.label}
       className="
         mx-auto grid w-full max-w-[720px]
         grid-cols-3 items-center gap-2

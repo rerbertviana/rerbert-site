@@ -1,5 +1,6 @@
 import { missions } from "@/shared/data/missions";
 import { projects } from "../data/projects";
+
 import type { TimelineEntry } from "../types/timeline";
 
 export function getTimelineEntries(): TimelineEntry[] {
@@ -24,6 +25,7 @@ export function getTimelineEntries(): TimelineEntry[] {
       return a.isInProgress ? -1 : 1;
     }
 
+    if (!a.sortDate && !b.sortDate) return 0;
     if (!a.sortDate) return 1;
     if (!b.sortDate) return -1;
 

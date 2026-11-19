@@ -203,6 +203,7 @@ const ptBR: Dictionary = {
       completed: "CONCLUÍDO",
       overview: "Visão geral",
       sourceCode: "Código-fonte",
+      closeDetails: "Fechar detalhes da missão",
     },
   },
 };

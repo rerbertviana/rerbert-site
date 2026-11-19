@@ -150,6 +150,7 @@ export interface Dictionary {
       completed: string;
       overview: string;
       sourceCode: string;
+      closeDetails: string;
     };
   };
 }

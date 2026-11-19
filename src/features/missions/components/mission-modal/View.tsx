@@ -139,21 +139,58 @@ export function View({
       return;
     }
 
-    const focusableElements = dialogRef.current?.querySelectorAll<HTMLElement>(
-      'button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])',
-    );
+    const dialog = dialogRef.current;
 
-    if (!focusableElements?.length) {
+    if (!dialog) {
+      return;
+    }
+
+    const focusableElements = Array.from(
+      dialog.querySelectorAll<HTMLElement>(
+        [
+          "a[href]",
+          "area[href]",
+          "button:not([disabled])",
+          'input:not([disabled]):not([type="hidden"])',
+          "select:not([disabled])",
+          "textarea:not([disabled])",
+          "iframe",
+          "object",
+          "embed",
+          '[contenteditable="true"]',
+          '[tabindex]:not([tabindex="-1"])',
+        ].join(","),
+      ),
+    ).filter((element) => {
+      return (
+        !element.hasAttribute("hidden") &&
+        element.getAttribute("aria-hidden") !== "true" &&
+        element.getClientRects().length > 0
+      );
+    });
+
+    if (focusableElements.length === 0) {
+      event.preventDefault();
+      dialog.focus();
       return;
     }
 
     const firstElement = focusableElements[0];
     const lastElement = focusableElements[focusableElements.length - 1];
+    const activeElement = document.activeElement;
 
-    if (event.shiftKey && document.activeElement === firstElement) {
+    const focusIsOutsideDialog = !dialog.contains(activeElement);
+
+    if (
+      event.shiftKey &&
+      (activeElement === firstElement || focusIsOutsideDialog)
+    ) {
       event.preventDefault();
       lastElement.focus();
-    } else if (!event.shiftKey && document.activeElement === lastElement) {
+    } else if (
+      !event.shiftKey &&
+      (activeElement === lastElement || focusIsOutsideDialog)
+    ) {
       event.preventDefault();
       firstElement.focus();
     }
@@ -180,6 +217,7 @@ export function View({
       <section
         ref={dialogRef}
         role="dialog"
+        tabIndex={-1}
         aria-modal="true"
         aria-labelledby={`mission-modal-title-${id}`}
         onClick={(event) => event.stopPropagation()}
@@ -225,7 +263,7 @@ export function View({
             ref={closeButtonRef}
             type="button"
             onClick={handleClose}
-            aria-label="Close mission details"
+            aria-label={content.closeDetails}
             className="
               absolute right-4 top-4 z-20
               flex h-9 w-9 items-center justify-center
