@@ -198,6 +198,8 @@ const en: Dictionary = {
       highlights: "PROJECT HIGHLIGHTS",
       inProgress: "IN PROGRESS",
       completed: "COMPLETED",
+      overview: "Overview",
+      sourceCode: "Source Code",
     },
   },
 };

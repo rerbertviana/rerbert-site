@@ -287,7 +287,7 @@ export function View({
         >
           {/* Overview */}
           <section>
-            <ModalSectionTitle>OVERVIEW</ModalSectionTitle>
+            <ModalSectionTitle>{content.overview}</ModalSectionTitle>
 
             <p className="px-4 text-justify text-sm leading-relaxed text-gray-200 sm:text-base">
               {description}
@@ -327,7 +327,7 @@ export function View({
           {/* Project source code */}
           {!isExperience && (frontendUrl || backendUrl) && (
             <section className="mt-6">
-              <ModalSectionTitle>SOURCE CODE</ModalSectionTitle>
+              <ModalSectionTitle>{content.sourceCode}</ModalSectionTitle>
 
               <div className="flex flex-wrap gap-3 px-4">
                 {frontendUrl && (

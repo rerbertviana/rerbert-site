@@ -94,7 +94,14 @@ export function SiteHeader() {
           }
           aria-pressed={isSoundEnabled}
           onClick={handleSoundToggle}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-violet-500/40 bg-[#100C24]/80 text-violet-300 transition-colors hover:border-violet-400 hover:bg-violet-500/10 sm:h-11 sm:w-14"
+          className="
+            flex h-10 w-10 cursor-pointer items-center justify-center
+            rounded-lg border border-violet-500/40
+            bg-[#100C24]/80 text-violet-300
+            transition-colors
+            hover:border-violet-400
+            sm:h-11 sm:w-14
+          "
         >
           {isSoundEnabled ? (
             <Volume2 aria-hidden="true" size={20} />
@@ -114,7 +121,14 @@ export function SiteHeader() {
             aria-controls="language-menu"
             onClick={handleLanguageMenuToggle}
             onKeyDown={handleLanguageButtonKeyDown}
-            className="flex h-10 items-center justify-center gap-2 rounded-lg border border-violet-500/40 bg-[#100C24]/80 px-3 text-sm font-semibold text-white transition-colors hover:border-violet-400 sm:h-11 sm:px-4"
+            className="
+              flex h-10 cursor-pointer items-center justify-center gap-2
+              rounded-lg border border-violet-500/40
+              bg-[#100C24]/80 px-3
+              text-sm font-semibold text-white
+              transition-colors hover:border-violet-400
+              sm:h-11 sm:px-4
+            "
           >
             <div className="relative h-[14px] w-[21px] shrink-0 overflow-hidden rounded-[2px]">
               <Image
@@ -144,7 +158,16 @@ export function SiteHeader() {
               role="menu"
               aria-label={dictionary.header.languageOptions}
               onKeyDown={handleLanguageMenuKeyDown}
-              className="absolute right-0 top-full z-50 mt-2 min-w-[200px] overflow-hidden rounded-lg border border-violet-500/40 bg-[#100C24] p-1 shadow-[0_8px_30px_rgba(0,0,0,0.45)]"
+              className="
+                absolute left-0 right-auto top-full z-50 mt-2
+                w-[min(200px,calc(100vw-2rem))]
+                max-h-[calc(100dvh-6rem)]
+                overflow-y-auto
+                rounded-lg border border-violet-500/40
+                bg-[#100C24] p-1
+                shadow-[0_8px_30px_rgba(0,0,0,0.45)]
+                sm:left-auto sm:right-0
+              "
             >
               {languages.map((language) => {
                 const isSelected = locale === language.code;
@@ -193,7 +216,16 @@ export function SiteHeader() {
           href={resumeUrl}
           download
           aria-label={dictionary.header.downloadCv}
-          className="flex h-10 items-center justify-center gap-2 rounded-lg border border-[#80FF00] bg-[#80FF00]/5 px-3 text-xs font-bold text-white shadow-[0_0_12px_rgba(128,255,0,0.12)] transition-[background-color,box-shadow] hover:bg-[#80FF00]/15 hover:shadow-[0_0_18px_rgba(128,255,0,0.3)] sm:h-11 sm:px-5 sm:text-sm"
+          className="
+            flex h-10 cursor-pointer items-center justify-center gap-2
+            rounded-lg border border-[#80FF00]/40
+            bg-transparent px-3
+            text-xs font-bold text-white
+            transition-all duration-300
+            hover:border-[#80FF00]
+            hover:bg-transparent
+            sm:h-11 sm:px-5 sm:text-sm
+          "
         >
           <Download aria-hidden="true" size={19} className="text-[#80FF00]" />
 

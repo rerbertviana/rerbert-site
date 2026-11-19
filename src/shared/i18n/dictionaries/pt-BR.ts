@@ -201,6 +201,8 @@ const ptBR: Dictionary = {
       highlights: "DESTAQUES DO PROJETO",
       inProgress: "EM ANDAMENTO",
       completed: "CONCLUÍDO",
+      overview: "Visão geral",
+      sourceCode: "Código-fonte",
     },
   },
 };

@@ -1,13 +1,7 @@
 "use client";
 
 import { useCallback, useEffect } from "react";
-import {
-  LayoutGrid,
-  BriefcaseBusiness,
-  Code,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { LayoutGrid, BriefcaseBusiness, Code } from "lucide-react";
 
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
 import { playSound } from "@/shared/lib/audio/audioManager";
@@ -80,14 +74,6 @@ export function View({ selectedFilter, onFilterChange }: Props) {
     [activeIndex, handleSelectFilter],
   );
 
-  const handlePrevious = useCallback(() => {
-    handleNavigation("previous");
-  }, [handleNavigation]);
-
-  const handleNext = useCallback(() => {
-    handleNavigation("next");
-  }, [handleNavigation]);
-
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (
@@ -115,11 +101,7 @@ export function View({ selectedFilter, onFilterChange }: Props) {
 
       event.preventDefault();
 
-      if (event.key === "ArrowLeft") {
-        handlePrevious();
-      } else {
-        handleNext();
-      }
+      handleNavigation(event.key === "ArrowLeft" ? "previous" : "next");
     }
 
     window.addEventListener("keydown", handleKeyDown);
@@ -127,43 +109,21 @@ export function View({ selectedFilter, onFilterChange }: Props) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [handlePrevious, handleNext]);
+  }, [handleNavigation]);
 
   return (
     <section
       aria-label={content.label}
       className="
-        mx-auto flex w-full items-center justify-center gap-1
-        sm:gap-3
+        mx-auto grid w-full max-w-[720px]
+        grid-cols-3 items-center gap-2
+        px-2 sm:gap-3 sm:px-0
       "
     >
-      {/* Previous filter */}
-      <button
-        type="button"
-        aria-label="Previous filter"
-        onClick={handlePrevious}
-        className="
-          flex size-8 shrink-0 cursor-pointer
-          items-center justify-center
-          text-white/60
-          transition-colors duration-200
-          hover:text-[#A78BFA]
-          focus-visible:outline-none
-          focus-visible:ring-2
-          focus-visible:ring-[#A78BFA]
-          sm:size-10
-        "
-      >
-        <ChevronLeft aria-hidden="true" className="size-6 sm:size-8" />
-      </button>
-
       {/* Filters */}
       <nav
         aria-label={content.label}
-        className="
-          grid min-w-0 flex-1 grid-cols-3 gap-2
-          sm:flex sm:items-center sm:justify-center sm:gap-3
-        "
+        className="col-span-3 grid grid-cols-3 gap-2 sm:gap-3"
       >
         {filters.map((filter) => {
           const isSelected = selectedFilter === filter.id;
@@ -189,10 +149,8 @@ export function View({ selectedFilter, onFilterChange }: Props) {
                     ? "border-[#A78BFA]"
                     : "border-[#A78BFA]/50 hover:border-[#A78BFA]"
                 }
-                sm:min-h-10 sm:w-[220px] sm:min-w-[220px]
-                sm:flex-row sm:flex-nowrap sm:gap-2.5
+                sm:min-h-10 sm:flex-row sm:gap-2.5
                 sm:px-4 sm:py-2.5 sm:text-xs
-                sm:whitespace-nowrap
                 focus-visible:outline-none
                 focus-visible:ring-2
                 focus-visible:ring-[#A78BFA]
@@ -207,33 +165,11 @@ export function View({ selectedFilter, onFilterChange }: Props) {
                 aria-hidden="true"
               />
 
-              <span className="text-center sm:whitespace-nowrap sm:text-left">
-                {filter.label}
-              </span>
+              <span className="text-center sm:text-left">{filter.label}</span>
             </button>
           );
         })}
       </nav>
-
-      {/* Next filter */}
-      <button
-        type="button"
-        aria-label="Next filter"
-        onClick={handleNext}
-        className="
-          flex size-8 shrink-0 cursor-pointer
-          items-center justify-center
-          text-white/60
-          transition-colors duration-200
-          hover:text-[#A78BFA]
-          focus-visible:outline-none
-          focus-visible:ring-2
-          focus-visible:ring-[#A78BFA]
-          sm:size-10
-        "
-      >
-        <ChevronRight aria-hidden="true" className="size-6 sm:size-8" />
-      </button>
     </section>
   );
 }

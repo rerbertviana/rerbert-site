@@ -148,6 +148,8 @@ export interface Dictionary {
       highlights: string;
       inProgress: string;
       completed: string;
+      overview: string;
+      sourceCode: string;
     };
   };
 }

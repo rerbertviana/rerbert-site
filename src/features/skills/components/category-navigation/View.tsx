@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import type { LucideIcon } from "lucide-react";
 
 import { useLanguage } from "@/shared/i18n/LanguageProvider";
@@ -40,14 +40,17 @@ function isEditableTarget(target: EventTarget | null) {
 export function View({ selectedCategoryId, onCategoryChange }: Props) {
   const { dictionary } = useLanguage();
 
-  function handleSelectCategory(categoryId: SkillCategoryId) {
-    if (categoryId === selectedCategoryId) {
-      return;
-    }
+  const handleSelectCategory = useCallback(
+    (categoryId: SkillCategoryId) => {
+      if (categoryId === selectedCategoryId) {
+        return;
+      }
 
-    playSound("characterNavigation");
-    onCategoryChange(categoryId);
-  }
+      playSound("characterNavigation");
+      onCategoryChange(categoryId);
+    },
+    [selectedCategoryId, onCategoryChange],
+  );
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -85,7 +88,7 @@ export function View({ selectedCategoryId, onCategoryChange }: Props) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [selectedCategoryId, onCategoryChange]);
+  }, [selectedCategoryId, handleSelectCategory]);
 
   return (
     <section
