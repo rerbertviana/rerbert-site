@@ -21,6 +21,12 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         proficiency: "advanced",
       },
       {
+        id: "lucide-react",
+        name: "Lucide React",
+        image: "/images/skills/lucide-react.png",
+        proficiency: "advanced",
+      },
+      {
         id: "nodejs",
         name: "Node.js",
         image: "/images/skills/nodejs.png",
@@ -90,6 +96,12 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
         id: "laravel",
         name: "Laravel",
         image: "/images/skills/laravel.png",
+        proficiency: "basic",
+      },
+      {
+        id: "codeigniter",
+        name: "CodeIgniter",
+        image: "/images/skills/code-igniter.png",
         proficiency: "basic",
       },
     ],

@@ -57,7 +57,7 @@ export function View({ entry }: Props) {
 
     const localizedContent = entry.data.content[locale];
 
-    description = localizedContent.responsibilities[0] ?? "";
+    description = localizedContent.overview;
     details = localizedContent.responsibilities;
 
     period = `${formatDate(entry.data.startDate, locale)} — ${formatDate(

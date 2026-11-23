@@ -8,7 +8,7 @@ const en: Dictionary = {
   },
 
   header: {
-    developerPortfolio: "Developer Portfolio",
+    developerPortfolio: "Fullstack Developer",
     selectLanguage: "Select language",
     languageOptions: "Language options",
     enableSound: "Enable sound",
@@ -26,7 +26,7 @@ const en: Dictionary = {
   },
 
   characterSelection: {
-    pageLabel: "RERBERT.EXE character selection homepage",
+    pageLabel: "RERBERT character selection homepage",
     sectionLabel: "Character Selection",
 
     title: {

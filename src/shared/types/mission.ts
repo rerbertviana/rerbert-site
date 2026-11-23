@@ -2,6 +2,7 @@ export type MissionLocale = "en" | "pt-BR";
 
 export interface MissionLocalizedContent {
   role: string;
+  overview: string;
   responsibilities: string[];
 }
 

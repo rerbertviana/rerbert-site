@@ -350,8 +350,7 @@ export function View({
                       aria-hidden="true"
                       className="
                         mt-1.5 h-2 w-2 shrink-0
-                        bg-[#8AFF00]
-                        shadow-[0_0_8px_rgba(138,255,0,0.6)]
+                        bg-[#A78BFA]
                       "
                     />
 
