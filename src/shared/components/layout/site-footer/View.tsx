@@ -1,3 +1,7 @@
+"use client";
+
+import { useLanguage } from "@/shared/i18n/LanguageProvider";
+
 const KEY_CLASS =
   "inline-flex h-7 min-w-7 items-center justify-center rounded border border-[#A78BFA]/40 bg-[#211832]/90 px-2 font-[family-name:var(--font-oxanium)] text-xs font-semibold text-[#C4B5FD] shadow-[0_2px_0_rgba(167,139,250,0.2)]";
 
@@ -5,6 +9,9 @@ const SHORTCUT_CLASS =
   "flex items-center gap-2 text-xs text-white/65 sm:text-sm";
 
 export function SiteFooter() {
+  const { dictionary } = useLanguage();
+  const translations = dictionary.footer;
+
   return (
     <footer className="relative z-10 mt-auto w-full bg-[linear-gradient(to_top,rgba(8,5,22,0.75)_0%,rgba(8,5,22,0.25)_65%,rgba(8,5,22,0)_100%)] px-4 pt-8 pb-6 sm:px-8 lg:px-11">
       {/* Footer content */}
@@ -12,7 +19,7 @@ export function SiteFooter() {
         {/* Keyboard shortcuts */}
         <div
           role="group"
-          aria-label="Keyboard shortcuts"
+          aria-label={translations.keyboardShortcuts}
           className="flex flex-wrap items-center justify-start gap-x-5 gap-y-3 sm:gap-x-6"
         >
           <div className={SHORTCUT_CLASS}>
@@ -20,17 +27,17 @@ export function SiteFooter() {
               <kbd className={KEY_CLASS}>←</kbd>
               <kbd className={KEY_CLASS}>→</kbd>
             </span>
-            <span>Navigate</span>
+            <span>{translations.navigate}</span>
           </div>
 
           <div className={SHORTCUT_CLASS}>
             <kbd className={KEY_CLASS}>Enter</kbd>
-            <span>Select</span>
+            <span>{translations.select}</span>
           </div>
 
           <div className={SHORTCUT_CLASS}>
             <kbd className={KEY_CLASS}>Esc</kbd>
-            <span>Back</span>
+            <span>{translations.back}</span>
           </div>
         </div>
 

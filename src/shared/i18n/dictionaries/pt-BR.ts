@@ -17,6 +17,13 @@ const ptBR: Dictionary = {
     cv: "CV",
   },
 
+  footer: {
+    keyboardShortcuts: "Atalhos do teclado",
+    navigate: "Navegar",
+    select: "Selecionar",
+    back: "Voltar",
+  },
+
   navigation: {
     home: "Início",
     profile: "Perfil",

@@ -17,6 +17,13 @@ const en: Dictionary = {
     cv: "CV",
   },
 
+  footer: {
+    keyboardShortcuts: "Keyboard shortcuts",
+    navigate: "Navigate",
+    select: "Select",
+    back: "Back",
+  },
+
   navigation: {
     home: "Home",
     profile: "Profile",

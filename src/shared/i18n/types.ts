@@ -22,6 +22,13 @@ export interface Dictionary {
     cv: string;
   };
 
+  footer: {
+    keyboardShortcuts: string;
+    navigate: string;
+    select: string;
+    back: string;
+  };
+
   navigation: {
     home: string;
     profile: string;
