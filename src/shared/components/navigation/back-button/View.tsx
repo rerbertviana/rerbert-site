@@ -59,7 +59,7 @@ export function View({ href, label }: BackButtonProps) {
         onMouseEnter={() => playSound("interfaceClose")}
         onClick={handleBack}
         className="
-          group inline-flex items-center gap-2
+          group cursor-pointer inline-flex items-center gap-2
           rounded-lg border border-[#A78BFA]/50
           bg-[#100C24]/70 px-4 py-2
           font-[family-name:var(--font-oxanium)]

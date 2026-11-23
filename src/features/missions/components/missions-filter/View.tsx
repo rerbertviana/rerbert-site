@@ -135,7 +135,7 @@ export function View({ selectedFilter, onFilterChange }: Props) {
               aria-pressed={isSelected}
               onClick={() => handleSelectFilter(filter.id)}
               className={`
-                flex min-h-[76px] w-full min-w-0
+                flex cursor-pointer min-h-[76px] w-full min-w-0
                 flex-col items-center justify-center gap-2
                 rounded-md border bg-transparent
                 px-2 py-3
