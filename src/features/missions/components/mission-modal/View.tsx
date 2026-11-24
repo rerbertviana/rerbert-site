@@ -372,6 +372,7 @@ export function View({
                     href={frontendUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => playSound("buttonConfirm")}
                     aria-label="View frontend source code on GitHub"
                     className="
                       inline-flex items-center gap-2
@@ -395,6 +396,7 @@ export function View({
                     href={backendUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => playSound("buttonConfirm")}
                     aria-label="View backend source code on GitHub"
                     className="
                       inline-flex items-center gap-2

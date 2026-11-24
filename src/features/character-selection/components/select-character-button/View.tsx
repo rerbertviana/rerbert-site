@@ -17,7 +17,7 @@ export function SelectCharacterButton({
   const buttonLabel = disabled ? translations.select : translations.confirm;
 
   return (
-    <div className="relative isolate mx-auto flex w-full items-center justify-center px-4 pt-7 pb-2">
+    <div className="relative isolate mx-auto flex w-full items-center justify-center px-4 pt-7 pb-6 sm:pb-2">
       {/* Horizontal energy line behind the button */}
       <svg
         aria-hidden="true"
