@@ -16,7 +16,7 @@ const oxanium = Oxanium({
 });
 
 export const metadata: Metadata = {
-  title: "RERBERT.EXE — Developer Portfolio",
+  title: "RERBERT.DEV",
   description: "Interactive developer portfolio of Rerbert Viana.",
 };
 
