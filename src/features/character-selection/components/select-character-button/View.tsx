@@ -17,11 +17,11 @@ export function SelectCharacterButton({
   const buttonLabel = disabled ? translations.select : translations.confirm;
 
   return (
-    <div className="relative isolate mx-auto flex w-full items-center justify-center px-4 py-4 sm:py-6">
+    <div className="relative isolate mx-auto flex w-full items-center justify-center px-4 pt-7 pb-2">
       {/* Horizontal energy line behind the button */}
       <svg
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-24 w-[min(760px,calc(100vw-32px))] -translate-x-1/2 -translate-y-1/2"
+        className="pointer-events-none absolute left-1/2 top-[calc(50%+10px)] z-0 h-24 w-[min(760px,calc(100vw-32px))] -translate-x-1/2 -translate-y-1/2"
         viewBox="0 0 1000 100"
         preserveAspectRatio="none"
       >
@@ -77,9 +77,9 @@ export function SelectCharacterButton({
       {/* Button border */}
       <div
         className={`
-          relative z-10 w-full max-w-[280px] rounded-xl p-[1.5px]
+          relative z-10 w-full max-w-[240px] rounded-xl p-[1.5px]
           transition-[background-color,box-shadow] duration-300
-          sm:max-w-[360px]
+          sm:max-w-[300px]
           ${
             disabled
               ? "bg-[#354137]"
@@ -92,15 +92,15 @@ export function SelectCharacterButton({
           onClick={onClick}
           disabled={disabled}
           className={`
-            flex h-[52px] w-full items-center justify-center
-            rounded-[11px] px-4 sm:h-[64px] sm:px-6
+            flex h-[60px] w-full items-center justify-center
+            rounded-[11px] px-1 sm:px-2
             font-[family-name:var(--font-oxanium)]
-            text-sm font-bold uppercase tracking-[0.12em]
+            text-xs font-bold uppercase tracking-[0.12em]
             transition-[filter,transform] duration-300
             focus-visible:outline-none focus-visible:ring-2
             focus-visible:ring-[#80FF00] focus-visible:ring-offset-2
             focus-visible:ring-offset-[#080516]
-            sm:text-lg sm:tracking-[0.14em]
+            sm:text-sm sm:tracking-[0.14em]
             ${
               disabled
                 ? "cursor-not-allowed bg-[#182019] text-[#657064]"
