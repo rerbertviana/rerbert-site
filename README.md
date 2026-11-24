@@ -1,16 +1,22 @@
-# RERBERT.EXE — Interactive Developer Portfolio
+<p align="center">
+  <strong>rerbert.dev — Interactive Developer Portfolio</strong>
+</p>
 
-An interactive developer portfolio inspired by futuristic RPG character selection interfaces, combining gaming aesthetics with a professional presentation of software development experience, skills and projects.
+<p align="center">
+  An interactive developer portfolio inspired by futuristic RPG character selection interfaces, combining gaming aesthetics with a professional presentation of software development experience, skills and projects.
+</p>
 
-## Overview
+---
 
-**RERBERT.EXE** is a personal portfolio designed as an interactive experience rather than a traditional portfolio website.
+<p><strong>🌐 Overview</strong></p>
+
+<strong>rerbert.dev</strong> is a personal portfolio designed as an interactive experience rather than a traditional portfolio website.
 
 Inspired by futuristic RPG interfaces, the project combines a gaming-inspired visual identity with a professional presentation of my background, skills, career journey and projects.
 
 Visitors can navigate through different sections of the portfolio using an interface built around the concept of character selection, profiles, skill inventories and missions.
 
-## Features
+<p><strong>✨ Features</strong></p>
 
 - **Character Selection** — Interactive homepage inspired by RPG character selection interfaces.
 - **Profile** — Professional profile, education, experience and social links.
@@ -22,7 +28,7 @@ Visitors can navigate through different sections of the portfolio using an inter
 - **Audio Feedback** — Sound effects integrated into interface interactions.
 - **Responsive Design** — Adapted for desktop and mobile devices.
 
-## Tech Stack
+<p><strong>🛠️ Tech Stack</strong></p>
 
 - **Next.js** — App Router
 - **React**
@@ -34,7 +40,7 @@ Visitors can navigate through different sections of the portfolio using an inter
 - **Jest**
 - **React Testing Library**
 
-## Architecture
+<p><strong>🏗️ Architecture</strong></p>
 
 The project follows a feature-oriented architecture, separating application features from shared components, utilities and infrastructure.
 
@@ -107,7 +113,7 @@ tests/
 └── proxy.test.ts
 ```
 
-### Architectural principles
+<p><strong>Architectural principles</strong></p>
 
 - **Feature-oriented organization** — Each feature encapsulates its own components, data, logic and views.
 - **Reusable components** — Shared components centralize functionality used across different pages.
@@ -115,14 +121,14 @@ tests/
 - **Shared infrastructure** — Internationalization, audio functionality, shared UI and types are centralized.
 - **Testing organization** — Tests mirror the feature and shared structure to facilitate maintenance and discoverability.
 
-## Getting Started
+<p><strong>🚀 Getting Started</strong></p>
 
-### Prerequisites
+<p><strong>Prerequisites</strong></p>
 
 - Node.js
 - npm
 
-### Installation
+<p><strong>Installation</strong></p>
 
 Clone the repository:
 
@@ -142,7 +148,7 @@ Install dependencies:
 npm install
 ```
 
-### Development
+<p><strong>Development</strong></p>
 
 Start the development server:
 
@@ -152,7 +158,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Testing
+<p><strong>🧪 Testing</strong></p>
 
 Run the automated test suite:
 
@@ -172,7 +178,7 @@ Run tests with coverage:
 npm run test:coverage
 ```
 
-## Code Quality
+<p><strong>🔍 Code Quality</strong></p>
 
 Run ESLint:
 
@@ -180,7 +186,7 @@ Run ESLint:
 npm run lint
 ```
 
-## Production Build
+<p><strong>📦 Production Build</strong></p>
 
 Generate the production build:
 
@@ -194,12 +200,13 @@ Run the production server locally:
 npm run start
 ```
 
-## Project Status
+<p><strong>📌 Project Status</strong></p>
 
 The portfolio is fully developed and has been validated through automated tests, linting, production build and local production testing.
 
-## Author
+<p><strong>👨‍💻 Author</strong></p>
 
 **Rerbert Brito Viana**
 
 - GitHub: [@rerbertviana](https://github.com/rerbertviana)
+- Portfolio: [rerbert.dev](https://rerbert.dev)
